@@ -1,0 +1,25 @@
+export default {
+  testEnvironment: 'jsdom',
+  transform: {
+    '^.+\\.tsx?$': 'ts-jest',
+  },
+  moduleNameMapper: {
+    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': `<rootDir>/tests/__mocks__/fileMock.js`,
+    '^#/generated/(.*)$': '<rootDir>/src/generated/$1',
+    '^#/shared/(.*)$': '<rootDir>/src/shared/$1',
+    '^#/pages/(.*)$': '<rootDir>/src/pages/$1',
+    '^#/configs/(.*)$': '<rootDir>/src/configs/$1',
+    '^#/routers/(.*)$': '<rootDir>/src/routers/$1',
+    '^#/assets/(.*)$': '<rootDir>/src/assets/$1',
+    '^#/src/(.*)$': '<rootDir>/src/$1',
+    'next-i18next': '<rootDir>/tests/__mocks__/i18n.js',
+    '^lodash-es$': 'lodash',
+    '^lodash-es/(.*)$': 'lodash/$1',
+    '^.+\\.svg$': '<rootDir>/tests/__mocks__/svg.js',
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+  },
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  moduleDirectories: ['node_modules', '<rootDir>/'],
+  testMatch: ['<rootDir>/tests/**/*?(*.)+(spec|test).[jt]s?(x)'],
+  preset: 'ts-jest',
+};

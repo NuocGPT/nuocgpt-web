@@ -1,0 +1,6 @@
+{
+  "extends": ["@enouvo/eslint-config-react"],
+  "rules": {
+    "@typescript-eslint/no-unnecessary-condition": "off"
+  }
+}

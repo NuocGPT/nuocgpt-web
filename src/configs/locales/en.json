@@ -1,0 +1,187 @@
+{
+  "appInfo": {
+    "footer": "",
+    "name": "Smartos"
+  },
+  "sideBar": {
+    "dashboard": "Dashboard",
+    "user": "User",
+    "logout": "Logout"
+  },
+  "header": {
+    "profile": "Profile",
+    "logout": "Logout",
+    "notification": "Notification"
+  },
+  "login": {
+    "title": "Work with your team!",
+    "subTitle": "Login to access your account",
+    "rememberMe": "Remember me",
+    "loginBtn": "Login",
+    "email": "Email",
+    "forgotPassword": "Forgot password?",
+    "password": "Password",
+    "goToSignUp": "Not have an account yet?",
+    "permission": "Your account is disabled or you don't have access to this page!",
+    "passwordValidator": "Minimum eight characters, at least one letter, one number and one special character",
+    "errorRefreshTokenTitle": "Your login session expired. Please login again.",
+    "errorTitle": "Your login session expired. Please login again."
+  },
+  "required": {
+    "requiredField": "This field is required",
+    "usernameIsInvalid": "Username is invalid",
+    "path": "Path must be a valid url"
+  },
+  "profiles": {
+    "title": "General Information",
+    "header": "Profile",
+    "profileInfo": "Profile info",
+    "email": "Email",
+    "username": "Username",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "gender": "Gender",
+    "phone": "Phone Number",
+    "dateOfBirth": "Date Of Birth",
+    "country": "Country",
+    "fullName": "Full Name",
+    "role": "Role",
+    "n/a": "N/A",
+    "updateSuccess": "Updated user successfully!"
+  },
+  "dashboards": {
+    "overview": "Overview",
+    "clients": "Clients",
+    "company": "Company",
+    "leads": "Leads",
+    "campaigns": "Campaigns"
+  },
+  "button": {
+    "create": "Create",
+    "add": "Add",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "delete": "Delete",
+    "save": "Save",
+    "saveAndNext": "Save & Next",
+    "ok": "Ok",
+    "search": "Search",
+    "reset": "Reset",
+    "submit": "Submit",
+    "filter": "Filter",
+    "loadMore": "Load More...",
+    "update": "Update",
+    "clearFilter": "Clear",
+    "change": "Change",
+    "confirm": "Confirm",
+    "backToHome": "Back Home",
+    "previous": "Previous",
+    "next": "Next",
+    "goTo": "Go to",
+    "backHome": "Back Home",
+    "readMore": "...more",
+    "readLess": " less",
+    "clearCache": "Clear Cache",
+    "hide": "Hide"
+  },
+  "popup": {
+    "confirm": "Confirm",
+    "alertDelete": "Delete Data",
+    "alertDeleteDes": "Do you want to delete item {{customMessage}}?",
+    "alertDeleteDevice": "Do you want to remove device for this plant?",
+    "enableItem": "Do you want to enable this item?",
+    "disableItem": "Do you want to disable this item?",
+    "deleteItem": "Do you want to delete this item?"
+  },
+  "statuses": {
+    "name": "Name",
+    "color": "Color",
+    "isActive": "Status",
+    "createPage": "Create Status",
+    "editPage": "Edit Status",
+    "isCommon": "Is Common",
+    "notCommon": "Not Common"
+  },
+  "gender": {
+    "title": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "inprogress": "In Progress",
+    "approved": "Approved",
+    "verified": "Verified",
+    "rejected": "Rejected",
+    "pending": "Pending",
+    "notVerify": "Not verify"
+  },
+  "placeholder": {
+    "undefined": "select...",
+    "email": "Email address",
+    "password": "Enter your password",
+    "selectTheColor": "Select the color"
+  },
+  "validateMessage": {
+    "maxCharacters": "Please enter message no more than {{max}} characters",
+    "validatePassword": "Password must be at least 8 characters and contain at least one number, one letter and one special character",
+    "nonHtmlTag": "This value does not accept HTML tag",
+    "name": "Please enter a valid name",
+    "address": "Please enter a valid address",
+    "time": "Please enter a valid time",
+    "price": "Please enter a valid price",
+    "roomName": "Please enter a valid room name",
+    "roomCategoryName": "Please enter a valid room category name",
+    "phoneNumber": "Please enter a valid phone number",
+    "email": "Please enter a valid email",
+    "contactEmail": "Please enter a valid contact email",
+    "locationName": "Please enter a valid location name",
+    "fullName": "Please enter a valid full name",
+    "error": "Please enter valid format for this field",
+    "fileIsNotAllowed": "File type not allowed",
+    "serverInternalError": "Server Internal Error. Please try later.",
+    "IncorrectCurrentPassword": "Incorrect current password",
+    "validatePrice": "Your price is zero, please check again",
+    "documentFileType": "You can only upload TXT/JSON file!",
+    "fileSizeLimit": "File must smaller than 2MB!",
+    "impersonatingError": "Can not impersonating this business right now. Please try later.",
+    "endDateError": "End time must be greater than Start time"
+  },
+  "input": {
+    "image": "Select a .jpeg or .png file that is less than 3 MB.",
+    "search": "Search {{label}}"
+  },
+  "empty": {
+    "page": "Sorry, the page you visited does not exist."
+  },
+  "tooltip": {
+    "view": "View",
+    "create": "Create",
+    "edit": "Edit",
+    "impersonating": "Impersonating",
+    "delete": "Delete",
+    "uploadImages": "Click here to upload new image"
+  },
+  "table": {
+    "name": "Name",
+    "description": "Description",
+    "status": "Status",
+    "action": "Action",
+    "parentCategory": "Parent Category"
+  },
+  "units": {
+    "month": "Month",
+    "year": "Year"
+  },
+  "businesses": {
+    "generalInformation": "General Information",
+    "n/a": "N/A"
+  },
+  "label": {
+    "n/a": "N/A",
+    "etc": "..."
+  }
+}
