@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://nextjs.org">
-    <h1 align="center">Smartos Web Super admin</h1>
+    <h1 align="center">NUOCGPT WEB</h1>
   </a>
 </p>
 
@@ -10,6 +10,7 @@
 - [Typescript](https://www.typescriptlang.org/)
 - [Tailwind](https://tailwindcss.com/)
 - [Ant Design](https://ant.design/)
+- [React Query](https://tanstack.com/query/v3/)
 
 ## Getting Started
 
@@ -29,7 +30,7 @@
 1. Clone the repo
 
    ```sh
-   git clone git@bitbucket.org:geotechgroupservices/linked-office-web.git
+   git clone git@gitlab.enouvo.com:enosta/nuocgpt/nuocgpt-web.git
    ```
 
 2. Install NPM packages
@@ -43,11 +44,7 @@
 4. Run the development server:
 
    ```bash
-   #npm run dev
-   nvm use 17.0.1
-   export NODE_OPTIONS=--openssl-legacy-provider; npm run dev
-   # or
-   yarn dev
+    yarn dev
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -75,5 +72,3 @@ yarn run test-e2e
 ## Documentations
 
 - [Development style guides](docs/style-guide.md)
-
-- [Project Structure](docs/folder-structure.md)
