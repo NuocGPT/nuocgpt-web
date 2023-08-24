@@ -121,8 +121,9 @@ function Dashboard() {
             onChange={e => {
               setMessage(e.target.value);
             }}
-            onKeyDown={e => {
+            onKeyPress={e => {
               if (e.key === 'Enter') {
+                e.preventDefault();
                 conversation?.messages?.push({
                   createdAt: new Date().toISOString(),
                   id: String(Math.random() * 1000),
@@ -131,7 +132,6 @@ function Dashboard() {
                 });
                 newMessagesCountRef.current++;
                 setMessage('');
-                e.preventDefault();
               }
             }}
             placeholder={'Gửi tin nhắn'}
