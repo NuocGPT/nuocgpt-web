@@ -1,4 +1,5 @@
 import { Button, Typography } from 'antd';
+import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import { ReactComponent as Dislike } from '#/assets/svg/dislike-outlined.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as Like } from '#/assets/svg/like-outlined.svg';
@@ -7,11 +8,20 @@ import { currentUser } from '#/mocks/users';
 import { Avatar } from '#/shared/components/common';
 
 interface MessageProps {
-  message: Message;
+  message?: Message;
 }
 
 function MessageItem({ message }: MessageProps) {
-  return (
+  return !message ? (
+    <div className="w-full bg-color-neutral-5">
+      <div className="mx-auto flex max-w-[960px] justify-between gap-4 py-4">
+        <div className="flex items-start gap-4">
+          <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
+          <CursorIcon />
+        </div>
+      </div>
+    </div>
+  ) : (
     <div
       className={`w-full ${message.isGPTResponse ? 'bg-color-neutral-5' : ''}`}
     >
@@ -26,14 +36,16 @@ function MessageItem({ message }: MessageProps) {
             {message.text}
           </Typography.Paragraph>
         </div>
-        <div className="flex items-start justify-start">
-          <Button size="small" type="link">
-            <Like />
-          </Button>
-          <Button size="small" type="link">
-            <Dislike />
-          </Button>
-        </div>
+        {message.isGPTResponse && (
+          <div className="flex items-start justify-start">
+            <Button size="small" type="link">
+              <Like />
+            </Button>
+            <Button size="small" type="link">
+              <Dislike />
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

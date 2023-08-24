@@ -22,7 +22,7 @@ function PrivateLayout({
   // const { t } = useTypeSafeTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const [_, id] = pathname.split('/');
+  const id = pathname.split('/')?.length > 1 ? pathname.split('/')[1] : 0;
 
   console.log(user);
 

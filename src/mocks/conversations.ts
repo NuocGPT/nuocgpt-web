@@ -2,6 +2,12 @@ import type { Conversation } from './interfaces/conversations';
 
 export const conversations: Conversation[] = [
   {
+    createdAt: '2022-01-01T00:00:00.000Z',
+    id: '0',
+    messages: [],
+    name: 'Cuộc trò chuyện mới',
+  },
+  {
     createdAt: '2023-01-01T00:00:00.000Z',
     id: '1',
     messages: [
