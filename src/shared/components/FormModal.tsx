@@ -62,7 +62,7 @@ export const FormModal = forwardRef(
             <Typography className="flex justify-end">
               <Button
                 block
-                className="w-20 rounded-lg bg-color-neutral-20 text-sm font-bold"
+                className="bg-color-neutral-20 w-20 rounded-lg text-sm font-bold"
                 key="back"
                 onClick={onClose}
                 type="ghost"

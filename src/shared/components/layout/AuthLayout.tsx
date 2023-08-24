@@ -1,37 +1,34 @@
 import type { ReactNode } from 'react';
+import styled from '@emotion/styled';
 import { Col, Grid, Image, Row } from 'antd';
-import login from '#/assets/images/login.png';
-import logo from '#/assets/images/logo.png';
+import Logo from '#/assets/images/logo-white.png';
 
 interface Props {
   children: ReactNode;
 }
 
+const StyledAuthLayout = styled(Col)`
+  opacity: 0.5;
+  background: url('./src/assets/images/authBackground.png'),
+    lightgray 50% / cover no-repeat;
+  mix-blend-mode: color-dodge;
+`;
+
 function AuthLayout({ children }: Props) {
   const { md } = Grid.useBreakpoint();
   return (
-    <Row className="h-screen">
+    <Row className="m-6 max-h-screen rounded-2xl bg-primary-color shadow-shadow-2xl">
       {md && (
-        <Col
-          className="flex h-screen justify-center bg-color-gray-10"
+        <StyledAuthLayout
+          className="flex h-screen items-center justify-center"
           lg={12}
           md={0}
           xs={0}
         >
-          <Row align="middle">
-            <Col>
-              <Image className="w-auto" preview={false} src={login} />
-            </Col>
-          </Row>
-        </Col>
+          <Image className="opacity-100" preview={false} src={Logo} />
+        </StyledAuthLayout>
       )}
-      <Col
-        className="flex h-screen flex-col px-10 py-8 leading-normal"
-        lg={12}
-        md={24}
-        xs={24}
-      >
-        <Image className="h-14 w-auto" preview={false} src={logo} />
+      <Col className="h-screen bg-[#fff] px-12 py-8" lg={12} md={24} xs={24}>
         {children}
       </Col>
     </Row>

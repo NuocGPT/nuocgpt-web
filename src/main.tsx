@@ -6,6 +6,7 @@ import enUS from 'antd/es/locale/en_US';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
+import './configs/theme/index.css';
 import './configs';
 import { formConfig } from './configs/config';
 import App from './routers/App';

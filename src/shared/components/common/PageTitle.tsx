@@ -13,7 +13,7 @@ function PageTitle({ title, description, extraAction, className }: Props) {
   const { t } = useTypeSafeTranslation();
   return (
     <div className={`m-8 flex h-fit w-full items-center ${className}`}>
-      <div className="flex flex-1 flex-col text-color-gray-10">
+      <div className="text-color-gray-10 flex flex-1 flex-col">
         <div className="text-3xl font-bold">{t(title)}</div>
         {description && (
           <div className="whitespace-pre-line text-sm font-bold">

@@ -30,7 +30,7 @@ function UserInfo({
       />
       <Typography>
         <Paragraph
-          className="m-0 font-medium tracking-[0.00625rem] text-color-gray-10"
+          className="text-color-gray-10 m-0 font-medium tracking-[0.00625rem]"
           ellipsis={{
             expandable: false,
             rows: 1,
@@ -43,7 +43,7 @@ function UserInfo({
         </Paragraph>
         <Typography className="m-0 text-xs">
           <Paragraph
-            className="m-0 max-w-[15rem] tracking-[0.025rem] text-color-gray-30"
+            className="text-color-gray-30 m-0 max-w-[15rem] tracking-[0.025rem]"
             ellipsis={{
               expandable: false,
               rows: 1,

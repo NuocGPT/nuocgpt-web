@@ -24,6 +24,7 @@
       "#/configs/*": ["src/configs/*"],
       "#/routers/*": ["src/routers/*"],
       "#/assets/*": ["src/assets/*"],
+      "#/mocks/*": ["src/mocks/*"],
       "#/src/*": ["./src/*"]
     }
   },

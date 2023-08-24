@@ -1,4 +1,4 @@
-import Logo from '#/assets/images/logo-new.png';
+import Logo from '#/assets/images/logo-white.png';
 
 export const formConfig = {
   requiredMark: true,

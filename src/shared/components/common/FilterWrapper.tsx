@@ -41,7 +41,7 @@ function FilterWrapper<Type>({
           <Space className="flex justify-end" size={4}>
             <Form.Item>
               <Button
-                className="rounded-lg bg-color-gray-10 font-semibold text-cancel-color"
+                className="bg-color-gray-10 text-cancel-color rounded-lg font-semibold"
                 htmlType="submit"
               >
                 {t('button.filter')}
@@ -49,7 +49,7 @@ function FilterWrapper<Type>({
             </Form.Item>
             <Form.Item>
               <Button
-                className="rounded-lg border-2 border-color-gray-10 font-semibold"
+                className="border-color-gray-10 rounded-lg border-2 font-semibold"
                 onClick={onReset}
               >
                 {t('button.clearFilter')}

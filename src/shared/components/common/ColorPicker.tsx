@@ -20,7 +20,7 @@ function ColorPicker({ value, onChange }: ColorPickerProps) {
   return (
     <Typography
       className={`flex items-center justify-between rounded-lg ${
-        !!selectedColor && `h-10 border-[0.0625rem] border-color-dark-white`
+        !!selectedColor && `border-color-dark-white h-10 border-[0.0625rem]`
       }`}
     >
       <Typography className="flex flex-1 flex-col">
@@ -39,18 +39,18 @@ function ColorPicker({ value, onChange }: ColorPickerProps) {
           <Typography
             className={`flex ${
               selectedColor ? 'ml-1 h-7' : 'h-10'
-            } w-full items-center justify-center rounded-lg border-[0.0625rem] border-color-dark-white hover:border-primary-color`}
+            } border-color-dark-white w-full items-center justify-center rounded-lg border-[0.0625rem] hover:border-primary-color`}
             style={{ backgroundColor: selectedColor ?? DEFAULT_COLOR_VALUE }}
           />
           {!selectedColor?.toUpperCase() && (
-            <p className="absolute left-3 top-[0.575rem] m-0 text-color-gray-40">
+            <p className="text-color-gray-40 absolute left-3 top-[0.575rem] m-0">
               {t('placeholder.selectTheColor')}
             </p>
           )}
         </Popover>
       </Typography>
       {!!selectedColor && (
-        <p className="mx-2 mt-3 text-sm text-color-gray-10">
+        <p className="text-color-gray-10 mx-2 mt-3 text-sm">
           {selectedColor.toUpperCase()}
         </p>
       )}
