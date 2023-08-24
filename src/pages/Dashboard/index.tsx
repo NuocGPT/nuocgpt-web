@@ -131,6 +131,7 @@ function Dashboard() {
                 });
                 newMessagesCountRef.current++;
                 setMessage('');
+                e.preventDefault();
               }
             }}
             placeholder={'Gửi tin nhắn'}
