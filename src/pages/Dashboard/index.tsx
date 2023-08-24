@@ -23,7 +23,8 @@ const scrollToConversationBottom = () => {
 
 function Dashboard() {
   const { pathname } = useLocation();
-  const id = pathname.split('/')?.length > 1 ? pathname.split('/')[1] : 0;
+  const id = pathname.split('/')?.[1] ? pathname.split('/')[1] : '0';
+
   const [message, setMessage] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [completedTyping, setCompletedTyping] = useState(false);
