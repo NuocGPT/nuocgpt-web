@@ -85,7 +85,7 @@ function Dashboard() {
             </div>
           ))
         ) : (
-          <div className="flex h-[75vh] flex-col items-center justify-center">
+          <div className="mt-[16rem] flex flex-col items-center justify-center">
             <Image height={114} preview={false} src={LogoGrey} />
           </div>
         )}
@@ -113,7 +113,7 @@ function Dashboard() {
       <Footer className="fixed bottom-0 h-40 w-[88vw] bg-[#fff]">
         <div className="mx-auto max-w-[960px]">
           <Input
-            className="shadow-lg rounded-lg p-4"
+            className="rounded-lg p-4 shadow-lg"
             disabled={
               (!completedTyping && !isGenerating) ||
               (completedTyping && isGenerating)
@@ -123,15 +123,17 @@ function Dashboard() {
             }}
             onKeyPress={e => {
               if (e.key === 'Enter') {
-                e.preventDefault();
-                conversation?.messages?.push({
-                  createdAt: new Date().toISOString(),
-                  id: String(Math.random() * 1000),
-                  isGPTResponse: false,
-                  text: message,
-                });
-                newMessagesCountRef.current++;
-                setMessage('');
+                if (message) {
+                  e.preventDefault();
+                  conversation?.messages?.push({
+                    createdAt: new Date().toISOString(),
+                    id: String(Math.random() * 1000),
+                    isGPTResponse: false,
+                    text: message,
+                  });
+                  newMessagesCountRef.current++;
+                  setMessage('');
+                }
               }
             }}
             placeholder={'Gửi tin nhắn'}

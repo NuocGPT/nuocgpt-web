@@ -1,5 +1,8 @@
 import { loadable } from '@enouvo/react-uikit';
 import { useRoutes } from 'react-router-dom';
+import ForgotPassword from '#/pages/ForgotPassword';
+import ResetPassword from '#/pages/ResetPassword';
+import SignUp from '#/pages/SignUp';
 import GuardRoute from './GuardRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -14,6 +17,30 @@ const App = () => {
         </GuardRoute>
       ),
       path: 'login',
+    },
+    {
+      element: (
+        <GuardRoute>
+          <SignUp />
+        </GuardRoute>
+      ),
+      path: 'sign-up',
+    },
+    {
+      element: (
+        <GuardRoute>
+          <ForgotPassword />
+        </GuardRoute>
+      ),
+      path: 'forgot-password',
+    },
+    {
+      element: (
+        <GuardRoute>
+          <ResetPassword />
+        </GuardRoute>
+      ),
+      path: 'reset-password',
     },
     {
       element: (

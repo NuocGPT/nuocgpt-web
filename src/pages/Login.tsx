@@ -4,10 +4,8 @@
  */
 import { Button, Card, Col, Form, Input, Row, Typography } from 'antd';
 import { Link } from 'react-router-dom';
-/*
- * import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
- * import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
- */
+import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
+import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
 import AuthLayout from '#/shared/components/layout/AuthLayout';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 
@@ -43,7 +41,7 @@ function LoginForm() {
         <Row align="middle" justify="center">
           <Col span={24}>
             <Form.Item
-              messageVariables={{ name: 'Email' }}
+              label={t('login.email')}
               name="email"
               rules={[
                 {
@@ -55,12 +53,13 @@ function LoginForm() {
               <Input
                 className="rounded-lg pr-[1.875rem]"
                 placeholder={t('placeholder.email')}
-                // prefix={<Icon component={SmsSVG} />}
+                prefix={<SmsSVG />}
               />
             </Form.Item>
           </Col>
           <Col span={24}>
             <Form.Item
+              label={t('login.password')}
               name="password"
               rules={[
                 {
@@ -71,11 +70,16 @@ function LoginForm() {
               <Input.Password
                 className="rounded-lg"
                 placeholder={t('placeholder.password')}
-                // prefix={<Icon component={LockSVG} />}
+                prefix={<LockSVG />}
               />
             </Form.Item>
           </Col>
-          <Col className="mt-6" span={24}>
+          <Col span={24}>
+            <Link className="primary" to="/forgot-password">
+              {t('login.forgotPassword')}
+            </Link>
+          </Col>
+          <Col className="mt-8" span={24}>
             <Form.Item>
               <Button
                 block
@@ -89,8 +93,8 @@ function LoginForm() {
             </Form.Item>
           </Col>
           <Col className="text-center" span={24}>
-            <Link className="primary" to="/forgot-password">
-              {t('login.forgotPassword')}
+            <Link className="primary" to="/sign-up">
+              Không có tài khoản? Đăng ký
             </Link>
           </Col>
         </Row>
@@ -103,10 +107,10 @@ function Login() {
   const { t } = useTypeSafeTranslation();
   return (
     <AuthLayout>
-      <Row align="middle" className="h-screen" justify="start">
+      <Row align="middle" className="h-full" justify="start">
         <Card className="w-full border-0 p-0">
-          <Typography.Title className="text-color-dark-mode-40 mb-12" level={4}>
-            {t('login.subTitle')}
+          <Typography.Title className="mb-4 text-primary-color" level={3}>
+            👋 {t('login.subTitle')}
           </Typography.Title>
           <LoginForm />
         </Card>
