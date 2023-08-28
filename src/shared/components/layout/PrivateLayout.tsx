@@ -12,6 +12,7 @@ import { ReactComponent as VietnamFlagIcon } from '#/assets/svg/vietnam-flag.svg
 import { conversations } from '#/mocks/conversations';
 // import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { currentUser } from '#/mocks/users';
+import { clearToken } from '#/shared/utils/token';
 import type { User } from '#/src/interfaces/users';
 import { AboutUsModal } from '../AboutUs';
 
@@ -90,6 +91,17 @@ function PrivateLayout({
                 </div>
                 <EllipsisOutlined className="text-lg" />
               </div>
+              <Button
+                className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                onClick={() => {
+                  clearToken();
+                  logout();
+                }}
+                size="small"
+                type="text"
+              >
+                <span className="ml-1">Logout</span>
+              </Button>
             </div>
           </div>
         </div>

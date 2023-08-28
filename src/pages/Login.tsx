@@ -3,11 +3,12 @@
  * import styled from '@emotion/styled';
  */
 import { Button, Card, Col, Form, Input, Row, Typography } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
 import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
 import AuthLayout from '#/shared/components/layout/AuthLayout';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import { setToken } from '#/shared/utils/token';
 
 /*
  * const FormWrapper = styled.div`
@@ -34,10 +35,16 @@ import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 
 function LoginForm() {
   const { t } = useTypeSafeTranslation();
+  const navigate = useNavigate();
+
+  const handleLogin = (values: { email: string; password: string }) => {
+    setToken(`${values.email}-${values.password}`);
+    navigate('/');
+  };
 
   return (
     <>
-      <Form layout="vertical" onFinish={() => null} scrollToFirstError>
+      <Form layout="vertical" onFinish={handleLogin} scrollToFirstError>
         <Row align="middle" justify="center">
           <Col span={24}>
             <Form.Item

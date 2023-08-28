@@ -7,13 +7,15 @@ import type { MyWindow } from '#/shared/utils/type';
 
 function PrivateRoute() {
   const user = {};
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     /*
      * TODO
      * logout();
      */
+    navigate('/login');
   };
-  const navigate = useNavigate();
 
   useEffect(() => {
     (window as unknown as MyWindow).pushLogin = () => navigate('login');
