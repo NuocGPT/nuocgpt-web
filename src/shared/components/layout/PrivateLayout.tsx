@@ -45,7 +45,15 @@ function PrivateLayout({
   } = useQuery<Conversations>(QUERY.getConversations, fetchConversations, {
     onSuccess(data) {
       if (!id) {
-        navigate(`/${data?.items?.[0]?._id}`);
+        navigate(
+          `/${
+            data?.items?.sort(
+              (prev, next) =>
+                Number(new Date(next.created_at)) -
+                Number(new Date(prev.created_at)),
+            )?.[0]?._id
+          }`,
+        );
       }
     },
   });
