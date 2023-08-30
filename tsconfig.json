@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["vite/client", "jest"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
+    "types": [
+      "vite/client",
+      "jest"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,21 +21,50 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "baseUrl": "./",
     "paths": {
-      "#/graphql/*": ["src/graphql/*"],
-      "#/generated/*": ["src/generated/*"],
-      "#/shared/*": ["src/shared/*"],
-      "#/pages/*": ["src/pages/*"],
-      "#/configs/*": ["src/configs/*"],
-      "#/services/*": ["src/services/*"],
-      "#/routers/*": ["src/routers/*"],
-      "#/assets/*": ["src/assets/*"],
-      "#/mocks/*": ["src/mocks/*"],
-      "#/src/*": ["./src/*"]
-    }
+      "#/graphql/*": [
+        "src/graphql/*"
+      ],
+      "#/generated/*": [
+        "src/generated/*"
+      ],
+      "#/shared/*": [
+        "src/shared/*"
+      ],
+      "#/pages/*": [
+        "src/pages/*"
+      ],
+      "#/configs/*": [
+        "src/configs/*"
+      ],
+      "#/services/*": [
+        "src/services/*"
+      ],
+      "#/routers/*": [
+        "src/routers/*"
+      ],
+      "#/assets/*": [
+        "src/assets/*"
+      ],
+      "#/mocks/*": [
+        "src/mocks/*"
+      ],
+      "#/src/*": [
+        "./src/*"
+      ]
+    },
+    "incremental": true
   },
-  "include": ["./src", "./tests", "jest.config.ts", "jest.setup.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": [
+    "./src",
+    "./tests",
+    "jest.config.ts",
+    "jest.setup.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }
