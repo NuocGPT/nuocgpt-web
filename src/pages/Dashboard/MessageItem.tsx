@@ -4,10 +4,11 @@ import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import { ReactComponent as Dislike } from '#/assets/svg/dislike-outlined.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as Like } from '#/assets/svg/like-outlined.svg';
-import type { Message } from '#/mocks/interfaces/conversations';
 import { currentUser } from '#/mocks/users';
+import type { Message } from '#/services/conversations/interfaces';
+import { AuthorType } from '#/services/conversations/interfaces';
 import { Avatar } from '#/shared/components/common';
-import ModalPositiveFeedback from './components/ModalFeedback';
+import ModalFeedback from './components/ModalFeedback';
 
 interface MessageProps {
   message?: Message;
@@ -46,20 +47,26 @@ function MessageItem({ message }: MessageProps) {
     </div>
   ) : (
     <div
-      className={`w-full ${message.isGPTResponse ? 'bg-color-neutral-5' : ''}`}
+      className={`w-full ${
+        message.author?.role === AuthorType.SYSTEM ? 'bg-color-neutral-5' : ''
+      }`}
     >
       <div className="mx-auto flex max-w-[960px] justify-between gap-4 py-4">
         <div className="flex items-start gap-4">
           <Avatar
             className="flex-shrink-0"
             size={32}
-            src={message.isGPTResponse ? GPTAvatar : currentUser.avatar}
+            src={
+              message.author?.role === AuthorType.SYSTEM
+                ? GPTAvatar
+                : currentUser.avatar
+            }
           />
           <Typography.Paragraph className="text-color-neutral-1">
-            {message.text}
+            {message.content?.parts?.[0]}
           </Typography.Paragraph>
         </div>
-        {message.isGPTResponse && (
+        {message.author?.role === AuthorType.SYSTEM && (
           <div className="flex items-start justify-start">
             <Button
               onClick={handleCreatePositiveFeedback}
@@ -78,9 +85,10 @@ function MessageItem({ message }: MessageProps) {
           </div>
         )}
       </div>
-      <ModalPositiveFeedback
+      <ModalFeedback
+        conversationId={message.conversation_id}
         isPositive={feedbackType === FeedbackTypes.LIKE}
-        messageId={message.id}
+        messageId={message._id}
         onClose={handleClose}
         visible={!!feedbackType}
       />

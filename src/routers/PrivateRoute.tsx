@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useRoutes } from 'react-router-dom';
 // import NotFound from '#/pages/404Page';
 import Dashboard from '#/pages/Dashboard';
+import NewConversation from '#/pages/NewConversation';
 import PrivateLayout from '#/shared/components/layout/PrivateLayout';
 import type { MyWindow } from '#/shared/utils/type';
 
@@ -21,7 +22,10 @@ function PrivateRoute() {
     (window as unknown as MyWindow).pushLogin = () => navigate('login');
   }, []);
 
-  const routes = useRoutes([{ element: <Dashboard />, path: '*' }]);
+  const routes = useRoutes([
+    { element: <NewConversation />, path: '/new-conversation' },
+    { element: <Dashboard />, path: '*' },
+  ]);
 
   return (
     <PrivateLayout logout={handleLogout} user={user}>

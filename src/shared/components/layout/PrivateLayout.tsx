@@ -2,6 +2,7 @@ import { useState } from 'react';
 import EllipsisOutlined from '@ant-design/icons/lib/icons/EllipsisOutlined';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import type { DeepPartial } from '@enouvo/react-uikit';
+import { useQuery } from '@tanstack/react-query';
 import { Avatar, Button, Divider, Image, Layout, Typography } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -9,9 +10,11 @@ import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as AboutUsIcon } from '#/assets/svg/about-us.svg';
 import { ReactComponent as ChatIcon } from '#/assets/svg/chat.svg';
 import { ReactComponent as VietnamFlagIcon } from '#/assets/svg/vietnam-flag.svg';
-import { conversations } from '#/mocks/conversations';
-// import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { currentUser } from '#/mocks/users';
+import { QUERY } from '#/services/constants';
+import { fetchConversations } from '#/services/conversations';
+import type { Conversations } from '#/services/conversations/interfaces';
+import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { clearToken } from '#/shared/utils/token';
 import type { User } from '#/src/interfaces/users';
 import { AboutUsModal } from '../AboutUs';
@@ -26,11 +29,32 @@ function PrivateLayout({
   logout,
   user,
 }: React.PropsWithChildren<Props>) {
-  // const { t } = useTypeSafeTranslation();
+  const { t } = useTypeSafeTranslation();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
-  const id = pathname.split('/')?.[1] ? pathname.split('/')[1] : '0';
+  const id = pathname.split('/')?.[1];
+
+  const {
+    data: fetchConversationsResponse,
+    /*
+     * error,
+     * isError,
+     * isLoading,
+     */
+  } = useQuery<Conversations>(QUERY.getConversations, fetchConversations, {
+    onSuccess(data) {
+      if (!id) {
+        navigate(`/${data?.items?.[0]?._id}`);
+      }
+    },
+  });
+
+  const conversations = fetchConversationsResponse?.items ?? [];
+
+  const handleCreateNewConversation = () => {
+    navigate('/new-conversation');
+  };
 
   console.log(user);
 
@@ -46,7 +70,7 @@ function PrivateLayout({
             <Button
               className="mt-4 w-full rounded-lg border-[2px] bg-primary-color text-secondary-color"
               icon={<PlusOutlined />}
-              onClick={() => null}
+              onClick={handleCreateNewConversation}
             >
               Tạo trò chuyện mới
             </Button>
@@ -54,17 +78,15 @@ function PrivateLayout({
               {conversations.map(conversation => (
                 <Typography.Text
                   className={`flex cursor-pointer items-center gap-2 rounded-lg ${
-                    id === conversation.id ? 'bg-primary-color-light-10' : ''
+                    id === conversation._id ? 'bg-primary-color-light-10' : ''
                   } p-2 text-secondary-color`}
-                  key={conversation.id}
+                  key={conversation._id}
                   onClick={() =>
-                    id === conversation.id
-                      ? logout()
-                      : navigate(`/${conversation.id}`)
+                    id !== conversation._id && navigate(`/${conversation._id}`)
                   }
                 >
                   <ChatIcon />
-                  {conversation.name}
+                  {conversation.title}
                 </Typography.Text>
               ))}
             </div>
@@ -79,7 +101,7 @@ function PrivateLayout({
                 size="small"
                 type="text"
               >
-                <span className="ml-1">Về chúng tôi</span>
+                <span className="ml-1">{t('aboutUs.title')}</span>
               </Button>
               <div className="flex gap-2 text-secondary-color">
                 <VietnamFlagIcon /> Tiếng Việt

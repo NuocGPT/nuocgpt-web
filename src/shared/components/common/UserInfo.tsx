@@ -34,7 +34,7 @@ function UserInfo({
           ellipsis={{
             expandable: false,
             rows: 1,
-            symbol: t('label.etc'),
+            symbol: t('common.etc'),
           }}
         >
           <Tooltip className="font-medium" title={user.fullName ?? ''}>
@@ -47,7 +47,7 @@ function UserInfo({
             ellipsis={{
               expandable: false,
               rows: 1,
-              symbol: t('label.etc'),
+              symbol: t('common.etc'),
             }}
           >
             <Tooltip title={user.email ?? ''}>{user.email ?? ''}</Tooltip>

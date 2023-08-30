@@ -13,7 +13,7 @@ function NotFoundPage() {
         </Link>
       }
       status="404"
-      subTitle={t('empty.page')}
+      subTitle={t('empty.message')}
       title={<Typography.Title level={1}>404</Typography.Title>}
     />
   );

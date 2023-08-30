@@ -1,10 +1,18 @@
+import { showError } from '@enouvo/react-uikit';
+import { useMutation } from '@tanstack/react-query';
 import { Checkbox, Form, Input, Modal, Typography } from 'antd';
 import { ReactComponent as DislikeIcon } from '#/assets/svg/dislike-rounded.svg';
 import { ReactComponent as LikeIcon } from '#/assets/svg/like-rounded.svg';
+import { MUTATION } from '#/services/constants';
+import { addFeedback } from '#/services/feedbacks';
+import type { AddFeedbackDto } from '#/services/feedbacks/interfaces';
+import { FeedbackTag, Rating } from '#/services/feedbacks/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import { showSuccess } from '#/shared/utils/tools';
 
 interface ModalFeedbackProps {
   messageId: string;
+  conversationId: string;
   isPositive: boolean;
   visible: boolean;
   onClose: () => void;
@@ -12,15 +20,31 @@ interface ModalFeedbackProps {
 
 function ModalFeedback({
   messageId,
+  conversationId,
   isPositive,
   visible,
   onClose,
 }: ModalFeedbackProps) {
   const { t } = useTypeSafeTranslation();
   const [form] = Form.useForm();
+  const { mutate: addFeedbackMutation, isLoading: addFeedbackLoading } =
+    useMutation(MUTATION.addMessage, addFeedback, {
+      onError() {
+        showError('Đã có lỗi xảy ra!');
+      },
+      onSuccess() {
+        showSuccess('Thành công!', 'Gửi phản hồi thành công');
+        onClose();
+      },
+    });
 
-  const handleFinish = () => {
-    console.log(messageId);
+  const handleFinish = (values: Partial<AddFeedbackDto>) => {
+    addFeedbackMutation({
+      ...values,
+      conversation_id: conversationId,
+      message_id: messageId,
+      rating: isPositive ? Rating.thumbsUp : Rating.thumbsDown,
+    });
   };
 
   const handleClose = () => {
@@ -32,6 +56,11 @@ function ModalFeedback({
     <Modal
       cancelButtonProps={{ hidden: true }}
       destroyOnClose
+      okButtonProps={{
+        form: 'feedback',
+        htmlType: 'submit',
+        loading: addFeedbackLoading,
+      }}
       okText={t('button.confirm')}
       onCancel={handleClose}
       open={visible}
@@ -44,7 +73,7 @@ function ModalFeedback({
         </div>
       }
     >
-      <Form form={form} onFinish={handleFinish}>
+      <Form form={form} name="feedback" onFinish={handleFinish}>
         <Form.Item name="text" rules={[{ required: true }]}>
           <Input.TextArea
             className="rounded-lg"
@@ -57,13 +86,15 @@ function ModalFeedback({
           />
         </Form.Item>
         {!isPositive && (
-          <Form.Item name="type" rules={[{ required: true }]}>
+          <Form.Item name="tags" rules={[{ required: true }]}>
             <Checkbox.Group className="flex flex-col gap-2">
-              <Checkbox value="1">Điều này có hại/không an toàn</Checkbox>
-              <Checkbox className="m-0" value="2">
+              <Checkbox value={FeedbackTag.harmful}>
+                Điều này có hại/không an toàn
+              </Checkbox>
+              <Checkbox className="m-0" value={FeedbackTag.false}>
                 Điều này không đúng
               </Checkbox>
-              <Checkbox className="m-0" value="3">
+              <Checkbox className="m-0" value={FeedbackTag.notHelpful}>
                 Điều này không hữu ích
               </Checkbox>
             </Checkbox.Group>

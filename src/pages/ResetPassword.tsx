@@ -1,17 +1,12 @@
-import { Card, Row } from 'antd';
+import ResetPassword from '#/shared/components/Authentication/ResetPassword';
 import AuthLayout from '#/shared/components/layout/AuthLayout';
-// import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 
-function ResetPassword() {
-  // const { t } = useTypeSafeTranslation();
-
+function ResetPasswordPage() {
   return (
     <AuthLayout>
-      <Row align="middle" className="h-full" justify="start">
-        <Card className="w-full border-0 p-0">Reset password page</Card>
-      </Row>
+      <ResetPassword />
     </AuthLayout>
   );
 }
 
-export default ResetPassword;
+export default ResetPasswordPage;

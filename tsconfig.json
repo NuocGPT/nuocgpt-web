@@ -22,6 +22,7 @@
       "#/shared/*": ["src/shared/*"],
       "#/pages/*": ["src/pages/*"],
       "#/configs/*": ["src/configs/*"],
+      "#/services/*": ["src/services/*"],
       "#/routers/*": ["src/routers/*"],
       "#/assets/*": ["src/assets/*"],
       "#/mocks/*": ["src/mocks/*"],

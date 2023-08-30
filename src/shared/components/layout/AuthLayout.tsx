@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 import { Button, Col, Grid, Image, Row, Typography } from 'antd';
 import Logo from '#/assets/images/logo-white.png';
+import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { AboutUsModal } from '../AboutUs';
 
 interface Props {
@@ -30,9 +31,10 @@ const StyledAuthLayout = styled(Col)`
 `;
 
 function AuthLayout({ children }: Props) {
+  const { t } = useTypeSafeTranslation();
+  const { md } = Grid.useBreakpoint();
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
 
-  const { md } = Grid.useBreakpoint();
   return (
     <div className="flex h-screen max-h-screen justify-center p-6">
       <Row className=" w-full max-w-[1560px] rounded-2xl bg-primary-color shadow-2xl">
@@ -63,9 +65,12 @@ function AuthLayout({ children }: Props) {
             size="small"
             type="text"
           >
-            Về chúng tôi
+            {t('aboutUs.title')}
           </Button>
-          {children}
+
+          <div className="flex h-full w-full items-center justify-start">
+            <div className="w-full">{children}</div>
+          </div>
           <div className="flex justify-center gap-4">
             <Typography.Link>Điều khoản sử dụng</Typography.Link> |
             <Typography.Link>Chính sách bảo mật</Typography.Link>

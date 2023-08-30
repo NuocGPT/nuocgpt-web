@@ -1,5 +1,4 @@
 export { default as Avatar } from './Avatar';
-export { default as FilterWrapper } from './FilterWrapper';
 export { default as UserInfo } from './UserInfo';
 export { default as ToggleParagraph } from './ToggleParagraph';
 export { default as Drawer } from './Drawer';

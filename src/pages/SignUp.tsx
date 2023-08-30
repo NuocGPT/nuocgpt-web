@@ -1,17 +1,12 @@
-import { Card, Row } from 'antd';
+import SignUp from '#/shared/components/Authentication/SignUp';
 import AuthLayout from '#/shared/components/layout/AuthLayout';
-// import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 
-function SignUp() {
-  // const { t } = useTypeSafeTranslation();
-
+function SignUpPage() {
   return (
     <AuthLayout>
-      <Row align="middle" className="h-full" justify="start">
-        <Card className="w-full border-0 p-0">Sign up page</Card>
-      </Row>
+      <SignUp />
     </AuthLayout>
   );
 }
 
-export default SignUp;
+export default SignUpPage;

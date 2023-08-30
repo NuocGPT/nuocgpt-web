@@ -1,36 +1,32 @@
 {
   "appInfo": {
-    "footer": "",
-    "name": "Smartos"
+    "name": "NuocGPT"
   },
-  "sideBar": {
-    "dashboard": "Dashboard",
-    "user": "User",
-    "logout": "Logout"
+  "common": {
+    "loading": "Loading...",
+    "n/a": "N/A",
+    "etc": "..."
   },
-  "header": {
-    "profile": "Profile",
-    "logout": "Logout",
-    "notification": "Notification"
+  "aboutUs": {
+    "title": "About Us",
+    "meaningOfOurBrand": "“Nước” có nghĩa là nước trong tiếng Việt. Một cái tên phù hợp để mô tả tình yêu của chúng tôi đối với đất nước trong khi gói gọn nhiều thách thức về khí hậu mà Việt Nam đang phải đối mặt.",
+    "ourMission": "Được thành lập vào năm 2023, chúng tôi là một nhóm liên ngành đam mê nghiên cứu các giải pháp khí hậu cho Việt Nam. Cùng với nhau, chúng tôi có chuyên môn về AI, công nghệ vũ trụ, chăm sóc sức khỏe, tinh thần kinh doanh và các giải pháp khí hậu."
   },
-  "login": {
-    "title": "Work with your team!",
-    "subTitle": "Welcome back",
-    "rememberMe": "Remember me",
-    "loginBtn": "Login",
+  "authentication": {
+    "title": "Welcome back",
+    "login": "Login",
     "email": "Email",
-    "forgotPassword": "Forgot password?",
+    "forgotPassword": "Forgot password",
+    "forgotPasswordDescription": "Please enter your email address and we will send you instructions on how to reset your password.",
+    "resetPassword": "Reset password",
     "password": "Password",
-    "goToSignUp": "Not have an account yet?",
-    "permission": "Your account is disabled or you don't have access to this page!",
+    "confirmPassword": "Confirm password",
+    "notHaveAccountYet": "Not have an account yet?",
+    "alreadyHaveAccount": "Already have an account?",
+    "signUp": "Sign up",
     "passwordValidator": "Minimum eight characters, at least one letter, one number and one special character",
     "errorRefreshTokenTitle": "Your login session expired. Please login again.",
     "errorTitle": "Your login session expired. Please login again."
-  },
-  "required": {
-    "requiredField": "This field is required",
-    "usernameIsInvalid": "Username is invalid",
-    "path": "Path must be a valid url"
   },
   "profiles": {
     "title": "General Information",
@@ -46,62 +42,27 @@
     "country": "Country",
     "fullName": "Full Name",
     "role": "Role",
-    "n/a": "N/A",
     "updateSuccess": "Updated user successfully!"
-  },
-  "dashboards": {
-    "overview": "Overview",
-    "clients": "Clients",
-    "company": "Company",
-    "leads": "Leads",
-    "campaigns": "Campaigns"
   },
   "button": {
     "create": "Create",
-    "add": "Add",
-    "edit": "Edit",
     "cancel": "Cancel",
-    "apply": "Apply",
-    "delete": "Delete",
     "save": "Save",
-    "saveAndNext": "Save & Next",
     "ok": "Ok",
     "search": "Search",
-    "reset": "Reset",
     "submit": "Submit",
     "filter": "Filter",
     "loadMore": "Load More...",
-    "update": "Update",
-    "clearFilter": "Clear",
     "change": "Change",
     "confirm": "Confirm",
-    "backToHome": "Back Home",
     "previous": "Previous",
     "next": "Next",
     "goTo": "Go to",
     "backHome": "Back Home",
     "readMore": "...more",
     "readLess": " less",
-    "clearCache": "Clear Cache",
-    "hide": "Hide"
-  },
-  "popup": {
-    "confirm": "Confirm",
-    "alertDelete": "Delete Data",
-    "alertDeleteDes": "Do you want to delete item {{customMessage}}?",
-    "alertDeleteDevice": "Do you want to remove device for this plant?",
-    "enableItem": "Do you want to enable this item?",
-    "disableItem": "Do you want to disable this item?",
-    "deleteItem": "Do you want to delete this item?"
-  },
-  "statuses": {
-    "name": "Name",
-    "color": "Color",
-    "isActive": "Status",
-    "createPage": "Create Status",
-    "editPage": "Edit Status",
-    "isCommon": "Is Common",
-    "notCommon": "Not Common"
+    "hide": "Hide",
+    "proceed": "Proceed"
   },
   "gender": {
     "title": "Gender",
@@ -111,13 +72,7 @@
   },
   "status": {
     "active": "Active",
-    "inactive": "Inactive",
-    "inprogress": "In Progress",
-    "approved": "Approved",
-    "verified": "Verified",
-    "rejected": "Rejected",
-    "pending": "Pending",
-    "notVerify": "Not verify"
+    "inactive": "Inactive"
   },
   "placeholder": {
     "undefined": "select...",
@@ -131,10 +86,6 @@
     "nonHtmlTag": "This value does not accept HTML tag",
     "name": "Please enter a valid name",
     "address": "Please enter a valid address",
-    "time": "Please enter a valid time",
-    "price": "Please enter a valid price",
-    "roomName": "Please enter a valid room name",
-    "roomCategoryName": "Please enter a valid room category name",
     "phoneNumber": "Please enter a valid phone number",
     "email": "Please enter a valid email",
     "contactEmail": "Please enter a valid contact email",
@@ -143,19 +94,16 @@
     "error": "Please enter valid format for this field",
     "fileIsNotAllowed": "File type not allowed",
     "serverInternalError": "Server Internal Error. Please try later.",
-    "IncorrectCurrentPassword": "Incorrect current password",
-    "validatePrice": "Your price is zero, please check again",
+    "incorrectCurrentPassword": "Incorrect current password",
     "documentFileType": "You can only upload TXT/JSON file!",
-    "fileSizeLimit": "File must smaller than 2MB!",
-    "impersonatingError": "Can not impersonating this business right now. Please try later.",
-    "endDateError": "End time must be greater than Start time"
+    "fileSizeLimit": "File must smaller than 2MB!"
   },
   "input": {
     "image": "Select a .jpeg or .png file that is less than 3 MB.",
     "search": "Search {{label}}"
   },
   "empty": {
-    "page": "Sorry, the page you visited does not exist."
+    "message": "Sorry, the page you visited does not exist."
   },
   "tooltip": {
     "view": "View",
@@ -164,24 +112,5 @@
     "impersonating": "Impersonating",
     "delete": "Delete",
     "uploadImages": "Click here to upload new image"
-  },
-  "table": {
-    "name": "Name",
-    "description": "Description",
-    "status": "Status",
-    "action": "Action",
-    "parentCategory": "Parent Category"
-  },
-  "units": {
-    "month": "Month",
-    "year": "Year"
-  },
-  "businesses": {
-    "generalInformation": "General Information",
-    "n/a": "N/A"
-  },
-  "label": {
-    "n/a": "N/A",
-    "etc": "..."
   }
 }

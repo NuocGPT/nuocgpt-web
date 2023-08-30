@@ -10,7 +10,7 @@ import './configs/theme/index.css';
 import './configs';
 import { formConfig } from './configs/config';
 import App from './routers/App';
-import { queryClient } from './services';
+import { queryClient } from './services/client';
 import i18n from './shared/i18n';
 
 createRoot(document.getElementById('root')!).render(
