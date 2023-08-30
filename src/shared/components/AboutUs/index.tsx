@@ -22,7 +22,7 @@ export function AboutUsModal({ visible, onClose }: AboutUsModalProps) {
       title={null}
       width={1280}
     >
-      <Row className="shadow-shadow-2xl h-[860px] rounded-2xl bg-primary-color">
+      <Row className="shadow-shadow-2xl h-[640px] rounded-2xl bg-primary-color">
         <StyledCol
           className="flex h-full items-center justify-center"
           span={13}

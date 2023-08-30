@@ -122,7 +122,7 @@ function PrivateLayout({
                 size="small"
                 type="text"
               >
-                <span className="ml-1">Logout</span>
+                <span className="ml-1">Đăng xuất</span>
               </Button>
             </div>
           </div>

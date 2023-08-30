@@ -42,7 +42,7 @@ function NewConversation() {
         addConversation({
           author_id: String(currentUser.id),
           message,
-          title: 'New Conversation',
+          title: 'Cuộc trò chuyện mới',
         }),
       {
         onSuccess(data) {

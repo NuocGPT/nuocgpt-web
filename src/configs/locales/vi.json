@@ -1,0 +1,116 @@
+{
+  "appInfo": {
+    "name": "NuocGPT"
+  },
+  "common": {
+    "loading": "Đang tải...",
+    "n/a": "N/A",
+    "etc": "..."
+  },
+  "aboutUs": {
+    "title": "Về chúng tôi",
+    "meaningOfOurBrand": "“Nước” có nghĩa là nước trong tiếng Việt. Một cái tên phù hợp để mô tả tình yêu của chúng tôi đối với đất nước trong khi gói gọn nhiều thách thức về khí hậu mà Việt Nam đang phải đối mặt.",
+    "ourMission": "Được thành lập vào năm 2023, chúng tôi là một nhóm liên ngành đam mê nghiên cứu các giải pháp khí hậu cho Việt Nam. Cùng với nhau, chúng tôi có chuyên môn về AI, công nghệ vũ trụ, chăm sóc sức khỏe, tinh thần kinh doanh và các giải pháp khí hậu."
+  },
+  "authentication": {
+    "title": "Chào mừng bạn quay trỏ lại",
+    "login": "Đăng nhập",
+    "email": "Email",
+    "forgotPassword": "Quên mật khẩu",
+    "forgotPasswordDescription": "Vui lòng nhập email của bạn và chúng tôi sẽ gửi cho bạn một thay đổi mật khẩu.",
+    "resetPassword": "Đổi mật khẩu",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "notHaveAccountYet": "Chưa có tài khoản?",
+    "alreadyHaveAccount": "Bạn có tài khoản?",
+    "signUp": "Đăng ký",
+    "passwordValidator": "Mínimum eight characters, at least one letter, one number and one special character",
+    "errorRefreshTokenTitle": "Your login session expired. Please login again.",
+    "errorTitle": "Your login session expired. Please login again."
+  },
+  "profiles": {
+    "title": "General Information",
+    "header": "Profile",
+    "profileInfo": "Profile info",
+    "email": "Email",
+    "username": "Username",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "gender": "Gender",
+    "phone": "Phone Number",
+    "dateOfBirth": "Date Of Birth",
+    "country": "Country",
+    "fullName": "Full Name",
+    "role": "Role",
+    "updateSuccess": "Updated user successfully!"
+  },
+  "button": {
+    "create": "Tạo",
+    "cancel": "Huỷ bỏ",
+    "save": "Lưu",
+    "ok": "Ok",
+    "search": "Tìm kiểm",
+    "submit": "Gửi",
+    "filter": "Filter",
+    "loadMore": "Load More...",
+    "change": "Change",
+    "confirm": "Confirm",
+    "previous": "Previous",
+    "next": "Next",
+    "goTo": "Go to",
+    "backHome": "Back Home",
+    "readMore": "...more",
+    "readLess": " less",
+    "hide": "Hide",
+    "proceed": "Tiếp theo"
+  },
+  "gender": {
+    "title": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "placeholder": {
+    "undefined": "select...",
+    "email": "Email address",
+    "password": "Enter your password",
+    "selectTheColor": "Select the color"
+  },
+  "validateMessage": {
+    "maxCharacters": "Please enter message no more than {{max}} characters",
+    "validatePassword": "Password must be at least 8 characters and contain at least one number, one letter and one special character",
+    "nonHtmlTag": "This value does not accept HTML tag",
+    "name": "Please enter a valid name",
+    "address": "Please enter a valid address",
+    "phoneNumber": "Please enter a valid phone number",
+    "email": "Please enter a valid email",
+    "contactEmail": "Please enter a valid contact email",
+    "locationName": "Please enter a valid location name",
+    "fullName": "Please enter a valid full name",
+    "error": "Please enter valid format for this field",
+    "fileIsNotAllowed": "File type not allowed",
+    "serverInternalError": "Server Internal Error. Please try later.",
+    "incorrectCurrentPassword": "Incorrect current password",
+    "documentFileType": "You can only upload TXT/JSON file!",
+    "fileSizeLimit": "File must smaller than 2MB!"
+  },
+  "input": {
+    "image": "Select a .jpeg or .png file that is less than 3 MB.",
+    "search": "Search {{label}}"
+  },
+  "empty": {
+    "message": "Sorry, the page you visited does not exist."
+  },
+  "tooltip": {
+    "view": "View",
+    "create": "Create",
+    "edit": "Edit",
+    "impersonating": "Impersonating",
+    "delete": "Delete",
+    "uploadImages": "Click here to upload new image"
+  }
+}
