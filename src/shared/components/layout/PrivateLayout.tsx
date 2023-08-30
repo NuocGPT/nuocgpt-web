@@ -50,7 +50,11 @@ function PrivateLayout({
     },
   });
 
-  const conversations = fetchConversationsResponse?.items ?? [];
+  const conversations =
+    fetchConversationsResponse?.items.sort(
+      (prev, next) =>
+        Number(new Date(next.created_at)) - Number(new Date(prev.created_at)),
+    ) ?? [];
 
   const handleCreateNewConversation = () => {
     navigate('/new-conversation');
