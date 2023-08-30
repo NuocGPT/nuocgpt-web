@@ -74,7 +74,7 @@ function PrivateLayout({
             >
               Tạo trò chuyện mới
             </Button>
-            <div className="flex flex-col gap-2">
+            <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
               {conversations.map(conversation => (
                 <Typography.Text
                   className={`flex cursor-pointer items-center gap-2 rounded-lg ${
