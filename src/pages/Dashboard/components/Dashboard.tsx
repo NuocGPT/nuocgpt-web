@@ -6,12 +6,11 @@ import LogoGrey from '#/assets/images/logo-grey.png';
 import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
-import { currentUser } from '#/mocks/users';
 import NotFoundPage from '#/pages/404Page';
 import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
 import { addMessage, fetchMessages } from '#/services/conversations';
-import type { Message, Messages } from '#/services/conversations/interfaces';
+import type { Message } from '#/services/conversations/interfaces';
 import {
   AuthorType,
   ConversationType,
@@ -46,10 +45,11 @@ function Dashboard({ conversationId }: DashboardProps) {
       },
     });
 
-  const { data: fetchMessagesResponse, refetch } = useQuery<Messages>(
+  const { data: fetchMessagesResponse, refetch } = useQuery(
     QUERY.getMessages,
     () => fetchMessages({ conversationId }),
     {
+      enabled: !!conversationId,
       onSuccess() {
         setTimeout(() => {
           scrollToConversationBottom();
@@ -67,7 +67,6 @@ function Dashboard({ conversationId }: DashboardProps) {
       MUTATION.addMessage,
       () =>
         addMessage(String(conversationId), {
-          author_id: String(currentUser.id),
           message,
         }),
       {
@@ -112,7 +111,7 @@ function Dashboard({ conversationId }: DashboardProps) {
                 message={{
                   _id: String(Math.random() * 1000),
                   author: {
-                    id: String(currentUser.id),
+                    id: '',
                     role: AuthorType.USER,
                   },
                   content: {
@@ -146,7 +145,7 @@ function Dashboard({ conversationId }: DashboardProps) {
                 message={{
                   _id: String(Math.random() * 1000),
                   author: {
-                    id: String(currentUser.id),
+                    id: '',
                     role: AuthorType.USER,
                   },
                   content: {

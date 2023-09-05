@@ -1,8 +1,15 @@
-import axios from 'axios';
-import type { AddConversationDto, AddMessageDto } from './interfaces';
+import * as fetcher from '../utils/fetcher';
+import type {
+  AddConversationDto,
+  AddConversationResponse,
+  AddMessageDto,
+  AddMessageResponse,
+  Conversations,
+  Messages,
+} from './interfaces';
 
 async function fetchConversations() {
-  const { data } = await axios.get(
+  const data = await fetcher.get<Conversations>(
     `${import.meta.env.VITE_BASE_URL}/conversations`,
   );
   return data;
@@ -10,36 +17,26 @@ async function fetchConversations() {
 
 async function fetchMessages({ conversationId }: { conversationId?: string }) {
   if (!conversationId) return;
-  const { data } = await axios.get(
+  const data = await fetcher.get<Messages>(
     `${import.meta.env.VITE_BASE_URL}/conversations/${conversationId}/messages`,
   );
   return data;
 }
 
-async function addConversation({
-  title,
-  author_id,
-  message,
-}: AddConversationDto) {
-  const { data } = await axios.post(
+async function addConversation(addConversationInput: AddConversationDto) {
+  const data = await fetcher.post<AddConversationDto, AddConversationResponse>(
     `${import.meta.env.VITE_BASE_URL}/conversations`,
     {
-      author_id,
-      message,
-      title,
+      ...addConversationInput,
     },
   );
   return data;
 }
 
-async function addMessage(
-  conversationId: string,
-  { message, author_id }: AddMessageDto,
-) {
-  const { data } = await axios.post(
+async function addMessage(conversationId: string, { message }: AddMessageDto) {
+  const data = await fetcher.post<AddMessageDto, AddMessageResponse>(
     `${import.meta.env.VITE_BASE_URL}/conversations/${conversationId}/messages`,
     {
-      author_id,
       message,
     },
   );

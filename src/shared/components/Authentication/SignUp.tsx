@@ -1,16 +1,34 @@
+import { showError } from '@enouvo/react-uikit';
+import { useMutation } from '@tanstack/react-query';
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
 import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
+import { signUp } from '#/services/auth';
+import type { SignUpDto, SignUpResponse } from '#/services/auth/interfaces';
+import { MUTATION } from '#/services/constants';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import { showSuccess } from '#/shared/utils/tools';
 
 function SignUp() {
   const { t } = useTypeSafeTranslation();
+  const navigate = useNavigate();
+  const { mutate: signUpMutation, isLoading: signUpLoading } = useMutation(
+    MUTATION.signUp,
+    signUp,
+    {
+      onError() {
+        showError('Đã có lỗi xảy ra!');
+      },
+      onSuccess(data: SignUpResponse) {
+        showSuccess('Thành công', 'Đăng ký thành công!');
+        navigate(`/verify-otp?email=${encodeURIComponent(data?.email)}`);
+      },
+    },
+  );
 
-  // TODO: Integrate with real API
-  const handleSignUp = (values: { email: string; password: string }) => {
-    const input = { ...values };
-    return input;
+  const handleSignUp = (values: SignUpDto) => {
+    signUpMutation(values);
   };
 
   return (
@@ -67,7 +85,7 @@ function SignUp() {
                 block
                 className="rounded-lg p-2 font-semibold text-secondary-color"
                 htmlType="submit"
-                loading={false}
+                loading={signUpLoading}
                 type="primary"
               >
                 {t('button.proceed')}

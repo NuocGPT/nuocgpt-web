@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import ForgotPassword from '#/pages/ForgotPassword';
 import ResetPassword from '#/pages/ResetPassword';
 import SignUp from '#/pages/SignUp';
+import VerifyOTPPage from '#/pages/VerifyOTP';
 import GuardRoute from './GuardRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -41,6 +42,14 @@ const App = () => {
         </GuardRoute>
       ),
       path: 'reset-password',
+    },
+    {
+      element: (
+        <GuardRoute>
+          <VerifyOTPPage />
+        </GuardRoute>
+      ),
+      path: 'verify-otp',
     },
     {
       element: (

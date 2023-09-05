@@ -4,10 +4,10 @@ import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import { ReactComponent as Dislike } from '#/assets/svg/dislike-outlined.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as Like } from '#/assets/svg/like-outlined.svg';
-import { currentUser } from '#/mocks/users';
 import type { Message } from '#/services/conversations/interfaces';
 import { AuthorType } from '#/services/conversations/interfaces';
 import { Avatar } from '#/shared/components/common';
+import { DEFAULT_AVATAR } from '#/shared/utils/constant';
 import ModalFeedback from './components/ModalFeedback';
 
 interface MessageProps {
@@ -59,7 +59,7 @@ function MessageItem({ message }: MessageProps) {
             src={
               message.author?.role === AuthorType.SYSTEM
                 ? GPTAvatar
-                : currentUser.avatar
+                : DEFAULT_AVATAR
             }
           />
           <Typography.Paragraph className="text-color-neutral-1">

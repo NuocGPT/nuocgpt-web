@@ -1,4 +1,4 @@
-import axios from 'axios';
+import * as fetcher from '../utils/fetcher';
 import type { AddFeedbackDto, UpdateFeedbackDto } from './interfaces';
 
 async function addFeedback({
@@ -8,7 +8,7 @@ async function addFeedback({
   tags,
   text,
 }: AddFeedbackDto) {
-  const { data } = await axios.post(
+  const data = await fetcher.post(
     `${import.meta.env.VITE_BASE_URL}/feedbacks`,
     {
       conversation_id,
@@ -22,7 +22,7 @@ async function addFeedback({
 }
 
 async function updateFeedback(id: string, { tags, text }: UpdateFeedbackDto) {
-  const { data } = await axios.put(
+  const data = await fetcher.put(
     `${import.meta.env.VITE_BASE_URL}/feedbacks/${id}`,
     {
       tags,

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import EllipsisOutlined from '@ant-design/icons/lib/icons/EllipsisOutlined';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
-import type { DeepPartial } from '@enouvo/react-uikit';
 import { useQuery } from '@tanstack/react-query';
 import { Avatar, Button, Divider, Image, Layout, Typography } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
@@ -10,18 +9,18 @@ import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as AboutUsIcon } from '#/assets/svg/about-us.svg';
 import { ReactComponent as ChatIcon } from '#/assets/svg/chat.svg';
 import { ReactComponent as VietnamFlagIcon } from '#/assets/svg/vietnam-flag.svg';
-import { currentUser } from '#/mocks/users';
 import { QUERY } from '#/services/constants';
 import { fetchConversations } from '#/services/conversations';
 import type { Conversations } from '#/services/conversations/interfaces';
+import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import { DEFAULT_AVATAR } from '#/shared/utils/constant';
 import { clearToken } from '#/shared/utils/token';
-import type { User } from '#/src/interfaces/users';
 import { AboutUsModal } from '../AboutUs';
 
 interface Props {
   logout: () => void;
-  user: DeepPartial<User>;
+  user?: MeResponse;
 }
 
 function PrivateLayout({
@@ -33,7 +32,7 @@ function PrivateLayout({
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
-  const id = pathname.split('/')?.[1];
+  const id = pathname.split('/')?.[2];
 
   const {
     data: fetchConversationsResponse,
@@ -44,9 +43,9 @@ function PrivateLayout({
      */
   } = useQuery<Conversations>(QUERY.getConversations, fetchConversations, {
     onSuccess(data) {
-      if (!id) {
+      if (!id && data?.items?.length) {
         navigate(
-          `/${
+          `/c/${
             data?.items?.sort(
               (prev, next) =>
                 Number(new Date(next.created_at)) -
@@ -54,6 +53,8 @@ function PrivateLayout({
             )?.[0]?._id
           }`,
         );
+      } else if (!id) {
+        navigate('/new-conversation');
       }
     },
   });
@@ -67,8 +68,6 @@ function PrivateLayout({
   const handleCreateNewConversation = () => {
     navigate('/new-conversation');
   };
-
-  console.log(user);
 
   return (
     <Layout className="h-screen">
@@ -94,7 +93,8 @@ function PrivateLayout({
                   } p-2 text-secondary-color`}
                   key={conversation._id}
                   onClick={() =>
-                    id !== conversation._id && navigate(`/${conversation._id}`)
+                    id !== conversation._id &&
+                    navigate(`/c/${conversation._id}`)
                   }
                 >
                   <ChatIcon />
@@ -120,8 +120,10 @@ function PrivateLayout({
               </div>
               <div className="flex justify-between gap-2 text-secondary-color">
                 <div className="flex gap-2">
-                  <Avatar size={24} src={currentUser.avatar} />{' '}
-                  {currentUser.fullName}
+                  <Avatar size={24} src={DEFAULT_AVATAR} />{' '}
+                  <Typography.Text className="flex-1 text-secondary-color">
+                    {user?.email}
+                  </Typography.Text>
                 </div>
                 <EllipsisOutlined className="text-lg" />
               </div>

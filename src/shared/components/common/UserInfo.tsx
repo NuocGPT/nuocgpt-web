@@ -2,8 +2,13 @@ import type { DeepPartial } from '@enouvo/react-uikit';
 import type { AvatarProps } from 'antd';
 import { Tooltip, Typography } from 'antd';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
-import type { User } from '#/src/interfaces/users';
 import Avatar from './Avatar';
+
+interface User {
+  fullName?: string;
+  avatar?: string;
+  email?: string;
+}
 
 interface Props {
   user: DeepPartial<User>;

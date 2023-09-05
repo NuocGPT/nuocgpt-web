@@ -26,7 +26,12 @@
     "signUp": "Sign up",
     "passwordValidator": "Minimum eight characters, at least one letter, one number and one special character",
     "errorRefreshTokenTitle": "Your login session expired. Please login again.",
-    "errorTitle": "Your login session expired. Please login again."
+    "errorTitle": "Your login session expired. Please login again.",
+    "inputOTP": "Nhập mã OTP",
+    "inputOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến email của bạn. Mã có giá trị trong 10 phút.",
+    "notReceiveOTP": "Không nhận được OTP?",
+    "resendOTP": "Resend",
+    "resendAfterSeconds": "Resend after {{seconds}} seconds"
   },
   "profiles": {
     "title": "General Information",

@@ -7,7 +7,6 @@ import LogoGrey from '#/assets/images/logo-grey.png';
 import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
-import { currentUser } from '#/mocks/users';
 import MessageItem from '#/pages/Dashboard/MessageItem';
 import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
@@ -40,7 +39,6 @@ function NewConversation() {
       MUTATION.addConversation,
       () =>
         addConversation({
-          author_id: String(currentUser.id),
           message,
           title: 'Cuộc trò chuyện mới',
         }),
@@ -61,7 +59,7 @@ function NewConversation() {
                 message={{
                   _id: String(Math.random() * 1000),
                   author: {
-                    id: String(currentUser.id),
+                    id: '',
                     role: AuthorType.USER,
                   },
                   content: {
@@ -99,7 +97,7 @@ function NewConversation() {
                 message={{
                   _id: String(Math.random() * 1000),
                   author: {
-                    id: String(currentUser.id),
+                    id: '',
                     role: AuthorType.USER,
                   },
                   content: {

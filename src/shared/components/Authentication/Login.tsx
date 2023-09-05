@@ -1,18 +1,34 @@
+import { showError } from '@enouvo/react-uikit';
+import { useMutation } from '@tanstack/react-query';
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
 import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
+import { signIn } from '#/services/auth';
+import type { SignInDto, SignInResponse } from '#/services/auth/interfaces';
+import { MUTATION } from '#/services/constants';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { setToken } from '#/shared/utils/token';
 
 function LoginPage() {
   const { t } = useTypeSafeTranslation();
   const navigate = useNavigate();
+  const { mutate: signInMutation, isLoading: signInLoading } = useMutation(
+    MUTATION.signIn,
+    signIn,
+    {
+      onError() {
+        showError('Đã có lỗi xảy ra!');
+      },
+      onSuccess(data: SignInResponse) {
+        setToken(data.access_token);
+        navigate(`/`);
+      },
+    },
+  );
 
-  // TODO: Integrate with real API
-  const handleLogin = (values: { email: string; password: string }) => {
-    setToken(`${values.email}-${values.password}`);
-    navigate('/');
+  const handleLogin = (values: SignInDto) => {
+    signInMutation(values);
   };
 
   return (
@@ -68,7 +84,7 @@ function LoginPage() {
                 block
                 className="rounded-lg p-2 font-semibold text-secondary-color"
                 htmlType="submit"
-                loading={false}
+                loading={signInLoading}
                 type="primary"
               >
                 {t('button.proceed')}

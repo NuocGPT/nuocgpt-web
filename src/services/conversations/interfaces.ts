@@ -2,13 +2,27 @@ import type { BaseGetAllResponse } from '#/services/common/interfaces';
 
 export interface AddConversationDto {
   title: string | null;
-  author_id: string;
   message: string;
+}
+
+export interface AddConversationResponse {
+  _id: string;
+  conversation_id: string;
+  author: Author;
+  content: Content;
+  created_at: string;
 }
 
 export interface AddMessageDto {
   message: string;
-  author_id: string;
+}
+
+export interface AddMessageResponse {
+  _id: string;
+  conversation_id: string;
+  author: Author;
+  content: Content;
+  created_at: string;
 }
 
 export interface Author {
