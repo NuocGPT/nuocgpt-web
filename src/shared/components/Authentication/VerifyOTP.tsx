@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { showError } from '@enouvo/react-uikit';
 import { useMutation } from '@tanstack/react-query';
@@ -40,6 +40,7 @@ interface VerifyOTPProps {
 function VerifyOTP({ email }: VerifyOTPProps) {
   const { t } = useTypeSafeTranslation();
   const navigate = useNavigate();
+  const [verifyCode, setVerifyCode] = useState<string>('');
   const { counter, resetCounter } = useCountdownTimer();
   const { mutate: verifyOTPMutation, isLoading: verifyOTPLoading } =
     useMutation(MUTATION.verifyOTP, verifyOTP, {
@@ -105,8 +106,10 @@ function VerifyOTP({ email }: VerifyOTPProps) {
               }}
               inputStyle="otp-input"
               numInputs={6}
-              onChange={_otp => null}
+              onChange={otp => setVerifyCode(otp)}
               renderInput={props => <input {...props} />}
+              shouldAutoFocus
+              value={verifyCode}
             />
           </Form.Item>
         </StyledOTPInput>
@@ -114,7 +117,7 @@ function VerifyOTP({ email }: VerifyOTPProps) {
           <Button
             block
             className="rounded-lg p-2 font-semibold text-secondary-color"
-            disabled={counter >= 0}
+            disabled={!verifyCode || verifyCode?.length < 6}
             htmlType="submit"
             loading={verifyOTPLoading || resendOTPLoading}
             type="primary"
