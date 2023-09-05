@@ -67,7 +67,7 @@ function SignUp() {
                 },
                 {
                   message: t('authentication.passwordValidator'),
-                  pattern: validateRegex.password,
+                  pattern: validateRegex.simplePassword,
                 },
               ]}
             >
