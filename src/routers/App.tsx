@@ -7,7 +7,7 @@ import VerifyOTPPage from '#/pages/verify-otp';
 import GuardRoute from './GuardRoute';
 import PrivateRoute from './PrivateRoute';
 
-const Login = loadable(import('../pages/login'));
+const Login = loadable(import('../pages/sign-in'));
 
 const App = () => {
   const routes = useRoutes([
