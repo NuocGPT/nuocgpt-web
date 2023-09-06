@@ -33,3 +33,13 @@ export interface ResendVerifyOTPDto {
 export interface ResendVerifyOTPResponse {
   verify_code: string;
 }
+
+export interface ForgotPasswordDto {
+  email: string;
+}
+
+export interface ResetPasswordDto {
+  email: string;
+  password: string;
+  confirm_password: string;
+}

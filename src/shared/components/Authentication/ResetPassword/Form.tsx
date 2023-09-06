@@ -1,21 +1,25 @@
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
 import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
+import type { ResetPasswordDto } from '#/services/auth/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import {
+  getConfirmPasswordRules,
+  getPasswordRules,
+} from '#/shared/utils/validations';
 
-function ResetPassword() {
+interface ResetPasswordFormProps {
+  onSubmit: (values: ResetPasswordDto) => void;
+}
+
+function ResetPasswordForm({ onSubmit }: ResetPasswordFormProps) {
   const { t } = useTypeSafeTranslation();
-
-  const handleResetPassword = () => {
-    const values = {};
-    return values;
-  };
 
   return (
     <>
       <Typography.Title className="mb-4 text-primary-color" level={3}>
         🔐 {t('authentication.resetPassword')}
       </Typography.Title>
-      <Form layout="vertical" onFinish={handleResetPassword} scrollToFirstError>
+      <Form layout="vertical" onFinish={onSubmit} scrollToFirstError>
         <Row align="middle" justify="center">
           <Col span={24}>
             <Form.Item
@@ -24,7 +28,9 @@ function ResetPassword() {
               rules={[
                 {
                   required: true,
+                  whitespace: true,
                 },
+                ...getPasswordRules(),
               ]}
             >
               <Input.Password
@@ -36,12 +42,15 @@ function ResetPassword() {
           </Col>
           <Col span={24}>
             <Form.Item
+              dependencies={['password']}
               label={t('authentication.confirmPassword')}
               name="confirmPassword"
               rules={[
                 {
                   required: true,
+                  whitespace: true,
                 },
+                ...getConfirmPasswordRules('password'),
               ]}
             >
               <Input.Password
@@ -70,4 +79,4 @@ function ResetPassword() {
   );
 }
 
-export default ResetPassword;
+export default ResetPasswordForm;

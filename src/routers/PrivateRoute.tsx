@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Spin } from 'antd';
 import { useNavigate, useRoutes } from 'react-router-dom';
-import NotFoundPage from '#/pages/404Page';
-import Dashboard from '#/pages/Dashboard';
-import NewConversation from '#/pages/NewConversation';
+import NotFoundPage from '#/pages/404';
+import Chat from '#/pages/chat';
+import NewConversation from '#/pages/new-conversation';
 import { QUERY } from '#/services/constants';
 import { fetchMe } from '#/services/me';
 import PrivateLayout from '#/shared/components/layout/PrivateLayout';
@@ -18,10 +19,6 @@ function PrivateRoute() {
   });
 
   const handleLogout = () => {
-    /*
-     * TODO
-     * logout();
-     */
     navigate('/login');
   };
 
@@ -31,7 +28,8 @@ function PrivateRoute() {
 
   const routes = useRoutes([
     { element: <NewConversation />, path: '/new-conversation' },
-    { element: <Dashboard />, path: '/c/:id' },
+    { element: <Chat />, path: '/c/:id' },
+    { element: <Spin />, path: '/' },
     { element: <NotFoundPage />, path: '*' },
   ]);
 

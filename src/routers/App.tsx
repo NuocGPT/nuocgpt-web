@@ -1,13 +1,13 @@
 import { loadable } from '@enouvo/react-uikit';
 import { useRoutes } from 'react-router-dom';
-import ForgotPassword from '#/pages/ForgotPassword';
-import ResetPassword from '#/pages/ResetPassword';
-import SignUp from '#/pages/SignUp';
-import VerifyOTPPage from '#/pages/VerifyOTP';
+import ForgotPassword from '#/pages/forgot-password';
+import ResetPassword from '#/pages/reset-password';
+import SignUp from '#/pages/sign-up';
+import VerifyOTPPage from '#/pages/verify-otp';
 import GuardRoute from './GuardRoute';
 import PrivateRoute from './PrivateRoute';
 
-const Login = loadable(import('../pages/Login'));
+const Login = loadable(import('../pages/login'));
 
 const App = () => {
   const routes = useRoutes([

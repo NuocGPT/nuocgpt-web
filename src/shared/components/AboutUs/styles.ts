@@ -3,7 +3,7 @@ import { Col, Modal } from 'antd';
 
 export const StyledCol = styled(Col)`
   opacity: 0.85;
-  background: url('./src/assets/images/authBackground.png');
+  background: url('./authBackground.png');
   background-size: cover;
   mix-blend-mode: color-dodge;
   border-top-left-radius: 1rem;

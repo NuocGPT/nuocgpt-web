@@ -6,10 +6,13 @@ function VerifyOTPPage() {
   const [searchParams] = useSearchParams();
 
   const email = decodeURIComponent(searchParams.get('email') || '');
+  const type = searchParams.get('type') || '';
+
+  const isForgotPassword = type === 'forgot';
 
   return (
     <AuthLayout>
-      <VerifyOTP email={email} />
+      <VerifyOTP email={email} isForgotPassword={isForgotPassword} />
     </AuthLayout>
   );
 }

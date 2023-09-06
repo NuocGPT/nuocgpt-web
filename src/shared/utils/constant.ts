@@ -8,3 +8,8 @@ export const DOCUMENT_TYPES = 'application/json,text/plain';
 
 export const DEFAULT_AVATAR =
   'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png';
+
+export const LINKS = {
+  fulbright: 'https://fulbright.edu.vn/vi',
+  nuoc: 'https://www.nuoc.solutions',
+};

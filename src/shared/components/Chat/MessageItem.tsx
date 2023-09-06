@@ -8,7 +8,7 @@ import type { Message } from '#/services/conversations/interfaces';
 import { AuthorType } from '#/services/conversations/interfaces';
 import { Avatar } from '#/shared/components/common';
 import { DEFAULT_AVATAR } from '#/shared/utils/constant';
-import ModalFeedback from './components/ModalFeedback';
+import ModalFeedback from './ModalFeedback';
 
 interface MessageProps {
   message?: Message;

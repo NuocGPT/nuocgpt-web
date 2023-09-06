@@ -35,9 +35,10 @@ export const StyledOTPInput = styled.div`
 
 interface VerifyOTPProps {
   email: string;
+  isForgotPassword?: boolean;
 }
 
-function VerifyOTP({ email }: VerifyOTPProps) {
+function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
   const { t } = useTypeSafeTranslation();
   const navigate = useNavigate();
   const [verifyCode, setVerifyCode] = useState<string>('');
@@ -72,10 +73,12 @@ function VerifyOTP({ email }: VerifyOTPProps) {
   }, [email, navigate]);
 
   const handleVerifyOTP = (values: VerifyOTPDto) => {
-    verifyOTPMutation({
-      ...values,
-      email,
-    });
+    if (!isForgotPassword) {
+      verifyOTPMutation({
+        ...values,
+        email,
+      });
+    }
   };
 
   const handleResendOTP = () => {

@@ -12,12 +12,12 @@ interface Props {
 
 const StyledAuthLayout = styled(Col)`
   // opacity: 0.5;
-  // background: url('./src/assets/images/authBackground.png'),
+  // background: url('./authBackground.png'),
   //   lightgray 50% / cover no-repeat;
   // mix-blend-mode: color-dodge;
 
   opacity: 0.85;
-  background: url('./src/assets/images/authBackground.png');
+  background: url('./authBackground.png');
   background-size: cover;
   mix-blend-mode: color-dodge;
   border-top-left-radius: 1rem;
@@ -60,7 +60,7 @@ function AuthLayout({ children }: Props) {
           xs={24}
         >
           <Button
-            className="w-fit"
+            className="w-fit p-0"
             onClick={() => setAboutUsModalVisible(true)}
             size="small"
             type="text"

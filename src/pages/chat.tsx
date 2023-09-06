@@ -1,11 +1,11 @@
 import { useLocation } from 'react-router-dom';
-import Dashboard from './components/Dashboard';
+import Chat from '#/shared/components/Chat';
 
-function DashboardPage() {
+function ChatPage() {
   const { pathname } = useLocation();
   const conversationId = pathname.split('/')?.[2] ? pathname.split('/')[2] : '';
 
-  return <Dashboard conversationId={conversationId} />;
+  return <Chat conversationId={conversationId} />;
 }
 
-export default DashboardPage;
+export default ChatPage;

@@ -1,7 +1,9 @@
 import * as fetcher from '../utils/fetcher';
 import type {
+  ForgotPasswordDto,
   ResendVerifyOTPDto,
   ResendVerifyOTPResponse,
+  ResetPasswordDto,
   SignInDto,
   SignInResponse,
   SignUpDto,
@@ -50,4 +52,31 @@ async function resendVerifyOTP(resendVerifyOTPInput: ResendVerifyOTPDto) {
   return data;
 }
 
-export { signIn, signUp, verifyOTP, resendVerifyOTP };
+async function forgotPassword(forgotPasswordInput: ForgotPasswordDto) {
+  const data = await fetcher.post<ForgotPasswordDto, string>(
+    `${import.meta.env.VITE_BASE_URL}/auth/forgot-password`,
+    {
+      ...forgotPasswordInput,
+    },
+  );
+  return data;
+}
+
+async function resetPassword(resetPasswordInput: ResetPasswordDto) {
+  const data = await fetcher.post<ResetPasswordDto, string>(
+    `${import.meta.env.VITE_BASE_URL}/auth/reset-password`,
+    {
+      ...resetPasswordInput,
+    },
+  );
+  return data;
+}
+
+export {
+  signIn,
+  signUp,
+  verifyOTP,
+  resendVerifyOTP,
+  forgotPassword,
+  resetPassword,
+};

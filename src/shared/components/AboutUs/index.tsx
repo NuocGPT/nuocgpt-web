@@ -1,8 +1,10 @@
 import { Col, Image, Row, Typography } from 'antd';
+import Link from 'antd/lib/typography/Link';
 import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as FulbrightLogo } from '#/assets/svg/fulbright-logo.svg';
 import { ReactComponent as NuocSolutionsLogo } from '#/assets/svg/nuoc-solutions-logo.svg';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import { LINKS } from '#/shared/utils/constant';
 import { StyledCol, StyledModal } from './styles';
 
 interface AboutUsModalProps {
@@ -41,12 +43,22 @@ export function AboutUsModal({ visible, onClose }: AboutUsModalProps) {
           </Typography.Paragraph>
           <Typography.Paragraph>{t('aboutUs.ourMission')}</Typography.Paragraph>
           <div className="flex w-full justify-between gap-4">
-            <div className="flex w-1/2 items-center justify-center rounded-lg bg-[#F1F6FF] p-4">
+            <Link
+              className="flex w-1/2 items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
+              href={LINKS.nuoc}
+              rel="noreferrer"
+              target={'_blank'}
+            >
               <NuocSolutionsLogo />
-            </div>
-            <div className="flex w-1/2 items-center justify-center rounded-lg bg-[#F1F6FF] p-4">
+            </Link>
+            <Link
+              className="flex w-1/2 items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
+              href={LINKS.fulbright}
+              rel="noreferrer"
+              target={'_blank'}
+            >
               <FulbrightLogo />
-            </div>
+            </Link>
           </div>
         </Col>
       </Row>

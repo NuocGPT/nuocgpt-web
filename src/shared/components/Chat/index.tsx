@@ -6,7 +6,7 @@ import LogoGrey from '#/assets/images/logo-grey.png';
 import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
-import NotFoundPage from '#/pages/404Page';
+import NotFoundPage from '#/pages/404';
 import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
 import { addMessage, fetchMessages } from '#/services/conversations';
@@ -16,7 +16,7 @@ import {
   ConversationType,
 } from '#/services/conversations/interfaces';
 import { useRenderResponse } from '#/shared/hooks/useRenderResponse';
-import MessageItem from '../MessageItem';
+import MessageItem from './MessageItem';
 
 export const scrollToConversationBottom = () => {
   const conversation = document.getElementById('messages');
@@ -28,11 +28,11 @@ export const scrollToConversationBottom = () => {
   }
 };
 
-interface DashboardProps {
+interface ChatProps {
   conversationId: string;
 }
 
-function Dashboard({ conversationId }: DashboardProps) {
+function Chat({ conversationId }: ChatProps) {
   const [message, setMessage] = useState('');
   const [disableChat, setDisableChat] = useState(false);
   const { completedTyping, displayResponse, handleRenderResponse } =
@@ -199,4 +199,4 @@ function Dashboard({ conversationId }: DashboardProps) {
   );
 }
 
-export default Dashboard;
+export default Chat;

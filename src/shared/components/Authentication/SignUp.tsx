@@ -9,7 +9,7 @@ import type { SignUpDto, SignUpResponse } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { showSuccess } from '#/shared/utils/tools';
-import { validateRegex } from '#/shared/utils/validations';
+import { getPasswordRules } from '#/shared/utils/validations';
 
 function SignUp() {
   const { t } = useTypeSafeTranslation();
@@ -64,11 +64,9 @@ function SignUp() {
               rules={[
                 {
                   required: true,
+                  whitespace: true,
                 },
-                {
-                  message: t('authentication.passwordValidator'),
-                  pattern: validateRegex.simplePassword,
-                },
+                ...getPasswordRules(),
               ]}
             >
               <Input.Password

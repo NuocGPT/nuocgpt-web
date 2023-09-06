@@ -1,14 +1,14 @@
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
 import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
+import type { ForgotPasswordDto } from '#/services/auth/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 
-function ForgotPassword() {
-  const { t } = useTypeSafeTranslation();
+interface ForgotPasswordFormProps {
+  onSubmit: (values: ForgotPasswordDto) => void;
+}
 
-  const handleForgotPassword = () => {
-    const values = {};
-    return values;
-  };
+function ForgotPasswordForm({ onSubmit }: ForgotPasswordFormProps) {
+  const { t } = useTypeSafeTranslation();
 
   return (
     <>
@@ -18,11 +18,7 @@ function ForgotPassword() {
       <Typography.Paragraph className="text-color-neutral-2">
         {t('authentication.forgotPasswordDescription')}
       </Typography.Paragraph>
-      <Form
-        layout="vertical"
-        onFinish={handleForgotPassword}
-        scrollToFirstError
-      >
+      <Form layout="vertical" onFinish={onSubmit} scrollToFirstError>
         <Row align="middle" justify="center">
           <Col span={24}>
             <Form.Item
@@ -61,4 +57,4 @@ function ForgotPassword() {
   );
 }
 
-export default ForgotPassword;
+export default ForgotPasswordForm;

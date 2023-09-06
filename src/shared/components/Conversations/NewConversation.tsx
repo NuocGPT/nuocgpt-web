@@ -7,7 +7,6 @@ import LogoGrey from '#/assets/images/logo-grey.png';
 import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
-import MessageItem from '#/pages/Dashboard/MessageItem';
 import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
 import { addConversation } from '#/services/conversations';
@@ -15,6 +14,7 @@ import {
   AuthorType,
   ConversationType,
 } from '#/services/conversations/interfaces';
+import MessageItem from '#/shared/components/Chat/MessageItem';
 import { useRenderResponse } from '#/shared/hooks/useRenderResponse';
 
 function NewConversation() {

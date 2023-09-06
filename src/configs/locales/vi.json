@@ -21,6 +21,7 @@
     "resetPassword": "Đổi mật khẩu",
     "password": "Mật khẩu",
     "confirmPassword": "Xác nhận mật khẩu",
+    "confirmPasswordNotMatch": "Xác nhận mật khẩu không khớp",
     "notHaveAccountYet": "Chưa có tài khoản?",
     "alreadyHaveAccount": "Bạn có tài khoản?",
     "signUp": "Tạo tài khoản",
@@ -31,7 +32,10 @@
     "inputOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến email của bạn. Mã có giá trị trong 10 phút.",
     "notReceiveOTP": "Không nhận được OTP?",
     "resendOTP": "Gửi lại",
-    "resendAfterSeconds": "Gửi lại sau {{seconds}} giây"
+    "resendAfterSeconds": "Gửi lại sau {{seconds}} giây",
+    "checkMail": "Kiểm tra email của bạn",
+    "checkMailDescription": "Vui lòng kiểm tra địa chỉ email {{email}} để được hướng dẫn đặt lại mật khẩu",
+    "passwordUpdated": "Mật khẩu đã được cập nhật thành công!"
   },
   "profiles": {
     "title": "General Information",
@@ -67,7 +71,9 @@
     "readMore": "...more",
     "readLess": " less",
     "hide": "Hide",
-    "proceed": "Tiếp theo"
+    "proceed": "Tiếp theo",
+    "enterOTP": "Nhập mã OTP",
+    "login": "Đăng nhập"
   },
   "gender": {
     "title": "Gender",
