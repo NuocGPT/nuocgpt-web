@@ -5,9 +5,10 @@ import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 
 interface ForgotPasswordFormProps {
   onSubmit: (values: ForgotPasswordDto) => void;
+  loading: boolean;
 }
 
-function ForgotPasswordForm({ onSubmit }: ForgotPasswordFormProps) {
+function ForgotPasswordForm({ onSubmit, loading }: ForgotPasswordFormProps) {
   const { t } = useTypeSafeTranslation();
 
   return (
@@ -44,7 +45,7 @@ function ForgotPasswordForm({ onSubmit }: ForgotPasswordFormProps) {
                 block
                 className="rounded-lg p-2 font-semibold text-secondary-color"
                 htmlType="submit"
-                loading={false}
+                loading={loading}
                 type="primary"
               >
                 {t('button.proceed')}

@@ -38,8 +38,16 @@ export interface ForgotPasswordDto {
   email: string;
 }
 
-export interface ResetPasswordDto {
+export interface VerifyOTPForgotPasswordDto {
   email: string;
+  verify_code: string;
+}
+
+export interface VerifyOTPForgotPasswordResponse {
+  verify_token: string;
+}
+
+export interface ResetPasswordDto {
+  verify_token: string;
   password: string;
-  confirm_password: string;
 }

@@ -1,6 +1,7 @@
 export enum ResponseStatusAPI {
   SuccessOK = 200,
   Unauthorized = 401,
+  TokenExpired = 403,
   ValidationError = 422,
   ServerError = 500,
 }

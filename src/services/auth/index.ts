@@ -9,6 +9,8 @@ import type {
   SignUpDto,
   SignUpResponse,
   VerifyOTPDto,
+  VerifyOTPForgotPasswordDto,
+  VerifyOTPForgotPasswordResponse,
   VerifyOTPResponse,
 } from './interfaces';
 
@@ -53,8 +55,8 @@ async function resendVerifyOTP(resendVerifyOTPInput: ResendVerifyOTPDto) {
 }
 
 async function forgotPassword(forgotPasswordInput: ForgotPasswordDto) {
-  const data = await fetcher.post<ForgotPasswordDto, string>(
-    `${import.meta.env.VITE_BASE_URL}/auth/forgot-password`,
+  const data = await fetcher.post<ForgotPasswordDto, boolean>(
+    `${import.meta.env.VITE_BASE_URL}/auth/send-verify-otp-forgot-password`,
     {
       ...forgotPasswordInput,
     },
@@ -62,9 +64,21 @@ async function forgotPassword(forgotPasswordInput: ForgotPasswordDto) {
   return data;
 }
 
+async function verifyOTPForgotPassword(
+  verifyOTPForgotPasswordInput: VerifyOTPForgotPasswordDto,
+) {
+  const data = await fetcher.post<
+    VerifyOTPForgotPasswordDto,
+    VerifyOTPForgotPasswordResponse
+  >(`${import.meta.env.VITE_BASE_URL}/auth/verify-otp-forgot-password`, {
+    ...verifyOTPForgotPasswordInput,
+  });
+  return data;
+}
+
 async function resetPassword(resetPasswordInput: ResetPasswordDto) {
-  const data = await fetcher.post<ResetPasswordDto, string>(
-    `${import.meta.env.VITE_BASE_URL}/auth/reset-password`,
+  const data = await fetcher.post<ResetPasswordDto, boolean>(
+    `${import.meta.env.VITE_BASE_URL}/auth/new-password-forgot-password`,
     {
       ...resetPasswordInput,
     },
@@ -78,5 +92,6 @@ export {
   verifyOTP,
   resendVerifyOTP,
   forgotPassword,
+  verifyOTPForgotPassword,
   resetPassword,
 };

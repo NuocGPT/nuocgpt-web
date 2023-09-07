@@ -11,8 +11,11 @@ export const MUTATION = {
   addFeedback: ['ADD_FEEDBACK'],
   addMessage: ['ADD_MESSAGE'],
   resendVerifyOTP: ['RESEND_VERIFY_OTP'],
+  resetPassword: ['RESET_PASSWORD'],
+  sendVerifyOTPForgotPassword: ['SEND_VERIFY_OTP_FORGOT_PASSWORD'],
   signIn: ['SIGN_IN'],
   signUp: ['SIGN_UP'],
   updateFeedback: ['UPDATE_FEEDBACK'],
   verifyOTP: ['VERIFY_OTP'],
+  verifyOTPForgotPassword: ['VERIFY_OTP_FORGOT_PASSWORD'],
 };

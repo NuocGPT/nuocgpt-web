@@ -9,9 +9,10 @@ import {
 
 interface ResetPasswordFormProps {
   onSubmit: (values: ResetPasswordDto) => void;
+  loading: boolean;
 }
 
-function ResetPasswordForm({ onSubmit }: ResetPasswordFormProps) {
+function ResetPasswordForm({ onSubmit, loading }: ResetPasswordFormProps) {
   const { t } = useTypeSafeTranslation();
 
   return (
@@ -44,7 +45,7 @@ function ResetPasswordForm({ onSubmit }: ResetPasswordFormProps) {
             <Form.Item
               dependencies={['password']}
               label={t('authentication.confirmPassword')}
-              name="confirmPassword"
+              name="confirm_password"
               rules={[
                 {
                   required: true,
@@ -66,7 +67,7 @@ function ResetPasswordForm({ onSubmit }: ResetPasswordFormProps) {
                 block
                 className="rounded-lg p-2 font-semibold text-secondary-color"
                 htmlType="submit"
-                loading={false}
+                loading={loading}
                 type="primary"
               >
                 {t('authentication.resetPassword')}

@@ -6,9 +6,15 @@ import { Button, Form, Typography } from 'antd';
 import OTPInput from 'react-otp-input';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as LockOTPSVG } from '#/assets/svg/lock-otp.svg';
-import { resendVerifyOTP, verifyOTP } from '#/services/auth';
+import {
+  resendVerifyOTP,
+  verifyOTP,
+  verifyOTPForgotPassword,
+} from '#/services/auth';
 import type {
   VerifyOTPDto,
+  VerifyOTPForgotPasswordDto,
+  VerifyOTPForgotPasswordResponse,
   VerifyOTPResponse,
 } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
@@ -55,6 +61,23 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
       },
     });
 
+  const {
+    mutate: verifyOTPForgotPasswordMutation,
+    isLoading: verifyOTPForgotPasswordLoading,
+  } = useMutation(MUTATION.verifyOTPForgotPassword, verifyOTPForgotPassword, {
+    onError() {
+      showError('Đã có lỗi xảy ra!');
+    },
+    onSuccess(data: VerifyOTPForgotPasswordResponse) {
+      showSuccess('Thành công', 'Xác thực thành công!');
+      navigate(
+        `/reset-password?verify_token=${encodeURIComponent(
+          data?.verify_token,
+        )}`,
+      );
+    },
+  });
+
   const { mutate: resendOTPMutation, isLoading: resendOTPLoading } =
     useMutation(MUTATION.resendVerifyOTP, resendVerifyOTP, {
       onError() {
@@ -72,9 +95,16 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
     }
   }, [email, navigate]);
 
-  const handleVerifyOTP = (values: VerifyOTPDto) => {
+  const handleVerifyOTP = (
+    values: VerifyOTPDto | VerifyOTPForgotPasswordDto,
+  ) => {
     if (!isForgotPassword) {
       verifyOTPMutation({
+        ...values,
+        email,
+      });
+    } else {
+      verifyOTPForgotPasswordMutation({
         ...values,
         email,
       });
@@ -122,7 +152,11 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
             className="rounded-lg p-2 font-semibold text-secondary-color"
             disabled={!verifyCode || verifyCode?.length < 6}
             htmlType="submit"
-            loading={verifyOTPLoading || resendOTPLoading}
+            loading={
+              verifyOTPLoading ||
+              resendOTPLoading ||
+              verifyOTPForgotPasswordLoading
+            }
             type="primary"
           >
             {t('button.proceed')}
