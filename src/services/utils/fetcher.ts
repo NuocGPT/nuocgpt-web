@@ -1,4 +1,6 @@
+import { clearToken } from '#/shared/utils/token';
 import { getHeaders } from './auth-header';
+import { ResponseStatusAPI } from './resultCodeCheck';
 
 const REQUEST_TIMEOUT_IN_SECS = 30 * 1000; //Request timeout in 30 secs
 
@@ -16,7 +18,12 @@ async function http<T>(path: string, config: RequestInit): Promise<T> {
 
   clearTimeout(timeoutId);
 
-  if (response.status !== 200) {
+  if (response.status === ResponseStatusAPI?.TokenExpired) {
+    clearToken();
+    window.location.href = '/login';
+  }
+
+  if (response.status !== ResponseStatusAPI?.SuccessOK) {
     const error = await response.json();
     throw new Error((error as { detail: string }).detail);
   }

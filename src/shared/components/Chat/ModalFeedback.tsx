@@ -75,7 +75,7 @@ function ModalFeedback({
       }
     >
       <Form form={form} name="feedback" onFinish={handleFinish}>
-        <Form.Item name="text" rules={[{ required: true }]}>
+        <Form.Item name="text">
           <Input.TextArea
             className="rounded-lg"
             placeholder={

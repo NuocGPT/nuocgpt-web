@@ -12,6 +12,7 @@ export enum ErrorMessage {
   EmailAlreadyExists = 'EMAIL_ALREADY_EXISTS',
   OTPIncorrectOrExpired = 'OTP_INCORRECT_OR_EXPIRED',
   TokenInvalidOrExpired = 'TOKEN_INVALID_OR_EXPIRED',
+  UserNotFound = 'USER_NOT_FOUND',
 }
 
 export const handleShowErrorMessage = (message: string) => {
@@ -30,25 +31,23 @@ export const handleShowErrorMessage = (message: string) => {
   if (message === ErrorMessage.IncorrectEmailOrPassword) {
     return 'Email hoặc mật khẩu không chính xác';
   }
+  if (message === ErrorMessage.UserNotFound) {
+    return 'Tài khoản không tồn tại';
+  }
   return message;
 };
 
-/*
- * export const resultCodeCheck = async (res: Record<string, unknown>) => {
- *   let response: Record<string, unknown>;
- *   if (res.status === ResponseStatusAPI.Unauthorized) {
- *     response = {
- *       message: {
- *         detail: 'Token Expired',
- *         isSuccess: false,
- *       },
- *       status: res.status,
- *     };
- *     // can put another logic to handle different status code here
- *   } else {
- *     response = await res.json();
- *     response.status = res.status;
- *   }
- *   return response;
- * };
- */
+export const resultCodeCheck = async (res: Response) => {
+  let response;
+  if (res.status === ResponseStatusAPI.Unauthorized) {
+    response = {
+      message: res.statusText,
+      status: res.status,
+    };
+    // can put another logic to handle different status code here
+  } else {
+    response = await res.json();
+    response.status = res.status;
+  }
+  return response;
+};
