@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Image, Input, Typography } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
@@ -19,14 +19,16 @@ import { useRenderResponse } from '#/shared/hooks/useRenderResponse';
 
 function NewConversation() {
   const [message, setMessage] = useState('');
+  const conversationId = useRef('');
   const [disableChat, setDisableChat] = useState(false);
   const navigate = useNavigate();
 
   const handleFinishRenderResponse = () => {
     setMessage('');
     setDisableChat(false);
-    queryClient.invalidateQueries(QUERY.getConversations);
-    navigate(`/`);
+    queryClient.invalidateQueries(QUERY.getConversations).then(() => {
+      navigate(`/c/${conversationId.current}`);
+    });
   };
 
   const { completedTyping, displayResponse, handleRenderResponse } =
@@ -44,6 +46,7 @@ function NewConversation() {
         }),
       {
         onSuccess(data) {
+          conversationId.current = data.conversation_id;
           handleRenderResponse(data.content.parts[0]);
         },
       },
@@ -136,7 +139,7 @@ function NewConversation() {
               placeholder={'Gửi tin nhắn'}
               size="large"
               suffix={<SendIcon />}
-              value={message}
+              value={disableChat ? '' : message}
             />
             <Typography.Paragraph className="mt-2 text-center text-xs text-color-neutral-3">
               Xem trước nghiên cứu miễn phí. Mục tiêu của chúng tôi là làm cho

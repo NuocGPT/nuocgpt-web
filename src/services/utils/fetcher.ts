@@ -2,14 +2,14 @@ import { clearToken } from '#/shared/utils/token';
 import { getHeaders } from './auth-header';
 import { ResponseStatusAPI } from './resultCodeCheck';
 
-const REQUEST_TIMEOUT_IN_SECS = 30 * 1000; //Request timeout in 30 secs
+const REQUEST_TIMEOUT_IN_SECS = 60 * 1000; //Request timeout in 60 secs
 
 async function http<T>(path: string, config: RequestInit): Promise<T> {
   const controller = new AbortController();
-  const timeoutId = setTimeout(
-    () => controller.abort(),
-    REQUEST_TIMEOUT_IN_SECS,
-  );
+  const timeoutId = setTimeout(() => {
+    controller.abort();
+    throw new Error('Request timeout');
+  }, REQUEST_TIMEOUT_IN_SECS);
 
   const response = await fetch(path, {
     ...config,

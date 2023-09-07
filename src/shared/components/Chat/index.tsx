@@ -50,6 +50,7 @@ function Chat({ conversationId }: ChatProps) {
     () => fetchMessages({ conversationId }),
     {
       enabled: !!conversationId,
+
       onSuccess() {
         setTimeout(() => {
           scrollToConversationBottom();
@@ -62,19 +63,27 @@ function Chat({ conversationId }: ChatProps) {
     refetch();
   }, [conversationId, refetch]);
 
-  const { mutate: addMessageMutation, isLoading: addMessageLoading } =
-    useMutation(
-      MUTATION.addMessage,
-      () =>
-        addMessage(String(conversationId), {
-          message,
-        }),
-      {
-        onSuccess(data) {
-          handleRenderResponse(data.content.parts[0]);
-        },
+  const {
+    mutate: addMessageMutation,
+    isLoading: addMessageLoading,
+    isError: addMessageError,
+  } = useMutation(
+    MUTATION.addMessage,
+    () =>
+      addMessage(String(conversationId), {
+        message,
+      }),
+    {
+      onError() {
+        setMessage('');
+        scrollToConversationBottom();
+        setDisableChat(false);
       },
-    );
+      onSuccess(data) {
+        handleRenderResponse(data.content.parts[0]);
+      },
+    },
+  );
 
   const conversationMessages: Message[] =
     fetchMessagesResponse?.items?.sort(
@@ -162,6 +171,12 @@ function Chat({ conversationId }: ChatProps) {
               <MessageItem />
             </div>
           </>
+        )}
+
+        {addMessageError && (
+          <div className="mt-2 flex flex-col items-center justify-center bg-info-color-soft py-2">
+            Đã xảy ra lỗi!, vui lòng thử lại
+          </div>
         )}
       </div>
       <Footer className="fixed bottom-0 h-40 w-[88vw] bg-[#fff]">

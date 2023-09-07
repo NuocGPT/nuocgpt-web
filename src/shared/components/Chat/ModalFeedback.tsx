@@ -28,6 +28,12 @@ function ModalFeedback({
 }: ModalFeedbackProps) {
   const { t } = useTypeSafeTranslation();
   const [form] = Form.useForm();
+
+  const handleClose = () => {
+    form.resetFields();
+    onClose();
+  };
+
   const { mutate: addFeedbackMutation, isLoading: addFeedbackLoading } =
     useMutation(MUTATION.addMessage, addFeedback, {
       onError(error: Error) {
@@ -35,7 +41,7 @@ function ModalFeedback({
       },
       onSuccess() {
         showSuccess('Thành công!', 'Gửi phản hồi thành công');
-        onClose();
+        handleClose();
       },
     });
 
@@ -46,11 +52,6 @@ function ModalFeedback({
       message_id: messageId,
       rating: isPositive ? Rating.thumbsUp : Rating.thumbsDown,
     });
-  };
-
-  const handleClose = () => {
-    form.resetFields();
-    onClose();
   };
 
   return (

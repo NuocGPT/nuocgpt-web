@@ -2,7 +2,15 @@ import { useState } from 'react';
 import EllipsisOutlined from '@ant-design/icons/lib/icons/EllipsisOutlined';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import { useQuery } from '@tanstack/react-query';
-import { Avatar, Button, Divider, Image, Layout, Typography } from 'antd';
+import {
+  Avatar,
+  Button,
+  Divider,
+  Image,
+  Layout,
+  Tooltip,
+  Typography,
+} from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Logo from '#/assets/images/logo-white.png';
@@ -121,9 +129,11 @@ function PrivateLayout({
               <div className="flex justify-between gap-2 text-secondary-color">
                 <div className="flex gap-2">
                   <Avatar size={24} src={DEFAULT_AVATAR} />{' '}
-                  <Typography.Text className="flex-1 text-secondary-color">
-                    {user?.email}
-                  </Typography.Text>
+                  <Tooltip title={user?.email}>
+                    <Typography.Text className="max-w-36 w-36 flex-1 truncate text-secondary-color">
+                      {user?.email}
+                    </Typography.Text>
+                  </Tooltip>
                 </div>
                 <EllipsisOutlined className="text-lg" />
               </div>
