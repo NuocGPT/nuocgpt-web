@@ -16,8 +16,9 @@ async function http<T>(path: string, config: RequestInit): Promise<T> {
 
   clearTimeout(timeoutId);
 
-  if (!response.ok) {
-    throw new Error(response.statusText);
+  if (response.status !== 200) {
+    const error = await response.json();
+    throw new Error((error as { detail: string }).detail);
   }
 
   return response.json();

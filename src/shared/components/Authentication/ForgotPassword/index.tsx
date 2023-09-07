@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { forgotPassword } from '#/services/auth';
 import type { ForgotPasswordDto } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
+import { handleShowErrorMessage } from '#/services/utils/resultCodeCheck';
 import ForgotPasswordSuccess from './ForgotSuccess';
 import ForgotPasswordForm from './Form';
 
@@ -14,8 +15,8 @@ function ForgotPassword() {
 
   const { mutate: forgotPasswordMutation, isLoading: forgotPasswordLoading } =
     useMutation(MUTATION.sendVerifyOTPForgotPassword, forgotPassword, {
-      onError() {
-        showError('Đã có lỗi xảy ra!');
+      onError(error: Error) {
+        showError(handleShowErrorMessage(error.message));
       },
       onSuccess() {
         setHasSentForgotPasswordRequest(true);

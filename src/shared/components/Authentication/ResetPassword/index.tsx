@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { resetPassword } from '#/services/auth';
 import type { ResetPasswordDto } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
+import { handleShowErrorMessage } from '#/services/utils/resultCodeCheck';
 import ResetPasswordForm from './Form';
 import ResetPasswordSuccess from './ResetSuccess';
 
@@ -16,8 +17,8 @@ function ResetPassword({ verifyToken }: ResetPasswordProps) {
 
   const { mutate: resetPasswordMutation, isLoading: resetPasswordLoading } =
     useMutation(MUTATION.resetPassword, resetPassword, {
-      onError() {
-        showError('Đã có lỗi xảy ra!');
+      onError(error: Error) {
+        showError(handleShowErrorMessage(error.message));
       },
       onSuccess() {
         setHasResetPasswordSuccess(true);

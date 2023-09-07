@@ -7,6 +7,7 @@ import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
 import { signUp } from '#/services/auth';
 import type { SignUpDto, SignUpResponse } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
+import { handleShowErrorMessage } from '#/services/utils/resultCodeCheck';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { showSuccess } from '#/shared/utils/tools';
 import { getPasswordRules } from '#/shared/utils/validations';
@@ -18,8 +19,8 @@ function SignUp() {
     MUTATION.signUp,
     signUp,
     {
-      onError() {
-        showError('Đã có lỗi xảy ra!');
+      onError(error: Error) {
+        showError(handleShowErrorMessage(error.message));
       },
       onSuccess(data: SignUpResponse) {
         showSuccess('Thành công', 'Đăng ký thành công!');

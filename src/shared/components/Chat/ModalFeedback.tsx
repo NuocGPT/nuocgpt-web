@@ -7,6 +7,7 @@ import { MUTATION } from '#/services/constants';
 import { addFeedback } from '#/services/feedbacks';
 import type { AddFeedbackDto } from '#/services/feedbacks/interfaces';
 import { FeedbackTag, Rating } from '#/services/feedbacks/interfaces';
+import { handleShowErrorMessage } from '#/services/utils/resultCodeCheck';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { showSuccess } from '#/shared/utils/tools';
 
@@ -29,8 +30,8 @@ function ModalFeedback({
   const [form] = Form.useForm();
   const { mutate: addFeedbackMutation, isLoading: addFeedbackLoading } =
     useMutation(MUTATION.addMessage, addFeedback, {
-      onError() {
-        showError('Đã có lỗi xảy ra!');
+      onError(error: Error) {
+        showError(handleShowErrorMessage(error.message));
       },
       onSuccess() {
         showSuccess('Thành công!', 'Gửi phản hồi thành công');

@@ -7,18 +7,26 @@ import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
 import { signIn } from '#/services/auth';
 import type { SignInDto, SignInResponse } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
+import {
+  ErrorMessage,
+  handleShowErrorMessage,
+} from '#/services/utils/resultCodeCheck';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { setToken } from '#/shared/utils/token';
 
 function LoginPage() {
   const { t } = useTypeSafeTranslation();
+  const [form] = Form.useForm();
   const navigate = useNavigate();
   const { mutate: signInMutation, isLoading: signInLoading } = useMutation(
     MUTATION.signIn,
     signIn,
     {
-      onError() {
-        showError('Đã có lỗi xảy ra!');
+      onError(error: Error) {
+        showError(handleShowErrorMessage(error.message));
+        if (error.message === ErrorMessage.UserNotVerified) {
+          navigate(`/verify-otp?email=${form?.getFieldValue('email')}`);
+        }
       },
       onSuccess(data: SignInResponse) {
         setToken(data.access_token);

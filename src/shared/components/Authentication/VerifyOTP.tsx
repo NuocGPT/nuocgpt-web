@@ -18,6 +18,7 @@ import type {
   VerifyOTPResponse,
 } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
+import { handleShowErrorMessage } from '#/services/utils/resultCodeCheck';
 import { useCountdownTimer } from '#/shared/hooks/useCountdownTimer';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { setToken } from '#/shared/utils/token';
@@ -51,8 +52,8 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
   const { counter, resetCounter } = useCountdownTimer();
   const { mutate: verifyOTPMutation, isLoading: verifyOTPLoading } =
     useMutation(MUTATION.verifyOTP, verifyOTP, {
-      onError() {
-        showError('Đã có lỗi xảy ra!');
+      onError(error: Error) {
+        showError(handleShowErrorMessage(error.message));
       },
       onSuccess(data: VerifyOTPResponse) {
         showSuccess('Thành công', 'Xác thực thành công!');
@@ -65,8 +66,8 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
     mutate: verifyOTPForgotPasswordMutation,
     isLoading: verifyOTPForgotPasswordLoading,
   } = useMutation(MUTATION.verifyOTPForgotPassword, verifyOTPForgotPassword, {
-    onError() {
-      showError('Đã có lỗi xảy ra!');
+    onError(error: Error) {
+      showError(handleShowErrorMessage(error.message));
     },
     onSuccess(data: VerifyOTPForgotPasswordResponse) {
       showSuccess('Thành công', 'Xác thực thành công!');
@@ -80,8 +81,8 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
 
   const { mutate: resendOTPMutation, isLoading: resendOTPLoading } =
     useMutation(MUTATION.resendVerifyOTP, resendVerifyOTP, {
-      onError() {
-        showError('Đã có lỗi xảy ra!');
+      onError(error: Error) {
+        showError(handleShowErrorMessage(error.message));
       },
       onSuccess() {
         resetCounter();
