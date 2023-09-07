@@ -41,31 +41,29 @@ function PrivateLayout({
   const navigate = useNavigate();
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
   const id = pathname.split('/')?.[2];
+  const isInNewConversation = pathname.includes('new-conversation');
 
-  const {
-    data: fetchConversationsResponse,
-    /*
-     * error,
-     * isError,
-     * isLoading,
-     */
-  } = useQuery<Conversations>(QUERY.getConversations, fetchConversations, {
-    onSuccess(data) {
-      if (!id && data?.items?.length) {
-        navigate(
-          `/c/${
-            data?.items?.sort(
-              (prev, next) =>
-                Number(new Date(next.created_at)) -
-                Number(new Date(prev.created_at)),
-            )?.[0]?._id
-          }`,
-        );
-      } else if (!id) {
-        navigate('/new-conversation');
-      }
+  const { data: fetchConversationsResponse } = useQuery<Conversations>(
+    QUERY.getConversations,
+    fetchConversations,
+    {
+      onSuccess(data) {
+        if (!id && !isInNewConversation) {
+          data?.items?.length > 0
+            ? navigate(
+                `/c/${
+                  data?.items?.sort(
+                    (prev, next) =>
+                      Number(new Date(next.created_at)) -
+                      Number(new Date(prev.created_at)),
+                  )?.[0]?._id
+                }`,
+              )
+            : navigate('/new-conversation');
+        }
+      },
     },
-  });
+  );
 
   const conversations =
     fetchConversationsResponse?.items.sort(

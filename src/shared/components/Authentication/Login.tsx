@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { showError } from '@enouvo/react-uikit';
 import { useMutation } from '@tanstack/react-query';
 import { Button, Col, Form, Input, Row, Typography } from 'antd';
@@ -16,7 +17,7 @@ import { setToken } from '#/shared/utils/token';
 
 function LoginPage() {
   const { t } = useTypeSafeTranslation();
-  const [form] = Form.useForm();
+  const email = useRef('');
   const navigate = useNavigate();
   const { mutate: signInMutation, isLoading: signInLoading } = useMutation(
     MUTATION.signIn,
@@ -25,7 +26,7 @@ function LoginPage() {
       onError(error: Error) {
         showError(handleShowErrorMessage(error.message));
         if (error.message === ErrorMessage.UserNotVerified) {
-          navigate(`/verify-otp?email=${form?.getFieldValue('email')}`);
+          navigate(`/verify-otp?email=${email.current}`);
         }
       },
       onSuccess(data: SignInResponse) {
@@ -36,6 +37,7 @@ function LoginPage() {
   );
 
   const handleLogin = (values: SignInDto) => {
+    email.current = values.email;
     signInMutation(values);
   };
 
