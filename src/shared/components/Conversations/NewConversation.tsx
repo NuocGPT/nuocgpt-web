@@ -36,21 +36,28 @@ function NewConversation() {
       onFinish: handleFinishRenderResponse,
     });
 
-  const { mutate: addConversationMutation, isLoading: addConversationLoading } =
-    useMutation(
-      MUTATION.addConversation,
-      () =>
-        addConversation({
-          message,
-          title: 'Cuộc trò chuyện mới',
-        }),
-      {
-        onSuccess(data) {
-          conversationId.current = data.conversation_id;
-          handleRenderResponse(data.content.parts[0]);
-        },
+  const {
+    mutate: addConversationMutation,
+    isLoading: addConversationLoading,
+    isError: addConversationError,
+  } = useMutation(
+    MUTATION.addConversation,
+    () =>
+      addConversation({
+        message,
+        title: 'Cuộc trò chuyện mới',
+      }),
+    {
+      onError() {
+        setMessage('');
+        setDisableChat(false);
       },
-    );
+      onSuccess(data) {
+        conversationId.current = data.conversation_id;
+        handleRenderResponse(data.content.parts[0]);
+      },
+    },
+  );
 
   return (
     <>
@@ -117,6 +124,12 @@ function NewConversation() {
               <MessageItem />
             </div>
           </>
+        )}
+
+        {addConversationError && (
+          <div className="mt-2 flex flex-col items-center justify-center bg-info-color-soft py-2">
+            Đã xảy ra lỗi!, vui lòng thử lại
+          </div>
         )}
 
         <Footer className="fixed bottom-0 h-40 w-[88vw] bg-[#fff]">
