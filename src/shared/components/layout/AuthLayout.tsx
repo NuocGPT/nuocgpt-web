@@ -36,8 +36,8 @@ function AuthLayout({ children }: Props) {
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
 
   return (
-    <div className="flex h-screen max-h-screen justify-center p-6">
-      <Row className=" w-full max-w-[1560px] rounded-2xl bg-primary-color shadow-2xl">
+    <div className="flex h-screen max-h-screen justify-center p-0 sm:p-6">
+      <Row className="w-full max-w-[1560px] rounded-2xl border-none bg-primary-color">
         {md && (
           <StyledAuthLayout
             className="flex items-center justify-center"
@@ -54,7 +54,7 @@ function AuthLayout({ children }: Props) {
           </StyledAuthLayout>
         )}
         <Col
-          className="flex h-full flex-col rounded-r-xl bg-secondary-color px-12 py-8"
+          className="flex h-full flex-col rounded-r-xl bg-secondary-color px-4 py-8 sm:px-12"
           lg={12}
           md={24}
           xs={24}

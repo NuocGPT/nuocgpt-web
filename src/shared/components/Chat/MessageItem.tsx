@@ -38,7 +38,7 @@ function MessageItem({ message }: MessageProps) {
 
   return !message ? (
     <div className="w-full bg-color-neutral-5">
-      <div className="mx-auto flex max-w-[960px] justify-between gap-4 py-4">
+      <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
         <div className="flex items-start gap-4">
           <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
           <CursorIcon />
@@ -51,7 +51,7 @@ function MessageItem({ message }: MessageProps) {
         message.author?.role === AuthorType.SYSTEM ? 'bg-color-neutral-5' : ''
       }`}
     >
-      <div className="mx-auto flex max-w-[960px] justify-between gap-4 py-4">
+      <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
         <div className="flex items-start gap-4">
           <Avatar
             className="flex-shrink-0"

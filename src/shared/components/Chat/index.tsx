@@ -134,7 +134,7 @@ function Chat({ conversationId }: ChatProps) {
               />
             </div>
             <div className={`w-full bg-color-neutral-5`}>
-              <div className="mx-auto flex max-w-[960px] justify-between gap-4 py-4">
+              <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
                 <div className="flex items-start gap-4">
                   <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
                   <Typography.Paragraph className="text-color-neutral-1">
@@ -178,8 +178,8 @@ function Chat({ conversationId }: ChatProps) {
             Đã xảy ra lỗi!, vui lòng thử lại
           </div>
         )}
-      </div>
-      <Footer className="fixed bottom-0 h-40 w-[88vw] bg-[#fff]">
+      </div>{' '}
+      <Footer className="fixed bottom-0 h-40 w-full bg-[#fff] px-4 sm:w-[88vw] sm:px-[50px]">
         <div className="mx-auto max-w-[960px]">
           <Input
             className="rounded-lg p-4 shadow-lg"
