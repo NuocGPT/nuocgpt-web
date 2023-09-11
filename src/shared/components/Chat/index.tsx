@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Avatar, Image, Input, Typography } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
+import LoadingGif from '#/assets/images/loading.gif';
 import LogoGrey from '#/assets/images/logo-grey.png';
 import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
@@ -109,7 +110,7 @@ function Chat({ conversationId }: ChatProps) {
           ))
         ) : (
           <div className="mt-[16rem] flex flex-col items-center justify-center">
-            <Image height={114} preview={false} src={LogoGrey} />
+            <Image height={64} preview={false} src={LogoGrey} />
           </div>
         )}
 
@@ -167,8 +168,9 @@ function Chat({ conversationId }: ChatProps) {
                 }}
               />
             </div>
-            <div className="flex">
-              <MessageItem />
+            <div className="mt-2 flex flex-col items-center justify-center py-2">
+              <Image height={114} preview={false} src={LoadingGif} />
+              Đang tải dữ liệu...
             </div>
           </>
         )}

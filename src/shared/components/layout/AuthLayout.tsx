@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
 import { useState } from 'react';
+import { LeftOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import { Button, Col, Grid, Image, Row, Typography } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import Logo from '#/assets/images/logo-white.png';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { AboutUsModal } from '../AboutUs';
@@ -33,7 +35,16 @@ const StyledAuthLayout = styled(Col)`
 function AuthLayout({ children }: Props) {
   const { t } = useTypeSafeTranslation();
   const { md } = Grid.useBreakpoint();
+  const navigate = useNavigate();
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
+
+  const handleGoBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate('/', { replace: true });
+    }
+  };
 
   return (
     <div className="flex h-screen max-h-screen justify-center p-6">
@@ -54,19 +65,33 @@ function AuthLayout({ children }: Props) {
           </StyledAuthLayout>
         )}
         <Col
-          className="flex h-full flex-col rounded-r-xl bg-secondary-color px-12 py-8"
+          className="flex h-full flex-col gap-4 rounded-r-xl bg-secondary-color px-12 py-8"
           lg={12}
           md={24}
           xs={24}
         >
-          <Button
-            className="w-fit p-0"
-            onClick={() => setAboutUsModalVisible(true)}
-            size="small"
-            type="text"
-          >
-            {t('aboutUs.title')}
-          </Button>
+          <div className="flex w-full items-center justify-between gap-4">
+            {window.history.state && window.history.state.idx > 0 && (
+              <div className="flex items-center gap-2" onClick={handleGoBack}>
+                <Button
+                  className="bg-white shadow-none w-fit border-none"
+                  shape="circle"
+                  type="ghost"
+                >
+                  <LeftOutlined />
+                </Button>
+                {t('button.back')}
+              </div>
+            )}
+            <Button
+              className="w-fit p-0"
+              onClick={() => setAboutUsModalVisible(true)}
+              size="small"
+              type="text"
+            >
+              {t('aboutUs.title')}
+            </Button>
+          </div>
 
           <div className="flex h-full w-full items-center justify-start">
             <div className="w-full">{children}</div>
