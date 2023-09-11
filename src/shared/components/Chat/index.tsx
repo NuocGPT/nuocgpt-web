@@ -110,7 +110,7 @@ function Chat({ conversationId }: ChatProps) {
           ))
         ) : (
           <div className="mt-[16rem] flex flex-col items-center justify-center">
-            <Image height={64} preview={false} src={LogoGrey} />
+            <Image height={114} preview={false} src={LogoGrey} />
           </div>
         )}
 
@@ -169,7 +169,7 @@ function Chat({ conversationId }: ChatProps) {
               />
             </div>
             <div className="mt-2 flex flex-col items-center justify-center py-2">
-              <Image height={114} preview={false} src={LoadingGif} />
+              <Image height={64} preview={false} src={LoadingGif} />
               Đang tải dữ liệu...
             </div>
           </>
