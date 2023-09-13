@@ -16,3 +16,18 @@ export const LINKS = {
 };
 
 export const LIMIT_TRUNCATE_TEXT = 100;
+
+export const TAG_MESSAGES = [
+  {
+    text: 'Điều này không đúng',
+    value: 'false',
+  },
+  {
+    text: 'Điều này có hại/không an toàn',
+    value: 'harmful',
+  },
+  {
+    text: 'Điều này không hữu ích',
+    value: 'not-helpful',
+  },
+];

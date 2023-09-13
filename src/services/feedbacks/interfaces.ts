@@ -46,7 +46,7 @@ export interface TFeedbacks {
           email: string;
         };
         rating: string;
-        tags: string;
+        tags: string[];
         text: string;
         created_at: string;
       }[]
@@ -78,7 +78,7 @@ export interface TFeedback {
     email: string;
   };
   rating: string;
-  tags: string;
+  tags: string[];
   text: string;
   created_at: string;
 }

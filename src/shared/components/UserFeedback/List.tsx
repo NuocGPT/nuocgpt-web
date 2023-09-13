@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { SearchOutlined } from '@ant-design/icons';
 import type { DeepPartial } from '@enouvo/react-uikit';
-import { formatDate, useTable } from '@enouvo/react-uikit';
+import { useTable } from '@enouvo/react-uikit';
 import { useQuery } from '@tanstack/react-query';
-import { Form, Input, Select, Table, Typography } from 'antd';
+import { Form, Input, Select, Table, Tag, Typography } from 'antd';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { ReactComponent as DislikeIcon } from '#/assets/svg/dislike-colour.svg';
 import { ReactComponent as LikeIcon } from '#/assets/svg/like-colour.svg';
 import { QUERY } from '#/services/constants';
@@ -14,12 +16,15 @@ import type {
   TFeedbacks,
 } from '#/services/feedbacks/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import { TAG_MESSAGES } from '#/shared/utils/constant';
 import { truncateText } from '#/shared/utils/tools';
 import PaginationPanel from '../common/PaginationPanel';
 import StatusCard from './components/StatusCard';
 import StatusTag from './components/StatusTag';
 import { StyledSelect } from './components/styles';
 import { StyledModal, TableWrapper } from './styles';
+
+dayjs.extend(utc);
 
 function List() {
   const { t } = useTypeSafeTranslation();
@@ -42,7 +47,8 @@ function List() {
     {
       dataIndex: 'created_at',
       key: 'created_at',
-      render: (data: string) => formatDate(data, 'DD/MM/YYYY - HH:mm'),
+      render: (data: string) =>
+        dayjs.utc(data).local().format('DD/MM/YYYY - HH:mm'),
       title: t('feedback.createdAt'),
       width: 170,
     },
@@ -94,7 +100,19 @@ function List() {
     {
       dataIndex: 'extraFeedback',
       key: 'extraFeedback',
-      render: (_data: string, record: DeepPartial<TFeedback>) => record.text,
+      render: (_data: string, record: DeepPartial<TFeedback>) => (
+        <div>
+          <Typography.Text className="mb-2 block">
+            {record.text}
+          </Typography.Text>
+          {record.tags &&
+            record?.tags?.map(item => (
+              <Tag key={item}>
+                {TAG_MESSAGES.find(tag => tag.value === item)?.text}
+              </Tag>
+            ))}
+        </div>
+      ),
       title: t('feedback.extraFeedback'),
       width: 230,
     },
@@ -107,7 +125,7 @@ function List() {
       </Typography.Text>
       <div className="mt-6 flex items-center gap-5">
         <div className="w-1/2">
-          <Form className="hidden" form={form}>
+          <Form form={form}>
             <div className="mt-6 flex items-center gap-5">
               <div className="w-1/2">
                 <Form.Item>
