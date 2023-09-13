@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Avatar, Image, Input, Typography } from 'antd';
+import { Avatar, Button, Image, Input, Typography } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
 import LoadingGif from '#/assets/images/loading.gif';
 import LogoGrey from '#/assets/images/logo-grey.png';
@@ -180,7 +180,7 @@ function Chat({ conversationId }: ChatProps) {
             Đã xảy ra lỗi!, vui lòng thử lại
           </div>
         )}
-      </div>{' '}
+      </div>
       <Footer className="fixed bottom-0 h-40 w-full bg-[#fff] px-4 sm:w-[88vw] sm:px-[50px]">
         <div className="mx-auto max-w-[960px]">
           <Input
@@ -200,7 +200,13 @@ function Chat({ conversationId }: ChatProps) {
             }}
             placeholder={'Gửi tin nhắn'}
             size="large"
-            suffix={<SendIcon />}
+            suffix={
+              <Button
+                className="h-fit w-fit border-none p-0"
+                icon={<SendIcon />}
+                onClick={() => handleAddMessage()}
+              />
+            }
             value={disableChat ? '' : message}
           />
           <Typography.Paragraph className="mt-2 text-center text-xs text-color-neutral-3">

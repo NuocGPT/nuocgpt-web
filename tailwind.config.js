@@ -11,8 +11,8 @@ module.exports = {
 
       'info-color': '#007AFF',
       'info-color-soft': '#E5F1FF',
-      'success-color': '#34C759',
-      'success-color-soft': '#EAF9EE',
+      'success-color': '#049E66',
+      'success-color-soft': '#D5F2EA',
       'alert-color': '#FFCC00',
       'alert-color-soft': '#FFF9E5',
       'warning-color': '#FF9500',

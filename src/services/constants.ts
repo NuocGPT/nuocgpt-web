@@ -2,6 +2,8 @@ import type { QueryKey } from '@tanstack/react-query';
 
 export const QUERY: Record<string, QueryKey> = {
   getConversations: ['GET_CONVERSATIONS'],
+  getCountRatings: ['GET_COUNT_RATINGS'],
+  getFeedbacks: ['GET_FEEDBACKS'],
   getMe: ['GET_ME'],
   getMessages: ['GET_MESSAGES'],
 };

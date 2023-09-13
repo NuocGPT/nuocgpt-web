@@ -5,6 +5,7 @@ export interface SignInDto {
 
 export interface SignInResponse {
   access_token: string;
+  roles: string[];
 }
 
 export interface SignUpDto {

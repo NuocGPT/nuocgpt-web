@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import deburr from 'lodash-es/deburr';
+import { LIMIT_TRUNCATE_TEXT } from './constant';
 
 export const formatFileName = (name: string | undefined) =>
   name?.replace(/_| /g, '').trim().toLowerCase();
@@ -88,3 +89,8 @@ export const getQueryParamsFromUrl = (searchStr: string) =>
       .replace(/&/g, '","')
       .replace(/=/g, '":"')}"}`,
   );
+
+export const truncateText = (text: string, limit = LIMIT_TRUNCATE_TEXT) => {
+  if (text?.length < limit) return text;
+  return `${text?.substring(0, limit)}...`;
+};

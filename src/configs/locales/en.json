@@ -74,7 +74,8 @@
     "hide": "Hide",
     "proceed": "Proceed",
     "enterOTP": "Enter OTP",
-    "login": "Login"
+    "login": "Login",
+    "createNewConversation": "Create new conversation"
   },
   "gender": {
     "title": "Gender",
@@ -124,5 +125,29 @@
     "impersonating": "Impersonating",
     "delete": "Delete",
     "uploadImages": "Click here to upload new image"
+  },
+  "conversation": {
+    "newTitle": "New conversation"
+  },
+  "termOfUse": {
+    "title": "Term of use"
+  },
+  "privacyPolicy": {
+    "title": "Privacy policy"
+  },
+  "feedback": {
+    "title": "View feedback",
+    "like": "Like",
+    "dislike": "Dislike",
+    "createdAt": "Created at",
+    "users": "Users",
+    "questions": "Questions",
+    "answer": "Answers",
+    "status": "Status",
+    "extraFeedback": "Extra feedback",
+    "placeholder": {
+      "search": "Search",
+      "status": "All status"
+    }
   }
 }

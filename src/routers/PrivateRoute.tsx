@@ -8,6 +8,7 @@ import NewConversation from '#/pages/new-conversation';
 import { QUERY } from '#/services/constants';
 import { fetchMe } from '#/services/me';
 import PrivateLayout from '#/shared/components/layout/PrivateLayout';
+import { clearToken } from '#/shared/utils/token';
 import type { MyWindow } from '#/shared/utils/type';
 
 function PrivateRoute() {
@@ -19,6 +20,7 @@ function PrivateRoute() {
   });
 
   const handleLogout = () => {
+    clearToken();
     navigate('/login');
   };
 

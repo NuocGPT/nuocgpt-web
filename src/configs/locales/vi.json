@@ -74,7 +74,8 @@
     "hide": "Hide",
     "proceed": "Tiếp theo",
     "enterOTP": "Nhập mã OTP",
-    "login": "Đăng nhập"
+    "login": "Đăng nhập",
+    "createNewConversation": "Tạo trò chuyện mới"
   },
   "gender": {
     "title": "Gender",
@@ -124,5 +125,29 @@
     "impersonating": "Impersonating",
     "delete": "Delete",
     "uploadImages": "Click here to upload new image"
+  },
+  "conversation": {
+    "newTitle": "Cuộc trò chuyện mới"
+  },
+  "termOfUse": {
+    "title": "Điều khoản sử dụng"
+  },
+  "privacyPolicy": {
+    "title": "Chính sách bảo mật"
+  },
+  "feedback": {
+    "title": "Xem phản hồi",
+    "like": "Thích",
+    "dislike": "Không thích",
+    "createdAt": "Ngày tạo",
+    "users": "Người dùng",
+    "questions": "Câu hỏi",
+    "answer": "Câu trả lời",
+    "status": "Trạng thái",
+    "extraFeedback": "Phản hồi bổ sung",
+    "placeholder": {
+      "search": "Tìm kiểm",
+      "status": "Tất cả trạng thái"
+    }
   }
 }

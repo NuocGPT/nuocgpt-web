@@ -18,6 +18,7 @@ import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as AboutUsIcon } from '#/assets/svg/about-us.svg';
 import { ReactComponent as ChatIcon } from '#/assets/svg/chat.svg';
 import { ReactComponent as CloseIcon } from '#/assets/svg/close.svg';
+import { ReactComponent as FeedbackIcon } from '#/assets/svg/like-tag.svg';
 import { ReactComponent as MenuIcon } from '#/assets/svg/menu.svg';
 import { ReactComponent as VietnamFlagIcon } from '#/assets/svg/vietnam-flag.svg';
 import { QUERY } from '#/services/constants';
@@ -26,7 +27,7 @@ import type { Conversations } from '#/services/conversations/interfaces';
 import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { DEFAULT_AVATAR } from '#/shared/utils/constant';
-import { clearToken } from '#/shared/utils/token';
+import { getIsAdmin } from '#/shared/utils/token';
 import { AboutUsModal } from '../AboutUs';
 import { DrawerStyled } from './styles';
 
@@ -47,25 +48,27 @@ function PrivateLayout({
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
   const id = pathname.split('/')?.[2];
   const isInNewConversation = pathname.includes('new-conversation');
+  const isUserFeedback = pathname.includes('user-feedback');
   const [isDrawer, setIsDrawer] = useState(false);
+
+  const isAdmin = getIsAdmin();
 
   const { data: fetchConversationsResponse } = useQuery<Conversations>(
     QUERY.getConversations,
     fetchConversations,
     {
       onSuccess(data) {
-        if (!id && !isInNewConversation) {
-          data?.items?.length > 0
-            ? navigate(
-                `/c/${
-                  data?.items?.sort(
-                    (prev, next) =>
-                      Number(new Date(next.created_at)) -
-                      Number(new Date(prev.created_at)),
-                  )?.[0]?._id
-                }`,
-              )
-            : navigate('/new-conversation');
+        if (!id && !isInNewConversation && !isUserFeedback) {
+          data?.items?.length > 0 &&
+            navigate(
+              `/c/${
+                data?.items?.sort(
+                  (prev, next) =>
+                    Number(new Date(next.created_at)) -
+                    Number(new Date(prev.created_at)),
+                )?.[0]?._id
+              }`,
+            );
         }
       },
     },
@@ -102,7 +105,7 @@ function PrivateLayout({
                 onClick={onOpen}
               />
             </div>
-            <div className="w-fit">Cuộc trò chuyện mới</div>
+            <div className="w-fit">{t('conversation.newTitle')}</div>
             <div className="w-fit">
               <Button
                 className="w-fit border-none"
@@ -123,7 +126,7 @@ function PrivateLayout({
                   icon={<PlusOutlined />}
                   onClick={handleCreateNewConversation}
                 >
-                  Tạo trò chuyện mới
+                  {t('button.createNewConversation')}
                 </Button>
                 <Button
                   className="absolute -right-14 w-fit border-[2px] border-secondary-color bg-secondary-color-opacity p-2"
@@ -156,6 +159,17 @@ function PrivateLayout({
             <div className="fixed bottom-0 w-fit">
               <Divider className="bg-secondary-color" />
               <div className="flex flex-col gap-4 py-2">
+                {isAdmin === 'admin' && (
+                  <Button
+                    className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                    icon={<FeedbackIcon />}
+                    onClick={() => navigate('/admin')}
+                    size="small"
+                    type="text"
+                  >
+                    <span>{t('feedback.title')}</span>
+                  </Button>
+                )}
                 <Button
                   className="m-0 flex gap-2 p-0 text-left text-secondary-color"
                   icon={<AboutUsIcon />}
@@ -182,7 +196,6 @@ function PrivateLayout({
                 <Button
                   className="m-0 flex gap-2 p-0 text-left text-secondary-color"
                   onClick={() => {
-                    clearToken();
                     logout();
                   }}
                   size="small"
@@ -211,7 +224,7 @@ function PrivateLayout({
                   icon={<PlusOutlined />}
                   onClick={handleCreateNewConversation}
                 >
-                  Tạo trò chuyện mới
+                  {t('button.createNewConversation')}
                 </Button>
                 <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
                   {conversations.map(conversation => (
@@ -236,6 +249,17 @@ function PrivateLayout({
               <div>
                 <Divider className="bg-secondary-color" />
                 <div className="flex flex-col gap-4 px-3 py-2">
+                  {isAdmin === 'admin' && (
+                    <Button
+                      className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                      icon={<FeedbackIcon />}
+                      onClick={() => navigate('/admin')}
+                      size="small"
+                      type="text"
+                    >
+                      <span>{t('feedback.title')}</span>
+                    </Button>
+                  )}
                   <Button
                     className="m-0 flex gap-2 p-0 text-left text-secondary-color"
                     icon={<AboutUsIcon />}
@@ -262,7 +286,6 @@ function PrivateLayout({
                   <Button
                     className="m-0 flex gap-2 p-0 text-left text-secondary-color"
                     onClick={() => {
-                      clearToken();
                       logout();
                     }}
                     size="small"

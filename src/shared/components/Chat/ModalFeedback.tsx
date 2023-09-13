@@ -4,6 +4,7 @@ import { Checkbox, Form, Input, Modal, Typography } from 'antd';
 import { ReactComponent as DislikeIcon } from '#/assets/svg/dislike-rounded.svg';
 import { ReactComponent as LikeIcon } from '#/assets/svg/like-rounded.svg';
 import { MUTATION } from '#/services/constants';
+import type { Message } from '#/services/conversations/interfaces';
 import { addFeedback } from '#/services/feedbacks';
 import type { AddFeedbackDto } from '#/services/feedbacks/interfaces';
 import { FeedbackTag, Rating } from '#/services/feedbacks/interfaces';
@@ -12,7 +13,7 @@ import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { showSuccess } from '#/shared/utils/tools';
 
 interface ModalFeedbackProps {
-  messageId: string;
+  message: Message;
   conversationId: string;
   isPositive: boolean;
   visible: boolean;
@@ -20,7 +21,7 @@ interface ModalFeedbackProps {
 }
 
 function ModalFeedback({
-  messageId,
+  message,
   conversationId,
   isPositive,
   visible,
@@ -35,7 +36,7 @@ function ModalFeedback({
   };
 
   const { mutate: addFeedbackMutation, isLoading: addFeedbackLoading } =
-    useMutation(MUTATION.addMessage, addFeedback, {
+    useMutation(MUTATION.addFeedback, addFeedback, {
       onError(error: Error) {
         showError(handleShowErrorMessage(error.message));
       },
@@ -48,8 +49,18 @@ function ModalFeedback({
   const handleFinish = (values: Partial<AddFeedbackDto>) => {
     addFeedbackMutation({
       ...values,
-      conversation_id: conversationId,
-      message_id: messageId,
+      conversation: {
+        id: conversationId,
+        title: 'Cuộc trò chuyện mới',
+      },
+      message: {
+        content: message.content.parts[0],
+        id: message._id,
+      },
+      question: {
+        content: 'Hello',
+        id: message._id,
+      },
       rating: isPositive ? Rating.thumbsUp : Rating.thumbsDown,
     });
   };

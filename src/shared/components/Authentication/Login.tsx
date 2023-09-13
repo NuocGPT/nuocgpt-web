@@ -13,7 +13,7 @@ import {
   handleShowErrorMessage,
 } from '#/services/utils/resultCodeCheck';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
-import { setToken } from '#/shared/utils/token';
+import { setIsAdmin, setToken } from '#/shared/utils/token';
 
 function LoginPage() {
   const { t } = useTypeSafeTranslation();
@@ -30,6 +30,10 @@ function LoginPage() {
         }
       },
       onSuccess(data: SignInResponse) {
+        const isAdminRole = data.roles.includes('admin');
+        if (isAdminRole) {
+          setIsAdmin('admin');
+        }
         setToken(data.access_token);
         navigate(`/`);
       },

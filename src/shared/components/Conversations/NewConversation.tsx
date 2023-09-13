@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Avatar, Image, Input, Typography } from 'antd';
+import { Avatar, Button, Image, Input, Typography } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
 import { useNavigate } from 'react-router-dom';
 import LoadingGif from '#/assets/images/loading.gif';
@@ -153,7 +153,13 @@ function NewConversation() {
               }}
               placeholder={'Gửi tin nhắn'}
               size="large"
-              suffix={<SendIcon />}
+              suffix={
+                <Button
+                  className="h-fit w-fit border-none p-0"
+                  icon={<SendIcon />}
+                  onClick={() => addConversationMutation()}
+                />
+              }
               value={disableChat ? '' : message}
             />
             <Typography.Paragraph className="mt-2 text-center text-xs text-color-neutral-3">

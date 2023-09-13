@@ -97,8 +97,8 @@ function AuthLayout({ children }: Props) {
             <div className="w-full">{children}</div>
           </div>
           <div className="flex justify-center gap-4">
-            <Typography.Link>Điều khoản sử dụng</Typography.Link> |
-            <Typography.Link>Chính sách bảo mật</Typography.Link>
+            <Typography.Link>{t('termOfUse.title')}</Typography.Link> |
+            <Typography.Link>{t('privacyPolicy.title')}</Typography.Link>
           </div>
         </Col>
         <AboutUsModal

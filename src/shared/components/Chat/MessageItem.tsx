@@ -88,7 +88,7 @@ function MessageItem({ message }: MessageProps) {
       <ModalFeedback
         conversationId={message.conversation_id}
         isPositive={feedbackType === FeedbackTypes.LIKE}
-        messageId={message._id}
+        message={message}
         onClose={handleClose}
         visible={!!feedbackType}
       />
