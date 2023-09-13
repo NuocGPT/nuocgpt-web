@@ -23,13 +23,19 @@ function MessageItem({ message }: MessageProps) {
   const [feedbackType, setFeedbackType] = useState<FeedbackTypes | undefined>(
     undefined,
   );
+  const [isClickedPositive, setIsClickedPositive] = useState(false);
+  const [isClickedNegative, setIsClickedNegative] = useState(false);
 
   const handleCreatePositiveFeedback = () => {
     setFeedbackType(FeedbackTypes.LIKE);
+    setIsClickedPositive(true);
+    setIsClickedNegative(false);
   };
 
   const handleCreateNegativeFeedback = () => {
     setFeedbackType(FeedbackTypes.DISLIKE);
+    setIsClickedNegative(true);
+    setIsClickedPositive(false);
   };
 
   const handleClose = () => {
@@ -69,16 +75,26 @@ function MessageItem({ message }: MessageProps) {
         {message.author?.role === AuthorType.SYSTEM && (
           <div className="flex items-start justify-start">
             <Button
+              className={`${
+                isClickedPositive
+                  ? 'bg-primary-color-light-20 text-secondary-color'
+                  : ''
+              }`}
               onClick={handleCreatePositiveFeedback}
               size="small"
-              type="link"
+              type="text"
             >
               <Like />
             </Button>
             <Button
+              className={`${
+                isClickedNegative
+                  ? 'bg-primary-color-light-20 text-secondary-color'
+                  : ''
+              }`}
               onClick={handleCreateNegativeFeedback}
               size="small"
-              type="link"
+              type="text"
             >
               <Dislike />
             </Button>

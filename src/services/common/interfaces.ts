@@ -18,3 +18,13 @@ interface ErrorDetail {
 export interface BaseErrorResponse {
   detail: ErrorDetail[];
 }
+
+export interface Pagination {
+  size: number;
+  page: number;
+}
+
+export interface QueryParams {
+  search?: string;
+  rating?: string;
+}

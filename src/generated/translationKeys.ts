@@ -66,6 +66,7 @@ export type TranslationKeys =
   | 'button.enterOTP'
   | 'button.login'
   | 'button.createNewConversation'
+  | 'button.viewAll'
   | 'gender.title'
   | 'gender.male'
   | 'gender.female'

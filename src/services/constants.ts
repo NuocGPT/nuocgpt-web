@@ -6,6 +6,7 @@ export const QUERY: Record<string, QueryKey> = {
   getFeedbacks: ['GET_FEEDBACKS'],
   getMe: ['GET_ME'],
   getMessages: ['GET_MESSAGES'],
+  getSearchFeedbacks: ['GET_SEARCH_FEEDBACKS'],
 };
 
 export const MUTATION = {

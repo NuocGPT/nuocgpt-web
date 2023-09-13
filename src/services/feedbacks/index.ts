@@ -1,14 +1,15 @@
+import type { BaseGetAllResponse } from '../common/interfaces';
 import * as fetcher from '../utils/fetcher';
 import type {
   AddFeedbackDto,
   CountRatings,
-  TFeedbacks,
+  Feedback,
   UpdateFeedbackDto,
 } from './interfaces';
 
-async function fetchFeedbacks() {
-  const data = await fetcher.get<TFeedbacks>(
-    `${import.meta.env.VITE_BASE_URL}/admin/feedbacks`,
+async function fetchFeedbacks(queryParams: string) {
+  const data = await fetcher.get<BaseGetAllResponse<Feedback>>(
+    `${import.meta.env.VITE_BASE_URL}/admin/feedbacks?${queryParams}`,
   );
   return data;
 }

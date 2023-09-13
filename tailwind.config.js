@@ -7,7 +7,7 @@ module.exports = {
       'secondary-color': '#FFFFFF',
 
       'primary-color-light-10': '#354BC1',
-      'primary-color-light-20': '##6778D1',
+      'primary-color-light-20': '#6778D1',
 
       'info-color': '#007AFF',
       'info-color-soft': '#E5F1FF',
@@ -17,8 +17,8 @@ module.exports = {
       'alert-color-soft': '#FFF9E5',
       'warning-color': '#FF9500',
       'warning-color-soft': '#FFF4E5',
-      'error-color': '#FF3B30',
-      'error-color-soft': '#FFEBEA',
+      'error-color': '#D53A3A',
+      'error-color-soft': '#FFE1E1',
 
       'color-neutral-1': '#000414',
       'color-neutral-2': '#4B4E6E',

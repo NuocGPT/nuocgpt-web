@@ -75,7 +75,8 @@
     "proceed": "Proceed",
     "enterOTP": "Enter OTP",
     "login": "Login",
-    "createNewConversation": "Create new conversation"
+    "createNewConversation": "Create new conversation",
+    "viewAll": "View all"
   },
   "gender": {
     "title": "Gender",

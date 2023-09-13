@@ -75,7 +75,8 @@
     "proceed": "Tiếp theo",
     "enterOTP": "Nhập mã OTP",
     "login": "Đăng nhập",
-    "createNewConversation": "Tạo trò chuyện mới"
+    "createNewConversation": "Tạo trò chuyện mới",
+    "viewAll": "Xem tất cả"
   },
   "gender": {
     "title": "Gender",
