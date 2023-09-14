@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  CloseCircleOutlined,
-  LeftCircleOutlined,
-  SearchOutlined,
-} from '@ant-design/icons';
+import { CloseCircleOutlined, SearchOutlined } from '@ant-design/icons';
 import type { DeepPartial } from '@enouvo/react-uikit';
 import { useTable } from '@enouvo/react-uikit';
 import { useQuery } from '@tanstack/react-query';
@@ -32,7 +28,7 @@ import { StyledModal, TableWrapper } from './styles';
 
 function List() {
   const { t } = useTypeSafeTranslation();
-  const { currentPage, setCurrentPage } = useTable();
+  const { pageSize, currentPage, setCurrentPage } = useTable();
   const [form] = Form.useForm();
   const [viewAll, setViewAll] = useState(false);
   const [viewAllText, setViewAllText] = useState<string | undefined>('');
@@ -44,7 +40,12 @@ function List() {
   const { data: fetchFeedbacksResponse } = useQuery<
     BaseGetAllResponse<Feedback>
   >({
-    queryFn: () => fetchFeedbacks(queryString),
+    queryFn: () =>
+      fetchFeedbacks({
+        page: currentPage,
+        queryParams: queryString,
+        size: pageSize,
+      }),
     queryKey: QUERY.getFeedbacks,
   });
 
@@ -55,7 +56,13 @@ function List() {
 
   const prefetchFeedbacks = async () => {
     await queryClient.prefetchQuery({
-      queryFn: () => fetchFeedbacks(queryString),
+      queryFn: () =>
+        fetchFeedbacks({
+          page: currentPage,
+          queryParams: queryString,
+          size: pageSize,
+        }),
+
       queryKey: QUERY.getFeedbacks,
     });
   };
@@ -85,8 +92,8 @@ function List() {
       width: 200,
     },
     {
-      dataIndex: 'answer',
-      key: 'answer',
+      dataIndex: 'message',
+      key: 'message',
       render: (_data: string, record: DeepPartial<Feedback>) => (
         <>
           {truncateText(String(record?.message?.content))}
@@ -105,8 +112,8 @@ function List() {
       width: 300,
     },
     {
-      dataIndex: 'status',
-      key: 'status',
+      dataIndex: 'rating',
+      key: 'rating',
       render: (_data: string, record: DeepPartial<Feedback>) => (
         <StatusTag status={record.rating} />
       ),
@@ -137,6 +144,7 @@ function List() {
   const onSearch = () => {
     form.validateFields().then(values => {
       setQueryParams(values);
+      setCurrentPage(1);
     });
   };
 
@@ -145,17 +153,11 @@ function List() {
     navigate({
       search: queryString,
     });
-  }, [navigate, queryString]); // eslint-disable-line
+  }, [queryString, currentPage]); // eslint-disable-line
 
   return (
     <div className="shadow-shadow-default mr-2 px-6">
       <Typography.Text className="flex gap-2 py-4 text-2xl font-semibold text-primary-color">
-        <Button
-          className="shadow-none h-fit w-fit border-none p-0 text-2xl text-primary-color"
-          onClick={() => navigate('/')}
-        >
-          <LeftCircleOutlined />
-        </Button>
         {t('feedback.title')}
       </Typography.Text>
       <div className="mt-6 flex items-center gap-5">
@@ -225,7 +227,7 @@ function List() {
         <PaginationPanel
           className="py-6"
           current={currentPage || 1}
-          pageSize={fetchFeedbacksResponse?.size ?? 10}
+          pageSize={pageSize ?? 10}
           setCurrentPage={setCurrentPage}
           showQuickJumper
           total={fetchFeedbacksResponse?.total ?? 1}
@@ -240,7 +242,7 @@ function List() {
         <PaginationPanel
           className="flex justify-end py-6 pr-6"
           current={currentPage || 1}
-          pageSize={fetchFeedbacksResponse?.size ?? 10}
+          pageSize={pageSize ?? 10}
           setCurrentPage={setCurrentPage}
           showQuickJumper
           total={fetchFeedbacksResponse?.total ?? 1}

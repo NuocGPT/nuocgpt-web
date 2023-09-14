@@ -30,6 +30,7 @@ module.exports = {
       'secondary-color-opacity': 'rgba(255, 255, 255, 0.20)',
     },
     boxShadow: {
+      none: '0 0 #0000',
       'inner-shadows': 'inset 0px -1px 0px #F00000;',
       sm: '0px 0px 1px rgba(12, 26, 75, 0.24), 0px 3px 8px -1px rgba(50, 50, 71, 0.05)',
       default:

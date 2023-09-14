@@ -7,9 +7,17 @@ import type {
   UpdateFeedbackDto,
 } from './interfaces';
 
-async function fetchFeedbacks(queryParams: string) {
+interface Props {
+  queryParams: string;
+  page?: number;
+  size?: number;
+}
+
+async function fetchFeedbacks({ queryParams, page, size }: Props) {
   const data = await fetcher.get<BaseGetAllResponse<Feedback>>(
-    `${import.meta.env.VITE_BASE_URL}/admin/feedbacks?${queryParams}`,
+    `${
+      import.meta.env.VITE_BASE_URL
+    }/admin/feedbacks?page=${page}&size=${size}&${queryParams}`,
   );
   return data;
 }

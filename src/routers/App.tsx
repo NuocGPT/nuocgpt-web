@@ -3,9 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import ForgotPassword from '#/pages/forgot-password';
 import ResetPassword from '#/pages/reset-password';
 import SignUp from '#/pages/sign-up';
-import UserFeedback from '#/pages/user-feedback';
 import VerifyOTPPage from '#/pages/verify-otp';
-import AdminRoute from './AdminRoute';
 import GuardRoute from './GuardRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -28,14 +26,6 @@ const App = () => {
         </GuardRoute>
       ),
       path: 'sign-up',
-    },
-    {
-      element: (
-        <AdminRoute>
-          <UserFeedback />
-        </AdminRoute>
-      ),
-      path: '/admin',
     },
     {
       element: (

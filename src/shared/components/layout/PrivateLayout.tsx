@@ -100,7 +100,7 @@ function PrivateLayout({
           <div className="flex items-center justify-between border-b border-b-[#EDEDED] p-4">
             <div className="w-fit">
               <Button
-                className="w-fit border-none"
+                className="w-fit border-none shadow-none"
                 icon={<MenuIcon />}
                 onClick={onOpen}
               />
@@ -108,7 +108,7 @@ function PrivateLayout({
             <div className="w-fit">{t('conversation.newTitle')}</div>
             <div className="w-fit">
               <Button
-                className="w-fit border-none"
+                className="w-fit border-none shadow-none"
                 icon={<PlusOutlined className="text-2xl" />}
                 onClick={handleCreateNewConversation}
               />
@@ -211,7 +211,7 @@ function PrivateLayout({
           </Layout>
         </>
       ) : (
-        <Layout className="h-screen">
+        <Layout className="min-h-screen">
           <Layout.Sider
             className="flex flex-col justify-between bg-primary-color"
             width={240}

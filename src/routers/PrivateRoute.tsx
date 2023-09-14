@@ -5,11 +5,13 @@ import { useNavigate, useRoutes } from 'react-router-dom';
 import NotFoundPage from '#/pages/404';
 import Chat from '#/pages/chat';
 import NewConversation from '#/pages/new-conversation';
+import UserFeedback from '#/pages/user-feedback';
 import { QUERY } from '#/services/constants';
 import { fetchMe } from '#/services/me';
 import PrivateLayout from '#/shared/components/layout/PrivateLayout';
 import { clearToken } from '#/shared/utils/token';
 import type { MyWindow } from '#/shared/utils/type';
+import AdminRoute from './AdminRoute';
 
 function PrivateRoute() {
   const navigate = useNavigate();
@@ -29,6 +31,14 @@ function PrivateRoute() {
   }, []);
 
   const routes = useRoutes([
+    {
+      element: (
+        <AdminRoute>
+          <UserFeedback />
+        </AdminRoute>
+      ),
+      path: '/admin',
+    },
     { element: <NewConversation />, path: '/new-conversation' },
     { element: <Chat />, path: '/c/:id' },
     { element: <Spin />, path: '/' },
