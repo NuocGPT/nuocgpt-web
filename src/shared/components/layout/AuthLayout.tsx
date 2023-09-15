@@ -74,7 +74,7 @@ function AuthLayout({ children }: Props) {
             {window.history.state && window.history.state.idx > 0 && (
               <div className="flex items-center gap-2" onClick={handleGoBack}>
                 <Button
-                  className="bg-white shadow-none w-fit border-none"
+                  className="bg-white w-fit border-none shadow-none"
                   shape="circle"
                   type="ghost"
                 >

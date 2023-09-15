@@ -71,7 +71,6 @@ function PrivateLayout({
             );
         }
       },
-      staleTime: 30000,
     },
   );
 
