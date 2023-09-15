@@ -10,7 +10,10 @@ import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
 import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
-import { addConversation } from '#/services/conversations';
+import {
+  addConversation,
+  fetchSummarizeQuestion,
+} from '#/services/conversations';
 import {
   AuthorType,
   ConversationType,
@@ -46,7 +49,7 @@ function NewConversation() {
     () =>
       addConversation({
         message,
-        title: 'Cuộc trò chuyện mới',
+        title: '',
       }),
     {
       onError() {
@@ -55,6 +58,9 @@ function NewConversation() {
       },
       onSuccess(data) {
         conversationId.current = data.conversation_id;
+        fetchSummarizeQuestion({
+          conversationId: data.conversation_id,
+        });
         handleRenderResponse(data.content.parts[0]);
       },
     },

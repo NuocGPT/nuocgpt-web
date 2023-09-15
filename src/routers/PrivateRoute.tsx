@@ -19,6 +19,7 @@ function PrivateRoute() {
     onSuccess(data) {
       localStorage.setItem('email', data?.email);
     },
+    staleTime: 3000,
   });
 
   const handleLogout = () => {

@@ -27,5 +27,4 @@ export interface Pagination {
 export interface QueryParams {
   search?: string;
   rating?: string;
-  pagination?: Pagination;
 }

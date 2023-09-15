@@ -28,6 +28,7 @@ import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { DEFAULT_AVATAR } from '#/shared/utils/constant';
 import { getIsAdmin } from '#/shared/utils/token';
+import { truncateText } from '#/shared/utils/tools';
 import { AboutUsModal } from '../AboutUs';
 import { DrawerStyled } from './styles';
 
@@ -48,9 +49,8 @@ function PrivateLayout({
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
   const id = pathname.split('/')?.[2];
   const isInNewConversation = pathname.includes('new-conversation');
-  const isUserFeedback = pathname.includes('user-feedback');
+  const isUserFeedback = pathname.includes('admin');
   const [isDrawer, setIsDrawer] = useState(false);
-
   const isAdmin = getIsAdmin();
 
   const { data: fetchConversationsResponse } = useQuery<Conversations>(
@@ -71,6 +71,7 @@ function PrivateLayout({
             );
         }
       },
+      staleTime: 30000,
     },
   );
 
@@ -151,8 +152,10 @@ function PrivateLayout({
                     }
                   }}
                 >
-                  <ChatIcon />
-                  {conversation.title}
+                  <div className="w-fit">
+                    <ChatIcon />
+                  </div>
+                  {truncateText(String(conversation.title), 20)}
                 </Typography.Text>
               ))}
             </div>
@@ -240,8 +243,10 @@ function PrivateLayout({
                         navigate(`/c/${conversation._id}`)
                       }
                     >
-                      <ChatIcon />
-                      {conversation.title}
+                      <div className="w-fit">
+                        <ChatIcon />
+                      </div>
+                      {truncateText(String(conversation.title), 20)}
                     </Typography.Text>
                   ))}
                 </div>

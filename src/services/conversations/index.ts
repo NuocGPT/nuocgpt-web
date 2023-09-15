@@ -33,6 +33,19 @@ async function addConversation(addConversationInput: AddConversationDto) {
   return data;
 }
 
+async function fetchSummarizeQuestion({
+  conversationId,
+}: {
+  conversationId?: string;
+}) {
+  const data = await fetcher.get<string>(
+    `${
+      import.meta.env.VITE_BASE_URL
+    }/conversations/${conversationId}/generate-title`,
+  );
+  return data;
+}
+
 async function addMessage(conversationId: string, { message }: AddMessageDto) {
   const data = await fetcher.post<AddMessageDto, AddMessageResponse>(
     `${import.meta.env.VITE_BASE_URL}/conversations/${conversationId}/messages`,
@@ -43,4 +56,10 @@ async function addMessage(conversationId: string, { message }: AddMessageDto) {
   return data;
 }
 
-export { fetchConversations, fetchMessages, addConversation, addMessage };
+export {
+  fetchConversations,
+  fetchMessages,
+  addConversation,
+  addMessage,
+  fetchSummarizeQuestion,
+};
