@@ -57,6 +57,7 @@ function Chat({ conversationId }: ChatProps) {
           scrollToConversationBottom();
         }, 100);
       },
+      staleTime: 300000,
     },
   );
 
