@@ -52,6 +52,9 @@ function PrivateLayout({
   const isUserFeedback = pathname.includes('admin');
   const [isDrawer, setIsDrawer] = useState(false);
   const isAdmin = getIsAdmin();
+  const conversationId = window.location.pathname
+    .split('/c')?.[1]
+    ?.split('/')?.[1];
 
   const { data: fetchConversationsResponse } = useQuery<Conversations>(
     QUERY.getConversations,
@@ -81,7 +84,9 @@ function PrivateLayout({
     ) ?? [];
 
   const handleCreateNewConversation = () => {
-    navigate('/new-conversation');
+    navigate('/new-conversation', {
+      state: conversationId,
+    });
     setIsDrawer(false);
   };
 
@@ -141,7 +146,10 @@ function PrivateLayout({
               {conversations.map(conversation => (
                 <Typography.Text
                   className={`flex cursor-pointer items-center gap-2 rounded-lg ${
-                    id === conversation._id ? 'bg-primary-color-light-10' : ''
+                    id === conversation._id ||
+                    conversationId === conversation._id
+                      ? 'bg-primary-color-light-10'
+                      : 'first:bg-primary-color-light-10'
                   } p-2 text-secondary-color`}
                   key={conversation._id}
                   onClick={() => {
@@ -154,7 +162,9 @@ function PrivateLayout({
                   <div className="w-fit">
                     <ChatIcon />
                   </div>
-                  {truncateText(String(conversation.title), 20)}
+                  {conversation.title
+                    ? truncateText(String(conversation.title), 20)
+                    : t('conversation.newTitle')}
                 </Typography.Text>
               ))}
             </div>
@@ -232,7 +242,8 @@ function PrivateLayout({
                   {conversations.map(conversation => (
                     <Typography.Text
                       className={`flex cursor-pointer items-center gap-2 rounded-lg ${
-                        id === conversation._id
+                        id === conversation._id ||
+                        conversationId === conversation._id
                           ? 'bg-primary-color-light-10'
                           : ''
                       } p-2 text-secondary-color`}
@@ -245,7 +256,9 @@ function PrivateLayout({
                       <div className="w-fit">
                         <ChatIcon />
                       </div>
-                      {truncateText(String(conversation.title), 20)}
+                      {conversation.title
+                        ? truncateText(String(conversation.title), 20)
+                        : t('conversation.newTitle')}
                     </Typography.Text>
                   ))}
                 </div>

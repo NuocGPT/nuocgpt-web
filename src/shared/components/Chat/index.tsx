@@ -178,7 +178,7 @@ function Chat({ conversationId }: ChatProps) {
 
         {addMessageError && (
           <div className="mt-2 flex flex-col items-center justify-center bg-info-color-soft py-2">
-            Đã xảy ra lỗi!, vui lòng thử lại
+            Đã xảy ra lỗi, vui lòng thử lại!
           </div>
         )}
       </div>
