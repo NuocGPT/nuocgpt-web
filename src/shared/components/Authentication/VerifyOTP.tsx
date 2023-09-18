@@ -56,7 +56,7 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
         showError(handleShowErrorMessage(error.message));
       },
       onSuccess(data: VerifyOTPResponse) {
-        showSuccess('Thành công', 'Xác thực thành công!');
+        showSuccess(t('success.title'), t('success.verify'));
         setToken(data.access_token);
         navigate(`/`);
       },
@@ -70,7 +70,7 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
       showError(handleShowErrorMessage(error.message));
     },
     onSuccess(data: VerifyOTPForgotPasswordResponse) {
-      showSuccess('Thành công', 'Xác thực thành công!');
+      showSuccess(t('success.title'), t('success.verify'));
       navigate(
         `/reset-password?verify_token=${encodeURIComponent(
           data?.verify_token,
@@ -86,7 +86,7 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
       },
       onSuccess() {
         resetCounter();
-        showSuccess('Thành công', 'Gửi lại mã xác thực thành công!');
+        showSuccess(t('success.title'), t('success.resendOTP'));
       },
     });
 

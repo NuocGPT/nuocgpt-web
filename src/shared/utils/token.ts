@@ -1,5 +1,6 @@
 import {
   LOCAL_STORAGE_IS_ADMIN,
+  LOCAL_STORAGE_IS_PASSWORD,
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
   LOCAL_STORAGE_TOKEN_KEY,
 } from './constant';
@@ -27,6 +28,17 @@ export const setIsAdmin = (role: string) => {
 };
 
 export const getIsAdmin = () => localStorage.getItem(LOCAL_STORAGE_IS_ADMIN);
+
+export const setPassword = (password: string) => {
+  localStorage.setItem(LOCAL_STORAGE_IS_PASSWORD, password);
+};
+
+export const getPassword = () =>
+  localStorage.getItem(LOCAL_STORAGE_IS_PASSWORD);
+
+export const clearPassword = () => {
+  localStorage.removeItem(LOCAL_STORAGE_IS_PASSWORD);
+};
 
 export const clearRefreshToken = () => {
   localStorage.removeItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);

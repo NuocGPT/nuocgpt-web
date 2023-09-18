@@ -23,7 +23,7 @@ function SignUp() {
         showError(handleShowErrorMessage(error.message));
       },
       onSuccess(data: SignUpResponse) {
-        showSuccess('Thành công', 'Đăng ký thành công!');
+        showSuccess(t('success.title'), t('success.signUp'));
         navigate(`/verify-otp?email=${encodeURIComponent(data?.email)}`);
       },
     },

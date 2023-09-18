@@ -41,7 +41,7 @@ function ModalFeedback({
         showError(handleShowErrorMessage(error.message));
       },
       onSuccess() {
-        showSuccess('Thành công!', 'Gửi phản hồi thành công');
+        showSuccess(t('success.title'), t('success.feedback'));
         handleClose();
       },
     });
@@ -81,7 +81,7 @@ function ModalFeedback({
         <div className="flex items-center gap-4">
           {isPositive ? <LikeIcon /> : <DislikeIcon />}
           <Typography.Title className="mb-0" level={4}>
-            Cung cấp phản hồi bổ sung
+            {t('feedback.addFeedback')}
           </Typography.Title>
         </div>
       }
@@ -92,8 +92,8 @@ function ModalFeedback({
             className="rounded-lg"
             placeholder={
               isPositive
-                ? 'Bạn thích gì về câu trả lời?'
-                : 'Vấn đề với câu trả lời là gì? Làm thế nào để câu trả lời có thể được cải thiện?            '
+                ? t('feedback.placeholder.positive')
+                : t('feedback.placeholder.negative')
             }
             rows={4}
           />
@@ -102,13 +102,13 @@ function ModalFeedback({
           <Form.Item name="tags" rules={[{ required: true }]}>
             <Checkbox.Group className="flex flex-col gap-2">
               <Checkbox value={FeedbackTag.harmful}>
-                Điều này có hại/không an toàn
+                {t('feedback.harmful')}
               </Checkbox>
               <Checkbox className="m-0" value={FeedbackTag.false}>
-                Điều này không đúng
+                {t('feedback.false')}
               </Checkbox>
               <Checkbox className="m-0" value={FeedbackTag.notHelpful}>
-                Điều này không hữu ích
+                {t('feedback.notHelpful')}
               </Checkbox>
             </Checkbox.Group>
           </Form.Item>

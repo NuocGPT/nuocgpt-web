@@ -17,6 +17,7 @@ import {
   ConversationType,
 } from '#/services/conversations/interfaces';
 import { useRenderResponse } from '#/shared/hooks/useRenderResponse';
+import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import MessageItem from './MessageItem';
 
 export const scrollToConversationBottom = () => {
@@ -34,6 +35,7 @@ interface ChatProps {
 }
 
 function Chat({ conversationId }: ChatProps) {
+  const { t } = useTypeSafeTranslation();
   const [message, setMessage] = useState('');
   const [disableChat, setDisableChat] = useState(false);
   const { completedTyping, displayResponse, handleRenderResponse } =
@@ -171,14 +173,14 @@ function Chat({ conversationId }: ChatProps) {
             </div>
             <div className="mt-2 flex flex-col items-center justify-center py-2">
               <Image height={64} preview={false} src={LoadingGif} />
-              Đang tải dữ liệu...
+              {t('common.loadingData')}
             </div>
           </>
         )}
 
         {addMessageError && (
           <div className="mt-2 flex flex-col items-center justify-center bg-info-color-soft py-2">
-            Đã xảy ra lỗi, vui lòng thử lại!
+            {t('error.title')}
           </div>
         )}
       </div>
@@ -199,7 +201,7 @@ function Chat({ conversationId }: ChatProps) {
                 }
               }
             }}
-            placeholder={'Gửi tin nhắn'}
+            placeholder={t('placeholder.sendMessage')}
             size="large"
             suffix={
               <Button
@@ -211,9 +213,7 @@ function Chat({ conversationId }: ChatProps) {
             value={disableChat ? '' : message}
           />
           <Typography.Paragraph className="mt-2 text-center text-xs text-color-neutral-3">
-            Xem trước nghiên cứu miễn phí. Mục tiêu của chúng tôi là làm cho các
-            hệ thống AI trở nên tự nhiên và an toàn hơn khi tương tác. Phản hồi
-            của bạn giúp chúng tôi hoàn thiện hơn.
+            {t('common.description')}
           </Typography.Paragraph>
         </div>
       </Footer>

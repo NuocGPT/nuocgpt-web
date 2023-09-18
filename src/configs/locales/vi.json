@@ -5,7 +5,9 @@
   "common": {
     "loading": "Đang tải...",
     "n/a": "N/A",
-    "etc": "..."
+    "etc": "...",
+    "loadingData": "Đang tải dữ liệu...",
+    "description": "Xem trước nghiên cứu miễn phí. Mục tiêu của chúng tôi là làm cho các hệ thống AI trở nên tự nhiên và an toàn hơn khi tương tác. Phản hồi của bạn giúp chúng tôi hoàn thiện hơn."
   },
   "aboutUs": {
     "title": "Về chúng tôi",
@@ -35,7 +37,19 @@
     "resendAfterSeconds": "Gửi lại sau {{seconds}} giây",
     "checkMail": "Kiểm tra email của bạn",
     "checkMailDescription": "Vui lòng kiểm tra địa chỉ email {{email}} để được hướng dẫn đặt lại mật khẩu",
-    "passwordUpdated": "Mật khẩu đã được cập nhật thành công!"
+    "passwordUpdated": "Mật khẩu đã được cập nhật thành công!",
+    "setSystemCode": "Vui lòng nhập mã hệ thống",
+    "systemCode": "Mật mã hệ thống"
+  },
+  "error": {
+    "title": "Đã xảy ra lỗi, vui lòng thử lại!"
+  },
+  "success": {
+    "title": "Thành công",
+    "signUp": "Đăng ký thành công!",
+    "verify": "Xác thực thành công!",
+    "resendOTP": "Gửi lại mã xác thực thành công!",
+    "feedback": "Gửi phản hồi thành công!"
   },
   "profiles": {
     "title": "General Information",
@@ -76,7 +90,8 @@
     "enterOTP": "Nhập mã OTP",
     "login": "Đăng nhập",
     "createNewConversation": "Tạo trò chuyện mới",
-    "viewAll": "Xem tất cả"
+    "viewAll": "Xem tất cả",
+    "logout": "Đăng xuất"
   },
   "gender": {
     "title": "Gender",
@@ -90,9 +105,11 @@
   },
   "placeholder": {
     "undefined": "select...",
-    "email": "Email address",
-    "password": "Enter your password",
-    "selectTheColor": "Select the color"
+    "email": "Nhập địa chỉ email",
+    "password": "Nhập mật khẩu",
+    "selectTheColor": "Select the color",
+    "sendMessage": "Gửi tin nhắn",
+    "systemCode": "Nhập mã hệ thống"
   },
   "validateMessage": {
     "maxCharacters": "Please enter message no more than {{max}} characters",
@@ -110,7 +127,10 @@
     "serverInternalError": "Server Internal Error. Please try later.",
     "incorrectCurrentPassword": "Incorrect current password",
     "documentFileType": "You can only upload TXT/JSON file!",
-    "fileSizeLimit": "File must smaller than 2MB!"
+    "fileSizeLimit": "File must smaller than 2MB!",
+    "incorrectPassword": "Mật khẩu không đúng! Xin vui lòng thử lại.",
+    "validateSystemCode": "Mã hệ thống phải có ít nhất 8 ký tự và chứa ít nhất một số, một chữ cái và một ký tự đặc biệt",
+    "incorrectSystemCode": "Mã hệ thống không đúng! Xin vui lòng thử lại."
   },
   "input": {
     "image": "Select a .jpeg or .png file that is less than 3 MB.",
@@ -146,9 +166,15 @@
     "answer": "Câu trả lời",
     "status": "Trạng thái",
     "extraFeedback": "Phản hồi bổ sung",
+    "addFeedback": "Cung cấp phản hồi bổ sung",
     "placeholder": {
       "search": "Tìm kiểm",
-      "status": "Tất cả trạng thái"
-    }
+      "status": "Tất cả trạng thái",
+      "positive": "Bạn thích gì về câu trả lời?",
+      "negative": "Vấn đề với câu trả lời là gì? Làm thế nào để câu trả lời có thể được cải thiện?"
+    },
+    "harmful": "Điều này có hại/không an toàn",
+    "false": "Điều này không đúng",
+    "notHelpful": "Điều này không hữu ích"
   }
 }

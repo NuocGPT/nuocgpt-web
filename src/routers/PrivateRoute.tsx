@@ -9,7 +9,7 @@ import UserFeedback from '#/pages/user-feedback';
 import { QUERY } from '#/services/constants';
 import { fetchMe } from '#/services/me';
 import PrivateLayout from '#/shared/components/layout/PrivateLayout';
-import { clearToken } from '#/shared/utils/token';
+import { clearPassword, clearToken } from '#/shared/utils/token';
 import type { MyWindow } from '#/shared/utils/type';
 import AdminRoute from './AdminRoute';
 
@@ -24,6 +24,7 @@ function PrivateRoute() {
 
   const handleLogout = () => {
     clearToken();
+    clearPassword();
     navigate('/login');
   };
 
