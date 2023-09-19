@@ -6,15 +6,16 @@ import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as Like } from '#/assets/svg/like-outlined.svg';
 import type { Message } from '#/services/conversations/interfaces';
 import { AuthorType } from '#/services/conversations/interfaces';
+import { type Feedback, Rating } from '#/services/feedbacks/interfaces';
 import { Avatar } from '#/shared/components/common';
-import { DEFAULT_AVATAR } from '#/shared/utils/constant';
+import { getAvatar } from '#/shared/utils/token';
 import ModalFeedback from './ModalFeedback';
 
 interface MessageProps {
   message?: Message;
 }
 
-enum FeedbackTypes {
+export enum FeedbackTypes {
   LIKE = 'LIKE',
   DISLIKE = 'DISLIKE',
 }
@@ -23,19 +24,15 @@ function MessageItem({ message }: MessageProps) {
   const [feedbackType, setFeedbackType] = useState<FeedbackTypes | undefined>(
     undefined,
   );
-  const [isClickedPositive, setIsClickedPositive] = useState(false);
-  const [isClickedNegative, setIsClickedNegative] = useState(false);
+  const [feedback, setFeedback] = useState<Feedback>();
+  const avatar = getAvatar();
 
   const handleCreatePositiveFeedback = () => {
     setFeedbackType(FeedbackTypes.LIKE);
-    setIsClickedPositive(true);
-    setIsClickedNegative(false);
   };
 
   const handleCreateNegativeFeedback = () => {
     setFeedbackType(FeedbackTypes.DISLIKE);
-    setIsClickedNegative(true);
-    setIsClickedPositive(false);
   };
 
   const handleClose = () => {
@@ -46,7 +43,7 @@ function MessageItem({ message }: MessageProps) {
     <div className="w-full bg-color-neutral-5">
       <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
         <div className="flex items-start gap-4">
-          <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
+          <Avatar className="flex-shrink-0" size={32} src={avatar} />
           <CursorIcon />
         </div>
       </div>
@@ -63,9 +60,7 @@ function MessageItem({ message }: MessageProps) {
             className="flex-shrink-0"
             size={32}
             src={
-              message.author?.role === AuthorType.SYSTEM
-                ? GPTAvatar
-                : DEFAULT_AVATAR
+              message.author?.role === AuthorType.SYSTEM ? GPTAvatar : avatar
             }
           />
           <Typography.Paragraph className="text-color-neutral-1">
@@ -74,30 +69,32 @@ function MessageItem({ message }: MessageProps) {
         </div>
         {message.author?.role === AuthorType.SYSTEM && (
           <div className="flex items-start justify-start">
-            <Button
-              className={`${
-                isClickedPositive
-                  ? 'bg-primary-color-light-20 text-secondary-color'
-                  : ''
-              }`}
-              onClick={handleCreatePositiveFeedback}
-              size="small"
-              type="text"
-            >
-              <Like />
-            </Button>
-            <Button
-              className={`${
-                isClickedNegative
-                  ? 'bg-primary-color-light-20 text-secondary-color'
-                  : ''
-              }`}
-              onClick={handleCreateNegativeFeedback}
-              size="small"
-              type="text"
-            >
-              <Dislike />
-            </Button>
+            {feedback ? (
+              <Button
+                className="bg-primary-color-light-20 text-secondary-color"
+                size="small"
+                type="text"
+              >
+                {feedback.rating === Rating.thumbsUp ? <Like /> : <Dislike />}
+              </Button>
+            ) : (
+              <>
+                <Button
+                  onClick={handleCreatePositiveFeedback}
+                  size="small"
+                  type="text"
+                >
+                  <Like />
+                </Button>
+                <Button
+                  onClick={handleCreateNegativeFeedback}
+                  size="small"
+                  type="text"
+                >
+                  <Dislike />
+                </Button>
+              </>
+            )}
           </div>
         )}
       </div>
@@ -106,6 +103,7 @@ function MessageItem({ message }: MessageProps) {
         isPositive={feedbackType === FeedbackTypes.LIKE}
         message={message}
         onClose={handleClose}
+        setFeedback={setFeedback}
         visible={!!feedbackType}
       />
     </div>

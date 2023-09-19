@@ -63,6 +63,21 @@ function Chat({ conversationId }: ChatProps) {
     },
   );
 
+  const user = {
+    _id: String(Math.random() * 1000),
+    author: {
+      id: '',
+      role: AuthorType.USER,
+    },
+    content: {
+      content_type: ConversationType.TEXT,
+      parts: [message],
+    },
+    conversation_id: String(conversationId),
+    created_at: new Date().toISOString(),
+    revision_id: null,
+  };
+
   useEffect(() => {
     refetch();
   }, [conversationId, refetch]);
@@ -120,22 +135,7 @@ function Chat({ conversationId }: ChatProps) {
         {displayResponse && (
           <>
             <div className="flex">
-              <MessageItem
-                message={{
-                  _id: String(Math.random() * 1000),
-                  author: {
-                    id: '',
-                    role: AuthorType.USER,
-                  },
-                  content: {
-                    content_type: ConversationType.TEXT,
-                    parts: [message],
-                  },
-                  conversation_id: String(conversationId),
-                  created_at: new Date().toISOString(),
-                  revision_id: null,
-                }}
-              />
+              <MessageItem message={user} />
             </div>
             <div className={`w-full bg-color-neutral-5`}>
               <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
@@ -154,22 +154,7 @@ function Chat({ conversationId }: ChatProps) {
         {addMessageLoading && (
           <>
             <div className="flex">
-              <MessageItem
-                message={{
-                  _id: String(Math.random() * 1000),
-                  author: {
-                    id: '',
-                    role: AuthorType.USER,
-                  },
-                  content: {
-                    content_type: ConversationType.TEXT,
-                    parts: [message],
-                  },
-                  conversation_id: String(conversationId),
-                  created_at: new Date().toISOString(),
-                  revision_id: null,
-                }}
-              />
+              <MessageItem message={user} />
             </div>
             <div className="mt-2 flex flex-col items-center justify-center py-2">
               <Image height={64} preview={false} src={LoadingGif} />

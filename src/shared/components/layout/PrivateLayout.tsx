@@ -26,8 +26,7 @@ import { fetchConversations } from '#/services/conversations';
 import type { Conversations } from '#/services/conversations/interfaces';
 import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
-import { DEFAULT_AVATAR } from '#/shared/utils/constant';
-import { getIsAdmin } from '#/shared/utils/token';
+import { getAvatar, getIsAdmin } from '#/shared/utils/token';
 import { truncateText } from '#/shared/utils/tools';
 import { AboutUsModal } from '../AboutUs';
 import { DrawerStyled } from './styles';
@@ -55,6 +54,7 @@ function PrivateLayout({
   const conversationId = window.location.pathname
     .split('/c')?.[1]
     ?.split('/')?.[1];
+  const avatar = getAvatar();
 
   const { data: fetchConversationsResponse } = useQuery<Conversations>(
     QUERY.getConversations,
@@ -196,7 +196,7 @@ function PrivateLayout({
                 </div>
                 <div className="flex justify-between gap-2 text-secondary-color">
                   <div className="flex gap-2">
-                    <Avatar size={24} src={DEFAULT_AVATAR} />{' '}
+                    <Avatar size={24} src={avatar} />{' '}
                     <Tooltip title={user?.email}>
                       <Typography.Text className="max-w-36 w-36 flex-1 truncate text-secondary-color">
                         {user?.email}
@@ -213,7 +213,7 @@ function PrivateLayout({
                   size="small"
                   type="text"
                 >
-                  <span className="ml-1">Đăng xuất</span>
+                  <span className="ml-1">{t('button.logout')}</span>
                 </Button>
               </div>
             </div>
@@ -291,7 +291,7 @@ function PrivateLayout({
                   </div>
                   <div className="flex justify-between gap-2 text-secondary-color">
                     <div className="flex gap-2">
-                      <Avatar size={24} src={DEFAULT_AVATAR} />{' '}
+                      <Avatar size={24} src={avatar} />{' '}
                       <Tooltip title={user?.email}>
                         <Typography.Text className="max-w-36 w-36 flex-1 truncate text-secondary-color">
                           {user?.email}
@@ -308,7 +308,7 @@ function PrivateLayout({
                     size="small"
                     type="text"
                   >
-                    <span className="ml-1">Đăng xuất</span>
+                    <span className="ml-1">{t('button.logout')}</span>
                   </Button>
                 </div>
               </div>

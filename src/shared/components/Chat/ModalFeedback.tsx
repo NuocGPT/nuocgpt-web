@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { showError } from '@enouvo/react-uikit';
 import { useMutation } from '@tanstack/react-query';
 import { Checkbox, Form, Input, Modal, Typography } from 'antd';
@@ -6,7 +7,7 @@ import { ReactComponent as LikeIcon } from '#/assets/svg/like-rounded.svg';
 import { MUTATION } from '#/services/constants';
 import type { Message } from '#/services/conversations/interfaces';
 import { addFeedback } from '#/services/feedbacks';
-import type { AddFeedbackDto } from '#/services/feedbacks/interfaces';
+import type { AddFeedbackDto, Feedback } from '#/services/feedbacks/interfaces';
 import { FeedbackTag, Rating } from '#/services/feedbacks/interfaces';
 import { handleShowErrorMessage } from '#/services/utils/resultCodeCheck';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
@@ -18,6 +19,7 @@ interface ModalFeedbackProps {
   isPositive: boolean;
   visible: boolean;
   onClose: () => void;
+  setFeedback?: Dispatch<SetStateAction<Feedback | undefined>>;
 }
 
 function ModalFeedback({
@@ -26,6 +28,7 @@ function ModalFeedback({
   isPositive,
   visible,
   onClose,
+  setFeedback,
 }: ModalFeedbackProps) {
   const { t } = useTypeSafeTranslation();
   const [form] = Form.useForm();
@@ -40,7 +43,8 @@ function ModalFeedback({
       onError(error: Error) {
         showError(handleShowErrorMessage(error.message));
       },
-      onSuccess() {
+      onSuccess(data) {
+        setFeedback?.(data as Feedback);
         showSuccess(t('success.title'), t('success.feedback'));
         handleClose();
       },

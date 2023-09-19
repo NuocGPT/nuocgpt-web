@@ -1,4 +1,5 @@
 import {
+  LOCAL_STORAGE_AVATAR,
   LOCAL_STORAGE_IS_ADMIN,
   LOCAL_STORAGE_IS_PASSWORD,
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
@@ -43,3 +44,9 @@ export const clearPassword = () => {
 export const clearRefreshToken = () => {
   localStorage.removeItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY);
 };
+
+export const setAvatar = (avatar: string) => {
+  localStorage.setItem(LOCAL_STORAGE_AVATAR, avatar);
+};
+
+export const getAvatar = () => localStorage.getItem(LOCAL_STORAGE_AVATAR);

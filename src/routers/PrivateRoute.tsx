@@ -9,7 +9,8 @@ import UserFeedback from '#/pages/user-feedback';
 import { QUERY } from '#/services/constants';
 import { fetchMe } from '#/services/me';
 import PrivateLayout from '#/shared/components/layout/PrivateLayout';
-import { clearPassword, clearToken } from '#/shared/utils/token';
+import { useGetRandomizeAvatar } from '#/shared/components/UserFeedback/hooks/useGetRandomizeAvatar';
+import { clearPassword, clearToken, setAvatar } from '#/shared/utils/token';
 import type { MyWindow } from '#/shared/utils/type';
 import AdminRoute from './AdminRoute';
 
@@ -21,6 +22,7 @@ function PrivateRoute() {
     },
     staleTime: 3000,
   });
+  const { randomizeAvatar } = useGetRandomizeAvatar();
 
   const handleLogout = () => {
     clearToken();
@@ -29,6 +31,9 @@ function PrivateRoute() {
   };
 
   useEffect(() => {
+    window.onload = () => {
+      setAvatar(randomizeAvatar);
+    };
     (window as unknown as MyWindow).pushLogin = () => navigate('login');
   }, []);
 
