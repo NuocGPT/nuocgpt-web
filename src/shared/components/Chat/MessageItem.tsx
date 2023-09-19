@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, Typography } from 'antd';
+import Avocado from '#/assets/images/avocado.png';
 import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import { ReactComponent as Dislike } from '#/assets/svg/dislike-outlined.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
@@ -26,6 +27,7 @@ function MessageItem({ message }: MessageProps) {
   );
   const [feedback, setFeedback] = useState<Feedback>();
   const avatar = getAvatar();
+  const defaultAvatar = avatar ?? Avocado;
 
   const handleCreatePositiveFeedback = () => {
     setFeedbackType(FeedbackTypes.LIKE);
@@ -43,7 +45,7 @@ function MessageItem({ message }: MessageProps) {
     <div className="w-full bg-color-neutral-5">
       <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
         <div className="flex items-start gap-4">
-          <Avatar className="flex-shrink-0" size={32} src={avatar} />
+          <Avatar className="flex-shrink-0" size={32} src={defaultAvatar} />
           <CursorIcon />
         </div>
       </div>
@@ -60,7 +62,9 @@ function MessageItem({ message }: MessageProps) {
             className="flex-shrink-0"
             size={32}
             src={
-              message.author?.role === AuthorType.SYSTEM ? GPTAvatar : avatar
+              message.author?.role === AuthorType.SYSTEM
+                ? GPTAvatar
+                : defaultAvatar
             }
           />
           <Typography.Paragraph className="text-color-neutral-1">

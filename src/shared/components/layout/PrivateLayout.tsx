@@ -14,6 +14,7 @@ import {
 } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Avocado from '#/assets/images/avocado.png';
 import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as AboutUsIcon } from '#/assets/svg/about-us.svg';
 import { ReactComponent as ChatIcon } from '#/assets/svg/chat.svg';
@@ -55,6 +56,7 @@ function PrivateLayout({
     .split('/c')?.[1]
     ?.split('/')?.[1];
   const avatar = getAvatar();
+  const defaultAvatar = avatar ?? Avocado;
 
   const { data: fetchConversationsResponse } = useQuery<Conversations>(
     QUERY.getConversations,
@@ -196,7 +198,7 @@ function PrivateLayout({
                 </div>
                 <div className="flex justify-between gap-2 text-secondary-color">
                   <div className="flex gap-2">
-                    <Avatar size={24} src={avatar} />{' '}
+                    <Avatar size={24} src={defaultAvatar} />{' '}
                     <Tooltip title={user?.email}>
                       <Typography.Text className="max-w-36 w-36 flex-1 truncate text-secondary-color">
                         {user?.email}
@@ -291,7 +293,7 @@ function PrivateLayout({
                   </div>
                   <div className="flex justify-between gap-2 text-secondary-color">
                     <div className="flex gap-2">
-                      <Avatar size={24} src={avatar} />{' '}
+                      <Avatar size={24} src={defaultAvatar} />{' '}
                       <Tooltip title={user?.email}>
                         <Typography.Text className="max-w-36 w-36 flex-1 truncate text-secondary-color">
                           {user?.email}
