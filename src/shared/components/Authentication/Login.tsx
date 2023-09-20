@@ -13,7 +13,7 @@ import {
   handleShowErrorMessage,
 } from '#/services/utils/resultCodeCheck';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
-import { setIsAdmin, setToken } from '#/shared/utils/token';
+import { setToken } from '#/shared/utils/token';
 
 function LoginPage() {
   const { t } = useTypeSafeTranslation();
@@ -30,10 +30,6 @@ function LoginPage() {
         }
       },
       onSuccess(data: SignInResponse) {
-        const isAdminRole = data.roles.includes('admin');
-        if (isAdminRole) {
-          setIsAdmin('admin');
-        }
         setToken(data.access_token);
         navigate(`/`);
       },
@@ -106,8 +102,10 @@ function LoginPage() {
             </Form.Item>
           </Col>
           <Col className="text-center" span={24}>
-            <Link className="primary" to="/sign-up">
-              {t('authentication.notHaveAccountYet')}{' '}
+            <Typography.Text className="pr-2">
+              {t('authentication.notHaveAccountYet')}
+            </Typography.Text>
+            <Link className="primary underline" to="/sign-up">
               {t('authentication.signUp')}
             </Link>
           </Col>

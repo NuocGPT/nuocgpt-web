@@ -78,6 +78,7 @@ export type TranslationKeys =
   | 'button.createNewConversation'
   | 'button.viewAll'
   | 'button.logout'
+  | 'button.sendFeedback'
   | 'gender.title'
   | 'gender.male'
   | 'gender.female'
@@ -137,4 +138,6 @@ export type TranslationKeys =
   | 'feedback.placeholder.negative'
   | 'feedback.harmful'
   | 'feedback.false'
-  | 'feedback.notHelpful';
+  | 'feedback.notHelpful'
+  | 'navigation.english'
+  | 'navigation.vietnamese';

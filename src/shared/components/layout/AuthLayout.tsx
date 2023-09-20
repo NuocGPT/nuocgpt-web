@@ -1,12 +1,11 @@
 import type { ReactNode } from 'react';
 import { useState } from 'react';
-import { LeftOutlined } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import { Button, Col, Grid, Image, Row, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import Logo from '#/assets/images/logo-white.png';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { AboutUsModal } from '../AboutUs';
+import ChangeLanguage from './ChangeLanguage';
 
 interface Props {
   children: ReactNode;
@@ -35,16 +34,17 @@ const StyledAuthLayout = styled(Col)`
 function AuthLayout({ children }: Props) {
   const { t } = useTypeSafeTranslation();
   const { md } = Grid.useBreakpoint();
-  const navigate = useNavigate();
   const [aboutUsModalVisible, setAboutUsModalVisible] = useState(false);
 
-  const handleGoBack = () => {
-    if (window.history.state && window.history.state.idx > 0) {
-      navigate(-1);
-    } else {
-      navigate('/', { replace: true });
-    }
-  };
+  /*
+   * const handleGoBack = () => {
+   *   if (window.history.state && window.history.state.idx > 0) {
+   *     navigate(-1);
+   *   } else {
+   *     navigate('/', { replace: true });
+   *   }
+   * };
+   */
 
   return (
     <div className="flex h-screen max-h-screen justify-center p-0 sm:p-6">
@@ -71,7 +71,7 @@ function AuthLayout({ children }: Props) {
           xs={24}
         >
           <div className="flex w-full items-center justify-between gap-4">
-            {window.history.state && window.history.state.idx > 0 && (
+            {/* {window.history.state && window.history.state.idx > 0 && (
               <div className="flex items-center gap-2" onClick={handleGoBack}>
                 <Button
                   className="bg-white w-fit border-none shadow-none"
@@ -79,26 +79,34 @@ function AuthLayout({ children }: Props) {
                   type="ghost"
                 >
                   <LeftOutlined />
+                  {t('button.back')}
                 </Button>
-                {t('button.back')}
               </div>
-            )}
+            )} */}
             <Button
-              className="w-fit p-0"
+              className="w-fit bg-transparent bg-none p-0 font-medium shadow-none"
               onClick={() => setAboutUsModalVisible(true)}
-              size="small"
               type="text"
             >
               {t('aboutUs.title')}
             </Button>
+            <ChangeLanguage
+              authLayout
+              className="rounded-full border bg-transparent font-semibold"
+            />
           </div>
 
           <div className="flex h-full w-full items-center justify-start">
             <div className="w-full">{children}</div>
           </div>
           <div className="flex justify-center gap-4">
-            <Typography.Link>{t('termOfUse.title')}</Typography.Link> |
-            <Typography.Link>{t('privacyPolicy.title')}</Typography.Link>
+            <Typography.Link className="font-medium">
+              {t('termOfUse.title')}
+            </Typography.Link>{' '}
+            |
+            <Typography.Link className="font-medium">
+              {t('privacyPolicy.title')}
+            </Typography.Link>
           </div>
         </Col>
         <AboutUsModal

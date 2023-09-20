@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import EllipsisOutlined from '@ant-design/icons/lib/icons/EllipsisOutlined';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import { useQuery } from '@tanstack/react-query';
 import {
-  Avatar,
   Button,
   Divider,
   Grid,
@@ -21,16 +19,18 @@ import { ReactComponent as ChatIcon } from '#/assets/svg/chat.svg';
 import { ReactComponent as CloseIcon } from '#/assets/svg/close.svg';
 import { ReactComponent as FeedbackIcon } from '#/assets/svg/like-tag.svg';
 import { ReactComponent as MenuIcon } from '#/assets/svg/menu.svg';
-import { ReactComponent as VietnamFlagIcon } from '#/assets/svg/vietnam-flag.svg';
+import { ReactComponent as SidebarIcon } from '#/assets/svg/side-bar.svg';
 import { QUERY } from '#/services/constants';
 import { fetchConversations } from '#/services/conversations';
 import type { Conversations } from '#/services/conversations/interfaces';
 import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
-import { getAvatar, getIsAdmin } from '#/shared/utils/token';
+import { getAvatar } from '#/shared/utils/token';
 import { truncateText } from '#/shared/utils/tools';
 import { AboutUsModal } from '../AboutUs';
+import ChangeLanguage from './ChangeLanguage';
 import { DrawerStyled } from './styles';
+import UserActions from './UserActions';
 
 interface Props {
   logout: () => void;
@@ -51,12 +51,13 @@ function PrivateLayout({
   const isInNewConversation = pathname.includes('new-conversation');
   const isUserFeedback = pathname.includes('admin');
   const [isDrawer, setIsDrawer] = useState(false);
-  const isAdmin = getIsAdmin();
+  const [collapsed, setCollapsed] = useState(false);
   const conversationId = window.location.pathname
     .split('/c')?.[1]
     ?.split('/')?.[1];
   const avatar = getAvatar();
   const defaultAvatar = avatar ?? Avocado;
+  const isAdmin = user?.roles.includes('admin');
 
   const { data: fetchConversationsResponse } = useQuery<Conversations>(
     QUERY.getConversations,
@@ -173,7 +174,7 @@ function PrivateLayout({
             <div className="fixed bottom-0 w-fit">
               <Divider className="bg-secondary-color" />
               <div className="flex flex-col gap-4 py-2">
-                {isAdmin === 'admin' && (
+                {isAdmin && (
                   <Button
                     className="m-0 flex gap-2 p-0 text-left text-secondary-color"
                     icon={<FeedbackIcon />}
@@ -184,101 +185,7 @@ function PrivateLayout({
                     <span>{t('feedback.title')}</span>
                   </Button>
                 )}
-                <Button
-                  className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                  icon={<AboutUsIcon />}
-                  onClick={() => setAboutUsModalVisible(true)}
-                  size="small"
-                  type="text"
-                >
-                  <span className="ml-1">{t('aboutUs.title')}</span>
-                </Button>
-                <div className="flex gap-2 text-secondary-color">
-                  <VietnamFlagIcon /> Tiếng Việt
-                </div>
-                <div className="flex justify-between gap-2 text-secondary-color">
-                  <div className="flex gap-2">
-                    <Avatar size={24} src={defaultAvatar} />{' '}
-                    <Tooltip title={user?.email}>
-                      <Typography.Text className="max-w-36 w-36 flex-1 truncate text-secondary-color">
-                        {user?.email}
-                      </Typography.Text>
-                    </Tooltip>
-                  </div>
-                  <EllipsisOutlined className="text-lg" />
-                </div>
-                <Button
-                  className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                  onClick={() => {
-                    logout();
-                  }}
-                  size="small"
-                  type="text"
-                >
-                  <span className="ml-1">{t('button.logout')}</span>
-                </Button>
-              </div>
-            </div>
-          </DrawerStyled>
-          <Layout>
-            <Content>{children}</Content>
-          </Layout>
-        </>
-      ) : (
-        <Layout className="min-h-screen">
-          <Layout.Sider
-            className="flex flex-col justify-between bg-primary-color"
-            width={240}
-          >
-            <div className="flex h-full flex-col justify-between px-3 py-4">
-              <div className="flex flex-col gap-4">
-                <Image preview={false} src={Logo} />
-                <Button
-                  className="mt-4 w-full rounded-lg border-[2px] bg-primary-color text-secondary-color"
-                  icon={<PlusOutlined />}
-                  onClick={handleCreateNewConversation}
-                >
-                  {t('button.createNewConversation')}
-                </Button>
-                <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
-                  {conversations.map(conversation => (
-                    <Typography.Text
-                      className={`flex cursor-pointer items-center gap-2 rounded-lg ${
-                        id === conversation._id ||
-                        conversationId === conversation._id
-                          ? 'bg-primary-color-light-10'
-                          : ''
-                      } p-2 text-secondary-color`}
-                      key={conversation._id}
-                      onClick={() =>
-                        id !== conversation._id &&
-                        navigate(`/c/${conversation._id}`)
-                      }
-                    >
-                      <div className="w-fit">
-                        <ChatIcon />
-                      </div>
-                      {conversation.title
-                        ? truncateText(String(conversation.title), 20)
-                        : t('conversation.newTitle')}
-                    </Typography.Text>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <Divider className="bg-secondary-color" />
-                <div className="flex flex-col gap-4 px-3 py-2">
-                  {isAdmin === 'admin' && (
-                    <Button
-                      className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                      icon={<FeedbackIcon />}
-                      onClick={() => navigate('/admin')}
-                      size="small"
-                      type="text"
-                    >
-                      <span>{t('feedback.title')}</span>
-                    </Button>
-                  )}
+                <div className="block w-full px-2 text-secondary-color">
                   <Button
                     className="m-0 flex gap-2 p-0 text-left text-secondary-color"
                     icon={<AboutUsIcon />}
@@ -288,43 +195,143 @@ function PrivateLayout({
                   >
                     <span className="ml-1">{t('aboutUs.title')}</span>
                   </Button>
-                  <div className="flex gap-2 text-secondary-color">
-                    <VietnamFlagIcon /> Tiếng Việt
-                  </div>
-                  <div className="flex justify-between gap-2 text-secondary-color">
-                    <div className="flex gap-2">
-                      <Avatar size={24} src={defaultAvatar} />{' '}
-                      <Tooltip title={user?.email}>
-                        <Typography.Text className="max-w-36 w-36 flex-1 truncate text-secondary-color">
-                          {user?.email}
-                        </Typography.Text>
-                      </Tooltip>
-                    </div>
-                    <EllipsisOutlined className="text-lg" />
-                  </div>
-                  <Button
-                    className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                    onClick={() => {
-                      logout();
-                    }}
-                    size="small"
-                    type="text"
-                  >
-                    <span className="ml-1">{t('button.logout')}</span>
-                  </Button>
+                </div>
+                <div className="block w-full text-secondary-color">
+                  <ChangeLanguage />
+                </div>
+                <div className="block w-full text-secondary-color">
+                  <UserActions
+                    defaultAvatar={defaultAvatar}
+                    email={user?.email}
+                    logout={logout}
+                  />
                 </div>
               </div>
             </div>
-          </Layout.Sider>
+          </DrawerStyled>
           <Layout>
             <Content>{children}</Content>
           </Layout>
-          <AboutUsModal
-            onClose={() => setAboutUsModalVisible(false)}
-            visible={aboutUsModalVisible}
-          />
+        </>
+      ) : (
+        <Layout className="min-h-screen">
+          {collapsed ? (
+            <Layout.Sider
+              className="mx-2 flex flex-col justify-between bg-transparent"
+              width={40}
+            >
+              <div className="flex flex-col gap-4">
+                <div className="mt-4 flex items-center gap-2">
+                  <Button
+                    className="trigger rounded-lg border-[2px] bg-secondary-color p-2"
+                    onClick={() => setCollapsed(!collapsed)}
+                  >
+                    <SidebarIcon className="text-xl" />
+                  </Button>
+                </div>
+              </div>
+            </Layout.Sider>
+          ) : (
+            <Layout.Sider
+              className="flex flex-col justify-between bg-primary-color"
+              width={240}
+            >
+              <div className="flex h-full flex-col justify-between px-3 py-4">
+                <div className="flex flex-col gap-4">
+                  <Image preview={false} src={Logo} />
+                  <div className="mt-4 flex items-center gap-2">
+                    <Button
+                      className="w-full rounded-lg border-[2px] bg-primary-color text-secondary-color"
+                      icon={<PlusOutlined />}
+                      onClick={handleCreateNewConversation}
+                    >
+                      {t('button.createNewConversation')}
+                    </Button>
+                    <Button
+                      className="trigger rounded-lg border-[2px] bg-transparent p-2"
+                      onClick={() => setCollapsed(!collapsed)}
+                    >
+                      <SidebarIcon className="text-xl text-secondary-color" />
+                    </Button>
+                  </div>
+                  <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
+                    {conversations.map(conversation => (
+                      <Typography.Text
+                        className={`flex cursor-pointer items-center gap-2 rounded-lg ${
+                          id === conversation._id ||
+                          conversationId === conversation._id
+                            ? 'bg-primary-color-light-10'
+                            : ''
+                        } p-2 text-secondary-color`}
+                        key={conversation._id}
+                        onClick={() =>
+                          id !== conversation._id &&
+                          navigate(`/c/${conversation._id}`)
+                        }
+                      >
+                        <div className="w-fit">
+                          <ChatIcon />
+                        </div>
+                        {conversation.title ? (
+                          <Tooltip placement="left" title={conversation.title}>
+                            {truncateText(String(conversation.title), 20)}
+                          </Tooltip>
+                        ) : (
+                          t('conversation.newTitle')
+                        )}
+                      </Typography.Text>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <Divider className="bg-secondary-color" />
+                  <div className="flex flex-col gap-4 px-3 py-2">
+                    {isAdmin && (
+                      <Button
+                        className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                        icon={<FeedbackIcon />}
+                        onClick={() => navigate('/admin')}
+                        size="small"
+                        type="text"
+                      >
+                        <span>{t('feedback.title')}</span>
+                      </Button>
+                    )}
+                    <div className="block w-full px-2 text-secondary-color">
+                      <Button
+                        className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                        icon={<AboutUsIcon />}
+                        onClick={() => setAboutUsModalVisible(true)}
+                        size="small"
+                        type="text"
+                      >
+                        <span className="ml-1">{t('aboutUs.title')}</span>
+                      </Button>
+                    </div>
+                    <div className="block w-full text-secondary-color">
+                      <ChangeLanguage />
+                    </div>
+                    <div className="block w-full text-secondary-color">
+                      <UserActions
+                        defaultAvatar={defaultAvatar}
+                        email={user?.email}
+                        logout={logout}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Layout.Sider>
+          )}
+          <Layout>
+            <Content>{children}</Content>
+          </Layout>
         </Layout>
       )}
+      <AboutUsModal
+        onClose={() => setAboutUsModalVisible(false)}
+        visible={aboutUsModalVisible}
+      />
     </>
   );
 }

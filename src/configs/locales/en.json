@@ -7,12 +7,12 @@
     "n/a": "N/A",
     "etc": "...",
     "loadingData": "Loading data...",
-    "description": "Xem trước nghiên cứu miễn phí. Mục tiêu của chúng tôi là làm cho các hệ thống AI trở nên tự nhiên và an toàn hơn khi tương tác. Phản hồi của bạn giúp chúng tôi hoàn thiện hơn."
+    "description": "Free research preview. Our goal is to make AI systems more natural and safe to interact with. Your feedback helps us improve."
   },
   "aboutUs": {
-    "title": "About Us",
-    "meaningOfOurBrand": "NướcGPT trả lời các câu hỏi về nước và khí hậu ở Việt Nam, đặc biệt tập trung vào vấn đề xâm nhập mặn. NướcGPT sẽ tận dụng Mô hình ngôn ngữ lớn để truy xuất thông tin và trả lời câu hỏi.",
-    "ourMission": "Được thành lập vào năm 2023, chúng tôi là một nhóm liên ngành đam mê nghiên cứu các giải pháp khí hậu cho Việt Nam. Cùng với nhau, chúng tôi có chuyên môn về AI, công nghệ vũ trụ, chăm sóc sức khỏe, tinh thần kinh doanh và các giải pháp khí hậu."
+    "title": "About us",
+    "meaningOfOurBrand": "“Nước” means water in Vietnamese. A fitting name to describe our love for the country while encapsulating the many climate challenges facing Vietnam.",
+    "ourMission": "Founded in 2023, we are an interdisciplinary team who are passionate about working on climate solutions for Vietnam. Together, we have expertise in AI, space technology, healthcare, entrepreneurship, and climate solutions."
   },
   "authentication": {
     "title": "Welcome back",
@@ -26,13 +26,13 @@
     "confirmPasswordNotMatch": "Confirm password does not match",
     "notHaveAccountYet": "Not have an account yet?",
     "alreadyHaveAccount": "Already have an account?",
-    "signUp": "Create account",
+    "signUp": "Sign up",
     "passwordValidator": "Your password must be at least 8 characters long, contain at least one number, one uppercase letter and one special character",
     "errorRefreshTokenTitle": "Your login session expired. Please login again.",
     "errorTitle": "Your login session expired. Please login again.",
-    "inputOTP": "Nhập mã OTP",
-    "inputOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến email của bạn. Mã có giá trị trong 10 phút.",
-    "notReceiveOTP": "Không nhận được OTP?",
+    "inputOTP": "Enter OTP code",
+    "inputOTPDescription": "Please enter the 6-digit verification code sent to your email. Code is valid for 10 minutes.",
+    "notReceiveOTP": "Didn’t receive OTP?",
     "resendOTP": "Resend",
     "resendAfterSeconds": "Resend after {{seconds}} seconds",
     "checkMail": "Check your email",
@@ -89,9 +89,10 @@
     "proceed": "Proceed",
     "enterOTP": "Enter OTP",
     "login": "Login",
-    "createNewConversation": "Create new conversation",
+    "createNewConversation": "New chat",
     "viewAll": "View all",
-    "logout": "Logout"
+    "logout": "Logout",
+    "sendFeedback": "Submit feedback"
   },
   "gender": {
     "title": "Gender",
@@ -108,7 +109,7 @@
     "email": "Email address",
     "password": "Enter your password",
     "selectTheColor": "Select the color",
-    "sendMessage": "Send message",
+    "sendMessage": "Send a message",
     "systemCode": "Enter the system secret code"
   },
   "validateMessage": {
@@ -157,24 +158,28 @@
     "title": "Privacy policy"
   },
   "feedback": {
-    "title": "View feedback",
+    "title": "Check feedback",
     "like": "Like",
     "dislike": "Dislike",
-    "createdAt": "Created at",
-    "users": "Users",
-    "questions": "Questions",
-    "answer": "Answers",
+    "createdAt": "Date created",
+    "users": "User",
+    "questions": "Question",
+    "answer": "Answer",
     "status": "Status",
-    "extraFeedback": "Extra feedback",
-    "addFeedback": "Cung cấp phản hồi bổ sung",
+    "extraFeedback": "Additional feedback",
+    "addFeedback": "Provide additional feedback",
     "placeholder": {
       "search": "Search",
       "status": "All status",
-      "positive": "Bạn thích gì về câu trả lời?",
-      "negative": "Vấn đề với câu trả lời là gì? Làm thế nào để câu trả lời có thể được cải thiện?"
+      "positive": "What do you like about the response?",
+      "negative": "What was the issue with the response? How could it be improved?"
     },
-    "harmful": "Điều này có hại/không an toàn",
-    "false": "Điều này không đúng",
-    "notHelpful": "Điều này không hữu ích"
+    "harmful": "This is harmful / unsafe",
+    "false": "This isn't true",
+    "notHelpful": "This isn't helpful"
+  },
+  "navigation": {
+    "english": "English",
+    "vietnamese": "Vietnamese"
   }
 }

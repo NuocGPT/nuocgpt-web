@@ -1,8 +1,8 @@
 export const LOCAL_STORAGE_TOKEN_KEY = 'nuoc_gpt_access_token';
 export const LOCAL_STORAGE_REFRESH_TOKEN_KEY = '';
-export const LOCAL_STORAGE_IS_ADMIN = 'admin';
 export const LOCAL_STORAGE_IS_PASSWORD = 'password';
 export const LOCAL_STORAGE_AVATAR = 'avatar';
+export const LOCAL_STORAGE_LANGUAGE = 'locale';
 
 export const DEFAULT_COLOR_VALUE = '#ffffff';
 

@@ -1,27 +1,27 @@
 @import '~antd/es/style/themes/default.less';
 
-@primary-color: #021EB2;
-@secondary-color: #FFFFFF;
+@primary-color: #021eb2;
+@secondary-color: #ffffff;
 
-@primary-color-light-10: #354BC1;
-@primary-color-light-20: #6778D1;
+@primary-color-light-10: #354bc1;
+@primary-color-light-20: #6778d1;
 
-@info-color: #007AFF;
-@info-color-light: #E5F1FF;
-@success-color: #34C759;
-@success-color-light: #EAF9EE;
-@alert-color: #FFCC00;
-@alert-color-light: #FFF9E5;
-@warning-color: #FF9500;
-@warning-color-light: #FFF4E5;
-@error-color: #FF3B30;
-@error-color-light: #FFEBEA;
+@info-color: #007aff;
+@info-color-light: #e5f1ff;
+@success-color: #34c759;
+@success-color-light: #eaf9ee;
+@alert-color: #ffcc00;
+@alert-color-light: #fff9e5;
+@warning-color: #ff9500;
+@warning-color-light: #fff4e5;
+@error-color: #ff3b30;
+@error-color-light: #ffebea;
 
 @color-neutral-1: #000414;
-@color-neutral-2: #4B4E6E;
-@color-neutral-3: #A0A3BD;
-@color-neutral-4: #D2D4E1;
-@color-neutral-5: #EFF0F6;
+@color-neutral-2: #4b4e6e;
+@color-neutral-3: #a0a3bd;
+@color-neutral-4: #d2d4e1;
+@color-neutral-5: #eff0f6;
 
 @surface-primary: #ffffff;
 @disabled-color: #b1b7cc;
@@ -58,7 +58,7 @@
   --color-neutral-3: @color-neutral-3;
   --color-neutral-4: @color-neutral-4;
   --color-neutral-5: @color-neutral-5;
-  
+
   --surface-primary: @surface-primary;
   --disabled-color: @disabled-color;
 
@@ -116,7 +116,7 @@
 }
 
 .ant-layout {
-  background: #FFF !important;
+  background: #fff !important;
 }
 .cursor {
   display: inline-block;
@@ -125,7 +125,8 @@
   margin-bottom: 4px;
 }
 
-.ant-modal-content, .ant-modal-header {
+.ant-modal-content,
+.ant-modal-header {
   border-radius: 16px !important;
 }
 
@@ -160,6 +161,21 @@
       .ant-form-item-required-mark-optional
     )::before {
     content: '';
+  }
+}
+
+.custom-background {
+  .ant-dropdown-menu {
+    background-color: var(--primary-color);
+    span {
+      color: var(--secondary-color);
+    }
+    .ant-dropdown-menu-item {
+      margin: 8px 0;
+      &:hover {
+        background-color: var(--primary-color-light-10);
+      }
+    }
   }
 }
 

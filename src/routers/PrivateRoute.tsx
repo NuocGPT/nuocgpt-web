@@ -12,7 +12,7 @@ import PrivateLayout from '#/shared/components/layout/PrivateLayout';
 import { useGetRandomizeAvatar } from '#/shared/components/UserFeedback/hooks/useGetRandomizeAvatar';
 import { clearPassword, clearToken, setAvatar } from '#/shared/utils/token';
 import type { MyWindow } from '#/shared/utils/type';
-import AdminRoute from './AdminRoute';
+import AdminRoute from './PermissionRoute';
 
 function PrivateRoute() {
   const navigate = useNavigate();
@@ -20,7 +20,6 @@ function PrivateRoute() {
     onSuccess(data) {
       localStorage.setItem('email', data?.email);
     },
-    staleTime: 3000,
   });
   const { randomizeAvatar } = useGetRandomizeAvatar();
 

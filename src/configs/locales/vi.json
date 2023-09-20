@@ -89,9 +89,10 @@
     "proceed": "Tiếp theo",
     "enterOTP": "Nhập mã OTP",
     "login": "Đăng nhập",
-    "createNewConversation": "Tạo trò chuyện mới",
+    "createNewConversation": "Trò chuyện mới",
     "viewAll": "Xem tất cả",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "sendFeedback": "Gửi phản hồi"
   },
   "gender": {
     "title": "Gender",
@@ -176,5 +177,9 @@
     "harmful": "Điều này có hại/không an toàn",
     "false": "Điều này không đúng",
     "notHelpful": "Điều này không hữu ích"
+  },
+  "navigation": {
+    "english": "Tiếng Anh",
+    "vietnamese": "Tiếng Việt"
   }
 }

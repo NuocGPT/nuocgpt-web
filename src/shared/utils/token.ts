@@ -1,7 +1,7 @@
 import {
   LOCAL_STORAGE_AVATAR,
-  LOCAL_STORAGE_IS_ADMIN,
   LOCAL_STORAGE_IS_PASSWORD,
+  LOCAL_STORAGE_LANGUAGE,
   LOCAL_STORAGE_REFRESH_TOKEN_KEY,
   LOCAL_STORAGE_TOKEN_KEY,
 } from './constant';
@@ -14,7 +14,6 @@ export const setToken = (accessToken: string) => {
 
 export const clearToken = () => {
   localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
-  localStorage.removeItem(LOCAL_STORAGE_IS_ADMIN);
 };
 
 export const getRefreshToken = () =>
@@ -23,13 +22,6 @@ export const getRefreshToken = () =>
 export const setRefreshToken = (refreshToken: string) => {
   localStorage.setItem(LOCAL_STORAGE_REFRESH_TOKEN_KEY, refreshToken);
 };
-
-export const setIsAdmin = (role: string) => {
-  localStorage.setItem(LOCAL_STORAGE_IS_ADMIN, role);
-};
-
-export const getIsAdmin = () => localStorage.getItem(LOCAL_STORAGE_IS_ADMIN);
-
 export const setPassword = (password: string) => {
   localStorage.setItem(LOCAL_STORAGE_IS_PASSWORD, password);
 };
@@ -47,6 +39,10 @@ export const clearRefreshToken = () => {
 
 export const setAvatar = (avatar: string) => {
   localStorage.setItem(LOCAL_STORAGE_AVATAR, avatar);
+};
+
+export const setLanguage = (language: string) => {
+  localStorage.setItem(LOCAL_STORAGE_LANGUAGE, language);
 };
 
 export const getAvatar = () => localStorage.getItem(LOCAL_STORAGE_AVATAR);

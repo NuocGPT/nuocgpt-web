@@ -78,8 +78,10 @@ function SignUp() {
             </Form.Item>
           </Col>
           <Col className="text-center" span={24}>
-            <Link className="primary" to="/login">
-              {t('authentication.alreadyHaveAccount')}{' '}
+            <Typography.Text className="pr-2">
+              {t('authentication.alreadyHaveAccount')}
+            </Typography.Text>
+            <Link className="primary underline" to="/slogin">
               {t('authentication.login')}
             </Link>
           </Col>

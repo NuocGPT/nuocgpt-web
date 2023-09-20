@@ -28,6 +28,7 @@ module.exports = {
 
       'color-black': '#000000',
       'secondary-color-opacity': 'rgba(255, 255, 255, 0.20)',
+      transparent: 'transparent',
     },
     boxShadow: {
       none: '0 0 #0000',

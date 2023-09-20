@@ -78,7 +78,7 @@ function ModalFeedback({
         htmlType: 'submit',
         loading: addFeedbackLoading,
       }}
-      okText={t('button.confirm')}
+      okText={t('button.sendFeedback')}
       onCancel={handleClose}
       open={visible}
       title={
@@ -93,7 +93,7 @@ function ModalFeedback({
       <Form form={form} name="feedback" onFinish={handleFinish}>
         <Form.Item name="text">
           <Input.TextArea
-            className="rounded-lg"
+            className="rounded-lg text-sm"
             placeholder={
               isPositive
                 ? t('feedback.placeholder.positive')

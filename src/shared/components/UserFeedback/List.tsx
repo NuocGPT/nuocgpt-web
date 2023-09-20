@@ -37,7 +37,7 @@ function List() {
 
   const { queryString } = useGetSearchParams(queryParams);
 
-  const { data: fetchFeedbacksResponse } = useQuery<
+  const { data: fetchFeedbacksResponse, isLoading } = useQuery<
     BaseGetAllResponse<Feedback>
   >({
     queryFn: () =>
@@ -160,8 +160,8 @@ function List() {
       <Typography.Text className="flex gap-2 py-4 text-2xl font-semibold text-primary-color">
         {t('feedback.title')}
       </Typography.Text>
-      <div className="mt-6 flex items-center gap-5">
-        <div className="w-1/2">
+      <div className="mt-6 block items-center gap-5 lg:flex">
+        <div className="w-full lg:w-1/2">
           <Form form={form}>
             <div className="mt-6 flex items-center gap-5">
               <div className="w-1/2">
@@ -208,7 +208,7 @@ function List() {
             </div>
           </Form>
         </div>
-        <div className="w-1/2">
+        <div className="w-full lg:w-1/2">
           <div className="flex items-center justify-between gap-4">
             <StatusCard
               icon={<LikeIcon />}
@@ -235,6 +235,7 @@ function List() {
         <Table
           columns={columns}
           dataSource={fetchFeedbacksResponse?.items ?? []}
+          loading={isLoading}
           pagination={false}
           rowKey="id"
           scroll={{ x: 'max-content', y: '67vh' }}
