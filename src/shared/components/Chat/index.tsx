@@ -78,14 +78,11 @@ function Chat({ conversationId }: ChatProps) {
     revision_id: null,
   };
 
-  useEffect(() => {
-    refetch();
-  }, [conversationId, refetch]);
-
   const {
     mutate: addMessageMutation,
     isLoading: addMessageLoading,
     isError: addMessageError,
+    reset,
   } = useMutation(
     MUTATION.addMessage,
     () =>
@@ -103,6 +100,11 @@ function Chat({ conversationId }: ChatProps) {
       },
     },
   );
+
+  useEffect(() => {
+    refetch();
+    reset();
+  }, [conversationId, refetch, reset]);
 
   const conversationMessages: Message[] =
     fetchMessagesResponse?.items?.sort(

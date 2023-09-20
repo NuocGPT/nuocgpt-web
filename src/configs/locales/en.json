@@ -42,7 +42,7 @@
     "systemCode": "System secret code"
   },
   "error": {
-    "title": "An error has occurred, please try again!"
+    "title": "We apologize that we cannot answer this question right now. Please try again in a few minutes or report the issue to the development team. Thank you!"
   },
   "success": {
     "title": "Success",

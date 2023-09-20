@@ -42,7 +42,7 @@
     "systemCode": "Mật mã hệ thống"
   },
   "error": {
-    "title": "Đã xảy ra lỗi, vui lòng thử lại!"
+    "title": "Xin lỗi chúng tôi chưa thể trả lời câu hỏi này ngay bây giờ, vui lòng thử lại sau ít phút hoặc báo cáo sự cố cho nhóm phát triển, xin cảm ơn!"
   },
   "success": {
     "title": "Thành công",
