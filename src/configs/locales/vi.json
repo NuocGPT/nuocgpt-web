@@ -149,7 +149,9 @@
     "uploadImages": "Click here to upload new image"
   },
   "conversation": {
-    "newTitle": "Cuộc trò chuyện mới"
+    "newTitle": "Cuộc trò chuyện mới",
+    "deleteTitle": "Xóa cuộc trò chuyện?",
+    "deleteContent": "Điều này sẽ xóa <b>{{title}}</b>"
   },
   "termOfUse": {
     "title": "Điều khoản sử dụng"

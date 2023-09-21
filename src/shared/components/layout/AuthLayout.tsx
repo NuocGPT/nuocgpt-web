@@ -5,7 +5,7 @@ import { Button, Col, Grid, Image, Row, Typography } from 'antd';
 import Logo from '#/assets/images/logo-white.png';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { AboutUsModal } from '../AboutUs';
-import ChangeLanguage from './ChangeLanguage';
+import ChangeLanguage from '../common/ChangeLanguage';
 
 interface Props {
   children: ReactNode;

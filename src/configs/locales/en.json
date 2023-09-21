@@ -149,7 +149,9 @@
     "uploadImages": "Click here to upload new image"
   },
   "conversation": {
-    "newTitle": "New conversation"
+    "newTitle": "New conversation",
+    "deleteTitle": "Delete conversation?",
+    "deleteContent": "This will delete <b>{{title}}</b>"
   },
   "termOfUse": {
     "title": "Term of use"

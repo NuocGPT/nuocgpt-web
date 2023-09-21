@@ -120,6 +120,8 @@ export type TranslationKeys =
   | 'tooltip.delete'
   | 'tooltip.uploadImages'
   | 'conversation.newTitle'
+  | 'conversation.deleteTitle'
+  | 'conversation.deleteContent'
   | 'termOfUse.title'
   | 'privacyPolicy.title'
   | 'feedback.title'

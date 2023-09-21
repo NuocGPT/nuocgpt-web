@@ -1,21 +1,12 @@
 import { useState } from 'react';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import { useQuery } from '@tanstack/react-query';
-import {
-  Button,
-  Divider,
-  Grid,
-  Image,
-  Layout,
-  Tooltip,
-  Typography,
-} from 'antd';
+import { Button, Divider, Grid, Image, Layout } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Avocado from '#/assets/images/avocado.png';
 import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as AboutUsIcon } from '#/assets/svg/about-us.svg';
-import { ReactComponent as ChatIcon } from '#/assets/svg/chat.svg';
 import { ReactComponent as CloseIcon } from '#/assets/svg/close.svg';
 import { ReactComponent as FeedbackIcon } from '#/assets/svg/like-tag.svg';
 import { ReactComponent as MenuIcon } from '#/assets/svg/menu.svg';
@@ -26,11 +17,11 @@ import type { Conversations } from '#/services/conversations/interfaces';
 import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { getAvatar } from '#/shared/utils/token';
-import { truncateText } from '#/shared/utils/tools';
 import { AboutUsModal } from '../AboutUs';
-import ChangeLanguage from './ChangeLanguage';
+import ChangeLanguage from '../common/ChangeLanguage';
+import UserActions from '../common/UserActions';
+import ConversationItem from '../Conversations/ConversationItem';
 import { DrawerStyled } from './styles';
-import UserActions from './UserActions';
 
 interface Props {
   logout: () => void;
@@ -143,34 +134,16 @@ function PrivateLayout({
                 />
               </div>
             }
-            width={240}
+            width={260}
           >
             <div className="flex h-full flex-col justify-between">
-              <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
-                {conversations.map(conversation => (
-                  <Typography.Text
-                    className={`flex cursor-pointer items-center gap-2 rounded-lg ${
-                      id === conversation._id ||
-                      conversationId === conversation._id
-                        ? 'bg-primary-color-light-10'
-                        : 'first:bg-primary-color-light-10'
-                    } p-2 text-secondary-color`}
-                    key={conversation._id}
-                    onClick={() => {
-                      if (id !== conversation._id) {
-                        navigate(`/c/${conversation._id}`);
-                        onClose();
-                      }
-                    }}
-                  >
-                    <div className="w-fit">
-                      <ChatIcon />
-                    </div>
-                    {conversation.title
-                      ? truncateText(String(conversation.title), 20)
-                      : t('conversation.newTitle')}
-                  </Typography.Text>
-                ))}
+              <div className="flex max-h-[65vh] flex-col gap-2 overflow-auto">
+                <ConversationItem
+                  conversationId={conversationId}
+                  conversations={conversations}
+                  id={id}
+                  onClose={onClose}
+                />
               </div>
               <div>
                 <Divider className="bg-secondary-color" />
@@ -236,7 +209,7 @@ function PrivateLayout({
           ) : (
             <Layout.Sider
               className="flex flex-col justify-between bg-primary-color"
-              width={240}
+              width={260}
             >
               <div className="flex h-full flex-col justify-between px-3 py-4">
                 <div className="flex flex-col gap-4">
@@ -257,37 +230,16 @@ function PrivateLayout({
                     </Button>
                   </div>
                   <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
-                    {conversations.map(conversation => (
-                      <Typography.Text
-                        className={`flex cursor-pointer items-center gap-2 rounded-lg ${
-                          id === conversation._id ||
-                          conversationId === conversation._id
-                            ? 'bg-primary-color-light-10'
-                            : ''
-                        } p-2 text-secondary-color`}
-                        key={conversation._id}
-                        onClick={() =>
-                          id !== conversation._id &&
-                          navigate(`/c/${conversation._id}`)
-                        }
-                      >
-                        <div className="w-fit">
-                          <ChatIcon />
-                        </div>
-                        {conversation.title ? (
-                          <Tooltip placement="left" title={conversation.title}>
-                            {truncateText(String(conversation.title), 20)}
-                          </Tooltip>
-                        ) : (
-                          t('conversation.newTitle')
-                        )}
-                      </Typography.Text>
-                    ))}
+                    <ConversationItem
+                      conversationId={conversationId}
+                      conversations={conversations}
+                      id={id}
+                    />
                   </div>
                 </div>
                 <div>
                   <Divider className="bg-secondary-color" />
-                  <div className="flex flex-col gap-4 px-3 py-2">
+                  <div className="flex flex-col gap-4 py-2">
                     {isAdmin && (
                       <Button
                         className="m-0 flex gap-2 p-0 text-left text-secondary-color"
