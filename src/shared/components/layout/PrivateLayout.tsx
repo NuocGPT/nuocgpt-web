@@ -145,66 +145,68 @@ function PrivateLayout({
             }
             width={240}
           >
-            <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
-              {conversations.map(conversation => (
-                <Typography.Text
-                  className={`flex cursor-pointer items-center gap-2 rounded-lg ${
-                    id === conversation._id ||
-                    conversationId === conversation._id
-                      ? 'bg-primary-color-light-10'
-                      : 'first:bg-primary-color-light-10'
-                  } p-2 text-secondary-color`}
-                  key={conversation._id}
-                  onClick={() => {
-                    if (id !== conversation._id) {
-                      navigate(`/c/${conversation._id}`);
-                      onClose();
-                    }
-                  }}
-                >
-                  <div className="w-fit">
-                    <ChatIcon />
+            <div className="flex h-full flex-col justify-between">
+              <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
+                {conversations.map(conversation => (
+                  <Typography.Text
+                    className={`flex cursor-pointer items-center gap-2 rounded-lg ${
+                      id === conversation._id ||
+                      conversationId === conversation._id
+                        ? 'bg-primary-color-light-10'
+                        : 'first:bg-primary-color-light-10'
+                    } p-2 text-secondary-color`}
+                    key={conversation._id}
+                    onClick={() => {
+                      if (id !== conversation._id) {
+                        navigate(`/c/${conversation._id}`);
+                        onClose();
+                      }
+                    }}
+                  >
+                    <div className="w-fit">
+                      <ChatIcon />
+                    </div>
+                    {conversation.title
+                      ? truncateText(String(conversation.title), 20)
+                      : t('conversation.newTitle')}
+                  </Typography.Text>
+                ))}
+              </div>
+              <div>
+                <Divider className="bg-secondary-color" />
+                <div className="flex flex-col gap-4 py-2">
+                  {isAdmin && (
+                    <Button
+                      className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                      icon={<FeedbackIcon />}
+                      onClick={() => navigate('/admin')}
+                      size="small"
+                      type="text"
+                    >
+                      <span>{t('feedback.title')}</span>
+                    </Button>
+                  )}
+                  <div className="block w-full px-2 text-secondary-color">
+                    <Button
+                      className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                      icon={<AboutUsIcon />}
+                      onClick={() => setAboutUsModalVisible(true)}
+                      size="small"
+                      type="text"
+                    >
+                      <span className="ml-1">{t('aboutUs.title')}</span>
+                    </Button>
                   </div>
-                  {conversation.title
-                    ? truncateText(String(conversation.title), 20)
-                    : t('conversation.newTitle')}
-                </Typography.Text>
-              ))}
-            </div>
-            <div className="fixed bottom-0 w-fit">
-              <Divider className="bg-secondary-color" />
-              <div className="flex flex-col gap-4 py-2">
-                {isAdmin && (
-                  <Button
-                    className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                    icon={<FeedbackIcon />}
-                    onClick={() => navigate('/admin')}
-                    size="small"
-                    type="text"
-                  >
-                    <span>{t('feedback.title')}</span>
-                  </Button>
-                )}
-                <div className="block w-full px-2 text-secondary-color">
-                  <Button
-                    className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                    icon={<AboutUsIcon />}
-                    onClick={() => setAboutUsModalVisible(true)}
-                    size="small"
-                    type="text"
-                  >
-                    <span className="ml-1">{t('aboutUs.title')}</span>
-                  </Button>
-                </div>
-                <div className="block w-full text-secondary-color">
-                  <ChangeLanguage />
-                </div>
-                <div className="block w-full text-secondary-color">
-                  <UserActions
-                    defaultAvatar={defaultAvatar}
-                    email={user?.email}
-                    logout={logout}
-                  />
+                  <div className="block w-full text-secondary-color">
+                    <ChangeLanguage />
+                  </div>
+                  <div className="block w-full text-secondary-color">
+                    <UserActions
+                      defaultAvatar={defaultAvatar}
+                      email={user?.email}
+                      logout={logout}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
