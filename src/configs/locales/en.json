@@ -92,7 +92,9 @@
     "createNewConversation": "New chat",
     "viewAll": "View all",
     "logout": "Log out",
-    "sendFeedback": "Submit feedback"
+    "sendFeedback": "Submit feedback",
+    "delete": "Delete",
+    "generateResponse": "Generate response"
   },
   "gender": {
     "title": "Gender",

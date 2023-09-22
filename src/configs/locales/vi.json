@@ -92,7 +92,9 @@
     "createNewConversation": "Trò chuyện mới",
     "viewAll": "Xem tất cả",
     "logout": "Đăng xuất",
-    "sendFeedback": "Gửi phản hồi"
+    "sendFeedback": "Gửi phản hồi",
+    "delete": "Xóa",
+    "generateResponse": "Tạo lại phản hồi"
   },
   "gender": {
     "title": "Gender",

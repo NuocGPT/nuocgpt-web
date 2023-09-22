@@ -79,6 +79,8 @@ export type TranslationKeys =
   | 'button.viewAll'
   | 'button.logout'
   | 'button.sendFeedback'
+  | 'button.delete'
+  | 'button.generateResponse'
   | 'gender.title'
   | 'gender.male'
   | 'gender.female'

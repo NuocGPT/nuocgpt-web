@@ -21,7 +21,7 @@ import { AboutUsModal } from '../AboutUs';
 import ChangeLanguage from '../common/ChangeLanguage';
 import UserActions from '../common/UserActions';
 import ConversationItem from '../Conversations/ConversationItem';
-import { DrawerStyled } from './styles';
+import { ConversationWrapper, DrawerStyled } from './styles';
 
 interface Props {
   logout: () => void;
@@ -229,13 +229,13 @@ function PrivateLayout({
                       <SidebarIcon className="text-xl text-secondary-color" />
                     </Button>
                   </div>
-                  <div className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
+                  <ConversationWrapper className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
                     <ConversationItem
                       conversationId={conversationId}
                       conversations={conversations}
                       id={id}
                     />
-                  </div>
+                  </ConversationWrapper>
                 </div>
                 <div>
                   <Divider className="bg-secondary-color" />

@@ -181,7 +181,7 @@ function Chat({ conversationId }: ChatProps) {
             }}
             onKeyPress={e => {
               if (e.key === 'Enter') {
-                if (message) {
+                if (message && message.trim() !== '') {
                   setDisableChat(true);
                   e.preventDefault();
                   handleAddMessage();
@@ -192,7 +192,8 @@ function Chat({ conversationId }: ChatProps) {
             size="large"
             suffix={
               <Button
-                className="h-fit w-fit border-none p-0"
+                className="h-fit w-fit border-none bg-transparent p-0"
+                disabled={message.length === 0 || message.trim() === ''}
                 icon={<SendIcon />}
                 onClick={() => handleAddMessage()}
               />
