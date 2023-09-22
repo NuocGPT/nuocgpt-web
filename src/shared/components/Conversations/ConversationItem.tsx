@@ -106,7 +106,7 @@ function ConversationItem({
     <div>
       {conversations.map(conversation => (
         <Typography.Text
-          className={`my-1 flex cursor-pointer items-center gap-1 rounded-lg hover:bg-primary-color-light-10 ${
+          className={`my-1 flex min-h-[42px] cursor-pointer items-center gap-1 rounded-lg hover:bg-primary-color-light-10 ${
             id === conversation._id || conversationId === conversation._id
               ? 'bg-primary-color-light-10'
               : ''
