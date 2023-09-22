@@ -67,3 +67,15 @@ export async function put<T, U>(
   };
   return await http<U>(path, init);
 }
+
+export async function remove<U>(
+  path: string,
+  config?: RequestInit,
+): Promise<U> {
+  const init = {
+    headers: getHeaders(),
+    method: 'delete',
+    ...config,
+  };
+  return await http<U>(path, init);
+}

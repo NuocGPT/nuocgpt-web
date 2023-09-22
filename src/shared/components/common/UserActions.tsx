@@ -45,7 +45,7 @@ function UserActions({ logout, defaultAvatar, email }: Props) {
           <Avatar size={24} src={defaultAvatar} />
           <Tooltip placement="left" title={email}>
             <Typography.Text className="flex-1 text-secondary-color">
-              {email && truncateText(email, 12)}
+              {email && truncateText(email, 17)}
             </Typography.Text>
           </Tooltip>
         </div>

@@ -5,6 +5,10 @@ export interface AddConversationDto {
   message: string;
 }
 
+export interface UpdateConversationDto {
+  title: string | null;
+}
+
 export interface AddConversationResponse {
   _id: string;
   conversation_id: string;

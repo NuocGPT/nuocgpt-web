@@ -7,6 +7,12 @@ import { Button, Input, Modal, Tooltip, Typography } from 'antd';
 import { Trans } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as ChatIcon } from '#/assets/svg/chat.svg';
+import { queryClient } from '#/services/client';
+import { QUERY } from '#/services/constants';
+import {
+  deleteConversation,
+  updateConversation,
+} from '#/services/conversations';
 import type { Conversation } from '#/services/conversations/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { truncateText } from '#/shared/utils/tools';
@@ -39,6 +45,9 @@ function ConversationItem({
       setEditingMessageId(undefined);
       setEditedText('');
     }
+    updateConversation(conversationId, editedText).then(() =>
+      queryClient.invalidateQueries(QUERY.getConversations),
+    );
   };
 
   const handleDelete = (id: string, title: string | null) => {
@@ -61,7 +70,9 @@ function ConversationItem({
       icon: false,
       maskClosable: true,
       onOk() {
-        console.log('Delete successfully!');
+        deleteConversation(id).then(() =>
+          queryClient.invalidateQueries(QUERY.getConversations),
+        );
       },
       title: t('conversation.deleteTitle'),
     });
@@ -118,7 +129,7 @@ function ConversationItem({
               <div className="w-36">
                 {conversation.title ? (
                   <Tooltip placement="left" title={conversation.title}>
-                    {truncateText(String(conversation.title), 17)}
+                    {truncateText(conversation.title, 19)}
                   </Tooltip>
                 ) : (
                   t('conversation.newTitle')

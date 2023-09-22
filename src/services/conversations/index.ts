@@ -6,6 +6,7 @@ import type {
   AddMessageResponse,
   Conversations,
   Messages,
+  UpdateConversationDto,
 } from './interfaces';
 
 async function fetchConversations() {
@@ -29,6 +30,23 @@ async function addConversation(addConversationInput: AddConversationDto) {
     {
       ...addConversationInput,
     },
+  );
+  return data;
+}
+
+async function updateConversation(id: string, title: string) {
+  const data = await fetcher.put<UpdateConversationDto, string>(
+    `${import.meta.env.VITE_BASE_URL}/conversations/${id}`,
+    {
+      title,
+    },
+  );
+  return data;
+}
+
+async function deleteConversation(id: string) {
+  const data = await fetcher.remove<string>(
+    `${import.meta.env.VITE_BASE_URL}/conversations/${id}`,
   );
   return data;
 }
@@ -60,6 +78,8 @@ export {
   fetchConversations,
   fetchMessages,
   addConversation,
+  updateConversation,
+  deleteConversation,
   addMessage,
   fetchSummarizeQuestion,
 };
