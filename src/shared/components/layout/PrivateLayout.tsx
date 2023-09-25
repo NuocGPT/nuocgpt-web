@@ -171,7 +171,7 @@ function PrivateLayout({
                     </Button>
                   </div>
                   <div className="block w-full text-secondary-color">
-                    <ChangeLanguage />
+                    <ChangeLanguage className="rounded-lg bg-primary-color-light-10" />
                   </div>
                   <div className="block w-full text-secondary-color">
                     <UserActions
@@ -263,7 +263,7 @@ function PrivateLayout({
                       </Button>
                     </div>
                     <div className="block w-full text-secondary-color">
-                      <ChangeLanguage />
+                      <ChangeLanguage className="rounded-lg bg-primary-color-light-10" />
                     </div>
                     <div className="block w-full text-secondary-color">
                       <UserActions

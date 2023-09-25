@@ -106,7 +106,7 @@ function LoginPage() {
               {t('authentication.notHaveAccountYet')}
             </Typography.Text>
             <Link className="primary underline" to="/sign-up">
-              {t('authentication.signUp')}
+              {t('button.signUp')}
             </Link>
           </Col>
         </Row>

@@ -19,7 +19,7 @@
     "login": "Login",
     "email": "Email",
     "forgotPassword": "Forgot password",
-    "forgotPasswordDescription": "Please enter your email address and we will send you instructions on how to reset your password.",
+    "forgotPasswordDescription": "Enter your email address and we will send you instructions to reset your password.",
     "resetPassword": "Reset password",
     "password": "Password",
     "confirmPassword": "Confirm password",
@@ -94,7 +94,9 @@
     "logout": "Log out",
     "sendFeedback": "Submit feedback",
     "delete": "Delete",
-    "generateResponse": "Generate response"
+    "generateResponse": "Generate response",
+    "signUp": "Sign up",
+    "continue": "Continue"
   },
   "gender": {
     "title": "Gender",

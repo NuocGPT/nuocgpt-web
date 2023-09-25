@@ -48,7 +48,7 @@ function ForgotPasswordForm({ onSubmit, loading }: ForgotPasswordFormProps) {
                 loading={loading}
                 type="primary"
               >
-                {t('button.proceed')}
+                {t('button.continue')}
               </Button>
             </Form.Item>
           </Col>

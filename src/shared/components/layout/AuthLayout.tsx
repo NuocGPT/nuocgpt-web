@@ -92,7 +92,8 @@ function AuthLayout({ children }: Props) {
             </Button>
             <ChangeLanguage
               authLayout
-              className="rounded-full border bg-transparent font-semibold"
+              className="rounded-full border border-color-neutral-3 bg-transparent font-semibold"
+              extraClass="none"
             />
           </div>
 

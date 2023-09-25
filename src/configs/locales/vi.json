@@ -19,12 +19,12 @@
     "login": "Đăng nhập",
     "email": "Email",
     "forgotPassword": "Quên mật khẩu",
-    "forgotPasswordDescription": "Vui lòng nhập email của bạn và chúng tôi sẽ gửi cho bạn một thay đổi mật khẩu.",
+    "forgotPasswordDescription": "Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn hướng dẫn để thiết lập lại mật khẩu của bạn.",
     "resetPassword": "Đổi mật khẩu",
     "password": "Mật khẩu",
     "confirmPassword": "Xác nhận mật khẩu",
     "confirmPasswordNotMatch": "Xác nhận mật khẩu không khớp",
-    "notHaveAccountYet": "Chưa có tài khoản?",
+    "notHaveAccountYet": "Không có tài khoản?",
     "alreadyHaveAccount": "Bạn có tài khoản?",
     "signUp": "Tạo tài khoản",
     "passwordValidator": "Mật khẩu phải có ít nhất 8 ký tự, có thể chứa ít nhất một chữ số, một kí tự in hoa, và một kí tự đặc biệt",
@@ -94,7 +94,9 @@
     "logout": "Đăng xuất",
     "sendFeedback": "Gửi phản hồi",
     "delete": "Xóa",
-    "generateResponse": "Tạo lại phản hồi"
+    "generateResponse": "Tạo lại phản hồi",
+    "signUp": "Đăng ký",
+    "continue": "Tiếp tục"
   },
   "gender": {
     "title": "Gender",

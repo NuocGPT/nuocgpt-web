@@ -13,11 +13,13 @@ import { setLanguage } from '#/shared/utils/token';
 interface Props {
   className?: string;
   authLayout?: boolean;
+  extraClass?: string;
 }
 
 function ChangeLanguage({
-  className = 'bg-primary-color-light-10',
+  className,
   authLayout = false,
+  extraClass = 'custom-background',
 }: Props) {
   const { t } = useTypeSafeTranslation();
   const [isClicked, setIsClicked] = useState(false);
@@ -68,10 +70,10 @@ function ChangeLanguage({
 
   return (
     <Dropdown
-      className={`${className} rounded-lg p-2 hover:cursor-pointer`}
+      className={`${className} p-2 hover:cursor-pointer`}
       destroyPopupOnHide
       menu={{ items }}
-      overlayClassName="custom-background"
+      overlayClassName={`${extraClass}`}
       placement="top"
       trigger={['click']}
     >
