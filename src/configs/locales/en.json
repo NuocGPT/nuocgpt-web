@@ -7,7 +7,8 @@
     "n/a": "N/A",
     "etc": "...",
     "loadingData": "Loading data...",
-    "description": "Free research preview. Our goal is to make AI systems more natural and safe to interact with. Your feedback helps us improve."
+    "description": "Free research preview. Our goal is to make AI systems more natural and safe to interact with. Your feedback helps us improve.",
+    "fetching": "Fetching..."
   },
   "aboutUs": {
     "title": "About us",

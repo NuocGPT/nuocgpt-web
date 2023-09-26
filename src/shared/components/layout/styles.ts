@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Drawer } from 'antd';
+import { Drawer, Spin } from 'antd';
 
 export const DrawerStyled = styled(Drawer)`
   .ant-drawer-body,
@@ -26,5 +26,11 @@ export const ConversationWrapper = styled.div`
     &::-webkit-scrollbar-thumb {
       background: var(--color-neutral-3);
     }
+  }
+`;
+
+export const SpinStyled = styled(Spin)`
+  .ant-spin-dot-item {
+    background-color: var(--secondary-color);
   }
 `;

@@ -104,20 +104,20 @@ function ConversationItem({
 
   return (
     <div>
-      {conversations.map(conversation => (
+      {conversations?.map(conversation => (
         <Typography.Text
           className={`my-1 flex min-h-[42px] cursor-pointer items-center gap-1 rounded-lg hover:bg-primary-color-light-10 ${
-            id === conversation._id || conversationId === conversation._id
+            id === conversation?._id || conversationId === conversation?._id
               ? 'bg-primary-color-light-10'
               : ''
           } p-2 text-secondary-color`}
-          key={conversation._id}
-          onClick={() => onNavigateToChat(conversation._id)}
+          key={conversation?._id}
+          onClick={() => onNavigateToChat(conversation?._id)}
         >
           <div className="w-fit">
             <ChatIcon />
           </div>
-          {editingMessageId === conversation._id ? (
+          {editingMessageId === conversation?._id ? (
             <>
               <div className="w-48">
                 <Input

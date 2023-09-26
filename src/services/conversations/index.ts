@@ -9,9 +9,9 @@ import type {
   UpdateConversationDto,
 } from './interfaces';
 
-async function fetchConversations() {
+async function fetchConversations({ size = 50, page = 1 }) {
   const data = await fetcher.get<Conversations>(
-    `${import.meta.env.VITE_BASE_URL}/conversations`,
+    `${import.meta.env.VITE_BASE_URL}/conversations?page=${page}&size=${size}`,
   );
   return data;
 }

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Divider, Grid, Image, Layout } from 'antd';
+import { Button, Divider, Grid, Image, Layout, Typography } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Avocado from '#/assets/images/avocado.png';
+import AvocadoAvatar from '#/assets/images/avocado.png';
 import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as AboutUsIcon } from '#/assets/svg/about-us.svg';
 import { ReactComponent as CloseIcon } from '#/assets/svg/close.svg';
@@ -13,7 +13,10 @@ import { ReactComponent as MenuIcon } from '#/assets/svg/menu.svg';
 import { ReactComponent as SidebarIcon } from '#/assets/svg/side-bar.svg';
 import { QUERY } from '#/services/constants';
 import { fetchConversations } from '#/services/conversations';
-import type { Conversations } from '#/services/conversations/interfaces';
+import type {
+  Conversation,
+  Conversations,
+} from '#/services/conversations/interfaces';
 import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { getAvatar } from '#/shared/utils/token';
@@ -21,7 +24,7 @@ import { AboutUsModal } from '../AboutUs';
 import ChangeLanguage from '../common/ChangeLanguage';
 import UserActions from '../common/UserActions';
 import ConversationItem from '../Conversations/ConversationItem';
-import { ConversationWrapper, DrawerStyled } from './styles';
+import { ConversationWrapper, DrawerStyled, SpinStyled } from './styles';
 
 interface Props {
   logout: () => void;
@@ -41,18 +44,32 @@ function PrivateLayout({
   const id = pathname.split('/')?.[2];
   const isInNewConversation = pathname.includes('new-conversation');
   const isUserFeedback = pathname.includes('admin');
+  const conversationRef = useRef<HTMLDivElement>(null);
   const [isDrawer, setIsDrawer] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [page, setPage] = useState<number>(1);
   const conversationId = window.location.pathname
     .split('/c')?.[1]
     ?.split('/')?.[1];
   const avatar = getAvatar();
-  const defaultAvatar = avatar ?? Avocado;
+  const defaultAvatar = avatar ?? AvocadoAvatar;
   const isAdmin = user?.roles.includes('admin');
+  const mobileRef = document.getElementById('mobile-ref');
+  const [conversationItems, setConversationItems] = useState<Conversation[]>(
+    [],
+  );
 
-  const { data: fetchConversationsResponse } = useQuery<Conversations>(
+  const {
+    data: fetchConversationsResponse,
+    isLoading,
+    refetch,
+    isFetching,
+  } = useQuery<Conversations>(
     QUERY.getConversations,
-    fetchConversations,
+    () =>
+      fetchConversations({
+        page,
+      }),
     {
       onSuccess(data) {
         if (!id && !isInNewConversation && !isUserFeedback) {
@@ -67,12 +84,57 @@ function PrivateLayout({
               }`,
             );
         }
+        const nextConversations = data?.items.find(item => item._id);
+        const previousConversations = fetchConversationsResponse?.items.find(
+          item => item._id,
+        );
+        if (nextConversations?._id === previousConversations?._id) {
+          return;
+        }
+        const newItems = conversationItems?.concat(data.items);
+        setConversationItems(newItems);
       },
     },
   );
 
+  useEffect(() => {
+    const scrollableElement = xs ? mobileRef : conversationRef.current;
+
+    if (scrollableElement) {
+      const handleScroll = () => {
+        if (
+          scrollableElement?.scrollHeight -
+            parseInt(String(scrollableElement?.scrollTop)) ===
+          scrollableElement?.clientHeight
+        ) {
+          if (fetchConversationsResponse?.next) {
+            setPage(prev => prev + 1);
+          }
+        }
+      };
+
+      scrollableElement?.addEventListener('scroll', handleScroll);
+
+      return () => {
+        if (scrollableElement) {
+          scrollableElement?.removeEventListener('scroll', handleScroll);
+        }
+      };
+    }
+  }, [
+    conversationItems.length,
+    fetchConversationsResponse,
+    mobileRef,
+    page,
+    xs,
+  ]);
+
+  useEffect(() => {
+    refetch();
+  }, [page]); // eslint-disable-line
+
   const conversations =
-    fetchConversationsResponse?.items.sort(
+    conversationItems?.sort(
       (prev, next) =>
         Number(new Date(next.created_at)) - Number(new Date(prev.created_at)),
     ) ?? [];
@@ -86,6 +148,7 @@ function PrivateLayout({
 
   const onOpen = () => {
     setIsDrawer(true);
+    refetch();
   };
 
   const onClose = () => {
@@ -137,14 +200,27 @@ function PrivateLayout({
             width={260}
           >
             <div className="flex h-full flex-col justify-between">
-              <div className="flex max-h-[65vh] flex-col gap-2 overflow-auto">
-                <ConversationItem
-                  conversationId={conversationId}
-                  conversations={conversations}
-                  id={id}
-                  onClose={onClose}
-                />
-              </div>
+              <SpinStyled
+                className="text-primary-color-light-10"
+                spinning={isLoading || isFetching}
+                tip={
+                  <Typography.Text className="font-normal text-secondary-color">
+                    {t('common.fetching')}
+                  </Typography.Text>
+                }
+              >
+                <div
+                  className="flex max-h-[65vh] flex-col gap-2 overflow-auto"
+                  id="mobile-ref"
+                >
+                  <ConversationItem
+                    conversationId={conversationId}
+                    conversations={conversations}
+                    id={id}
+                    onClose={onClose}
+                  />
+                </div>
+              </SpinStyled>
               <div>
                 <Divider className="bg-secondary-color" />
                 <div className="flex flex-col gap-4 py-2">
@@ -229,13 +305,26 @@ function PrivateLayout({
                       <SidebarIcon className="text-xl text-secondary-color" />
                     </Button>
                   </div>
-                  <ConversationWrapper className="flex max-h-[50vh] flex-col gap-2 overflow-auto">
-                    <ConversationItem
-                      conversationId={conversationId}
-                      conversations={conversations}
-                      id={id}
-                    />
-                  </ConversationWrapper>
+                  <SpinStyled
+                    className="text-primary-color-light-10"
+                    spinning={isLoading || isFetching}
+                    tip={
+                      <Typography.Text className="font-normal text-secondary-color">
+                        {t('common.fetching')}
+                      </Typography.Text>
+                    }
+                  >
+                    <ConversationWrapper
+                      className="flex max-h-[50vh] flex-col gap-2 overflow-auto"
+                      ref={conversationRef}
+                    >
+                      <ConversationItem
+                        conversationId={conversationId}
+                        conversations={conversations}
+                        id={id}
+                      />
+                    </ConversationWrapper>
+                  </SpinStyled>
                 </div>
                 <div>
                   <Divider className="bg-secondary-color" />

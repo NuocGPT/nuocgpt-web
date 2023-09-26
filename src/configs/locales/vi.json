@@ -7,7 +7,8 @@
     "n/a": "N/A",
     "etc": "...",
     "loadingData": "Đang tải dữ liệu...",
-    "description": "Xem trước nghiên cứu miễn phí. Mục tiêu của chúng tôi là làm cho các hệ thống AI trở nên tự nhiên và an toàn hơn khi tương tác. Phản hồi của bạn giúp chúng tôi hoàn thiện hơn."
+    "description": "Xem trước nghiên cứu miễn phí. Mục tiêu của chúng tôi là làm cho các hệ thống AI trở nên tự nhiên và an toàn hơn khi tương tác. Phản hồi của bạn giúp chúng tôi hoàn thiện hơn.",
+    "fetching": "Đang tải..."
   },
   "aboutUs": {
     "title": "Về chúng tôi",
