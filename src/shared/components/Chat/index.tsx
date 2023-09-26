@@ -53,7 +53,6 @@ function Chat({ conversationId }: ChatProps) {
     () => fetchMessages({ conversationId }),
     {
       enabled: !!conversationId,
-
       onSuccess() {
         setTimeout(() => {
           scrollToConversationBottom();
@@ -97,6 +96,7 @@ function Chat({ conversationId }: ChatProps) {
       },
       onSuccess(data) {
         handleRenderResponse(data.content.parts[0]);
+        scrollToConversationBottom();
       },
     },
   );

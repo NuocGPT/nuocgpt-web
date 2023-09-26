@@ -110,6 +110,7 @@ function NewConversation() {
       onSuccess(data) {
         conversationId.current = data?.conversation_id;
         handleRenderResponse(data.content.parts[0]);
+        scrollToConversationBottom();
         const newContent = content?.concat(data as unknown as Message[]);
         setContent([user, ...newContent]);
       },
