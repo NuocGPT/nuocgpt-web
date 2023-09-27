@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Divider, Grid, Image, Layout, Typography } from 'antd';
+import { Button, Divider, Grid, Image, Layout } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AvocadoAvatar from '#/assets/images/avocado.png';
@@ -24,7 +24,7 @@ import { AboutUsModal } from '../AboutUs';
 import ChangeLanguage from '../common/ChangeLanguage';
 import UserActions from '../common/UserActions';
 import ConversationItem from '../Conversations/ConversationItem';
-import { ConversationWrapper, DrawerStyled, SpinStyled } from './styles';
+import { ConversationWrapper, DrawerStyled } from './styles';
 
 interface Props {
   logout: () => void;
@@ -59,12 +59,7 @@ function PrivateLayout({
     [],
   );
 
-  const {
-    data: fetchConversationsResponse,
-    isLoading,
-    refetch,
-    isFetching,
-  } = useQuery<Conversations>(
+  const { data: fetchConversationsResponse, refetch } = useQuery<Conversations>(
     QUERY.getConversations,
     () =>
       fetchConversations({
@@ -200,27 +195,17 @@ function PrivateLayout({
             width={260}
           >
             <div className="flex h-full flex-col justify-between">
-              <SpinStyled
-                className="text-primary-color-light-10"
-                spinning={isLoading || isFetching}
-                tip={
-                  <Typography.Text className="font-normal text-secondary-color">
-                    {t('common.fetching')}
-                  </Typography.Text>
-                }
+              <div
+                className="flex max-h-[65vh] flex-col gap-2 overflow-auto"
+                id="mobile-ref"
               >
-                <div
-                  className="flex max-h-[65vh] flex-col gap-2 overflow-auto"
-                  id="mobile-ref"
-                >
-                  <ConversationItem
-                    conversationId={conversationId}
-                    conversations={conversations}
-                    id={id}
-                    onClose={onClose}
-                  />
-                </div>
-              </SpinStyled>
+                <ConversationItem
+                  conversationId={conversationId}
+                  conversations={conversations}
+                  id={id}
+                  onClose={onClose}
+                />
+              </div>
               <div>
                 <Divider className="bg-secondary-color" />
                 <div className="flex flex-col gap-4 py-2">
@@ -305,26 +290,16 @@ function PrivateLayout({
                       <SidebarIcon className="text-xl text-secondary-color" />
                     </Button>
                   </div>
-                  <SpinStyled
-                    className="text-primary-color-light-10"
-                    spinning={isLoading || isFetching}
-                    tip={
-                      <Typography.Text className="font-normal text-secondary-color">
-                        {t('common.fetching')}
-                      </Typography.Text>
-                    }
+                  <ConversationWrapper
+                    className="flex max-h-[50vh] flex-col gap-2 overflow-auto"
+                    ref={conversationRef}
                   >
-                    <ConversationWrapper
-                      className="flex max-h-[50vh] flex-col gap-2 overflow-auto"
-                      ref={conversationRef}
-                    >
-                      <ConversationItem
-                        conversationId={conversationId}
-                        conversations={conversations}
-                        id={id}
-                      />
-                    </ConversationWrapper>
-                  </SpinStyled>
+                    <ConversationItem
+                      conversationId={conversationId}
+                      conversations={conversations}
+                      id={id}
+                    />
+                  </ConversationWrapper>
                 </div>
                 <div>
                   <Divider className="bg-secondary-color" />
