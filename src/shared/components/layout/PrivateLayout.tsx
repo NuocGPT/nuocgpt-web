@@ -210,15 +210,17 @@ function PrivateLayout({
                 <Divider className="bg-secondary-color" />
                 <div className="flex flex-col gap-4 py-2">
                   {isAdmin && (
-                    <Button
-                      className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                      icon={<FeedbackIcon />}
-                      onClick={() => navigate('/admin')}
-                      size="small"
-                      type="text"
-                    >
-                      <span>{t('feedback.title')}</span>
-                    </Button>
+                    <div className="block w-full px-2 text-secondary-color">
+                      <Button
+                        className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                        icon={<FeedbackIcon />}
+                        onClick={() => navigate('/admin')}
+                        size="small"
+                        type="text"
+                      >
+                        <span>{t('feedback.title')}</span>
+                      </Button>
+                    </div>
                   )}
                   <div className="block w-full px-2 text-secondary-color">
                     <Button
@@ -305,15 +307,17 @@ function PrivateLayout({
                   <Divider className="bg-secondary-color" />
                   <div className="flex flex-col gap-4 py-2">
                     {isAdmin && (
-                      <Button
-                        className="m-0 flex gap-2 p-0 text-left text-secondary-color"
-                        icon={<FeedbackIcon />}
-                        onClick={() => navigate('/admin')}
-                        size="small"
-                        type="text"
-                      >
-                        <span>{t('feedback.title')}</span>
-                      </Button>
+                      <div className="block w-full px-2 text-secondary-color">
+                        <Button
+                          className="m-0 flex gap-2 p-0 text-left text-secondary-color"
+                          icon={<FeedbackIcon />}
+                          onClick={() => navigate('/admin')}
+                          size="small"
+                          type="text"
+                        >
+                          <span>{t('feedback.title')}</span>
+                        </Button>
+                      </div>
                     )}
                     <div className="block w-full px-2 text-secondary-color">
                       <Button
