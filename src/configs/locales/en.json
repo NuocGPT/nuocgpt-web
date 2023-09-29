@@ -188,5 +188,11 @@
   "navigation": {
     "english": "English",
     "vietnamese": "Vietnamese"
+  },
+  "date": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "previousSevenDays": "Previous 7 days",
+    "previousThirtyDays": "Previous 30 days"
   }
 }

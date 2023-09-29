@@ -188,5 +188,11 @@
   "navigation": {
     "english": "Tiếng Anh",
     "vietnamese": "Tiếng Việt"
+  },
+  "date": {
+    "today": "Hôm nay",
+    "yesterday": "Hôm qua",
+    "previousSevenDays": "7 ngày trước",
+    "previousThirtyDays": "30 ngày trước"
   }
 }

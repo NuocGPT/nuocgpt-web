@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import CloseOutlined from '@ant-design/icons/lib/icons/CloseOutlined';
 import DeleteOutlined from '@ant-design/icons/lib/icons/DeleteOutlined';
@@ -22,7 +23,9 @@ interface Props {
   id: string;
   conversationId: string;
   conversations: Conversation[];
+  conversationItems: Conversation[];
   onClose?: () => void;
+  setConversationItems: Dispatch<SetStateAction<Conversation[]>>;
 }
 
 function ConversationItem({
@@ -30,6 +33,8 @@ function ConversationItem({
   conversationId,
   conversations,
   onClose,
+  conversationItems,
+  setConversationItems,
 }: Props) {
   const { t } = useTypeSafeTranslation();
   const navigate = useNavigate();
@@ -46,9 +51,16 @@ function ConversationItem({
       setEditingMessageId(undefined);
       setEditedText('');
     }
-    updateConversation(conversationId, editedText).then(() =>
-      queryClient.invalidateQueries(QUERY.getConversations),
-    );
+    const updatedItems = conversationItems?.map(item => {
+      if (item._id === conversationId) {
+        return { ...item, title: editedText };
+      }
+      return item;
+    });
+    updateConversation(conversationId, editedText).then(() => {
+      setConversationItems(updatedItems);
+      queryClient.invalidateQueries(QUERY.getConversations);
+    });
   };
 
   const onCancel = () => {
@@ -85,9 +97,12 @@ function ConversationItem({
       },
       okText: t('button.delete'),
       onOk() {
-        deleteConversation(id).then(() =>
-          queryClient.invalidateQueries(QUERY.getConversations),
-        );
+        deleteConversation(id).then(() => {
+          queryClient.refetchQueries(QUERY.getConversations);
+          setConversationItems(prevItems =>
+            prevItems?.filter(item => item._id !== id),
+          );
+        });
       },
       title: t('conversation.deleteTitle'),
     });
@@ -124,6 +139,14 @@ function ConversationItem({
                   autoFocus
                   className="bg-transparent p-0 text-sm text-secondary-color"
                   onChange={e => setEditedText(e.target.value)}
+                  onKeyPress={e => {
+                    if (e.key === 'Enter') {
+                      if (editedText && editedText.trim() !== '') {
+                        e.preventDefault();
+                        handleEditSave();
+                      }
+                    }
+                  }}
                   type="text"
                   value={editedText}
                 />

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Divider, Grid, Image, Layout } from 'antd';
+import { Button, Divider, Grid, Image, Layout, Spin, Typography } from 'antd';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation, useNavigate } from 'react-router-dom';
 import AvocadoAvatar from '#/assets/images/avocado.png';
@@ -19,6 +19,10 @@ import type {
 } from '#/services/conversations/interfaces';
 import type { MeResponse } from '#/services/me/interfaces';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
+import {
+  categorizedConversations,
+  sortByDate,
+} from '#/shared/utils/sortConversations';
 import { getAvatar } from '#/shared/utils/token';
 import { AboutUsModal } from '../AboutUs';
 import ChangeLanguage from '../common/ChangeLanguage';
@@ -59,13 +63,18 @@ function PrivateLayout({
     [],
   );
 
-  const { data: fetchConversationsResponse, refetch } = useQuery<Conversations>(
+  const {
+    data: fetchConversationsResponse,
+    refetch,
+    isFetching,
+  } = useQuery<Conversations>(
     QUERY.getConversations,
     () =>
       fetchConversations({
         page,
       }),
     {
+      keepPreviousData: true,
       onSuccess(data) {
         if (!id && !isInNewConversation && !isUserFeedback) {
           data?.items?.length > 0 &&
@@ -79,15 +88,16 @@ function PrivateLayout({
               }`,
             );
         }
-        const nextConversations = data?.items.find(item => item._id);
-        const previousConversations = fetchConversationsResponse?.items.find(
-          item => item._id,
+        // Create a Set to store unique item IDs
+        const uniqueItemIds = new Set(conversationItems?.map(item => item._id));
+
+        // Filter out duplicates from data.items
+        const filteredData = data?.items?.filter(
+          item => !uniqueItemIds.has(item._id),
         );
-        if (nextConversations?._id === previousConversations?._id) {
-          return;
-        }
-        const newItems = conversationItems?.concat(data.items);
-        setConversationItems(newItems);
+
+        // Concatenate the filtered data with conversationItems
+        setConversationItems(prevItems => [...prevItems, ...filteredData]);
       },
     },
   );
@@ -116,29 +126,22 @@ function PrivateLayout({
         }
       };
     }
-  }, [
-    conversationItems.length,
-    fetchConversationsResponse,
-    mobileRef,
-    page,
-    xs,
-  ]);
+  }, [fetchConversationsResponse, mobileRef, xs]);
 
   useEffect(() => {
     refetch();
   }, [page]); // eslint-disable-line
 
-  const conversations =
-    conversationItems?.sort(
-      (prev, next) =>
-        Number(new Date(next.created_at)) - Number(new Date(prev.created_at)),
-    ) ?? [];
+  const sortConversations = categorizedConversations(
+    sortByDate(conversationItems),
+  );
 
   const handleCreateNewConversation = () => {
     navigate('/new-conversation', {
       state: conversationId,
     });
     setIsDrawer(false);
+    setPage(1);
   };
 
   const onOpen = () => {
@@ -195,17 +198,30 @@ function PrivateLayout({
             width={260}
           >
             <div className="flex h-full flex-col justify-between">
-              <div
-                className="flex max-h-[65vh] flex-col gap-2 overflow-auto"
-                id="mobile-ref"
-              >
-                <ConversationItem
-                  conversationId={conversationId}
-                  conversations={conversations}
-                  id={id}
-                  onClose={onClose}
-                />
-              </div>
+              <Spin spinning={isFetching}>
+                <div
+                  className="flex max-h-[65vh] flex-col gap-2 overflow-auto"
+                  id="mobile-ref"
+                >
+                  {Object.entries(sortConversations).map(
+                    ([dateCategory, conversationInCategory]) => (
+                      <div key={dateCategory}>
+                        <Typography.Text className="font-semibold text-color-neutral-3">
+                          {dateCategory}
+                        </Typography.Text>
+                        <ConversationItem
+                          conversationId={conversationId}
+                          conversationItems={conversationItems}
+                          conversations={conversationInCategory}
+                          id={id}
+                          onClose={onClose}
+                          setConversationItems={setConversationItems}
+                        />
+                      </div>
+                    ),
+                  )}
+                </div>
+              </Spin>
               <div>
                 <Divider className="bg-secondary-color" />
                 <div className="flex flex-col gap-4 py-2">
@@ -296,11 +312,22 @@ function PrivateLayout({
                     className="flex max-h-[50vh] flex-col gap-2 overflow-auto"
                     ref={conversationRef}
                   >
-                    <ConversationItem
-                      conversationId={conversationId}
-                      conversations={conversations}
-                      id={id}
-                    />
+                    {Object.entries(sortConversations).map(
+                      ([dateCategory, conversationInCategory]) => (
+                        <div key={dateCategory}>
+                          <Typography.Text className="font-semibold text-color-neutral-3">
+                            {dateCategory}
+                          </Typography.Text>
+                          <ConversationItem
+                            conversationId={conversationId}
+                            conversationItems={conversationItems}
+                            conversations={conversationInCategory}
+                            id={id}
+                            setConversationItems={setConversationItems}
+                          />
+                        </div>
+                      ),
+                    )}
                   </ConversationWrapper>
                 </div>
                 <div>
