@@ -27,7 +27,7 @@ export const categorizedConversations = (
       category = i18n.t('date.today');
     } else if (isWithinDays(date, 1)) {
       category = i18n.t('date.yesterday');
-    } else if (isWithinDays(date, 3)) {
+    } else if (isWithinDays(date, 7)) {
       category = i18n.t('date.previousSevenDays');
     } else if (isWithinDays(date, 30)) {
       category = i18n.t('date.previousThirtyDays');
