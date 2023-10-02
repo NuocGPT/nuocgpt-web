@@ -41,6 +41,13 @@ function MessageItem({ message }: MessageProps) {
     setFeedbackType(undefined);
   };
 
+  const content = message?.content?.parts?.[0];
+  const hasNumberItem = content?.includes('1. **');
+
+  const paragraphs = hasNumberItem
+    ? content?.split(/\d+\.\s/)
+    : content?.split('\n');
+
   return !message ? (
     <div className="w-full bg-color-neutral-5">
       <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
@@ -67,9 +74,18 @@ function MessageItem({ message }: MessageProps) {
                 : defaultAvatar
             }
           />
-          <Typography.Paragraph className="text-color-neutral-1">
-            {message.content?.parts?.[0]}
-          </Typography.Paragraph>
+          <div className="block">
+            {paragraphs
+              ?.filter(paragraph => paragraph.trim() !== '')
+              ?.map((paragraph, index) => (
+                <Typography.Paragraph
+                  className="block text-color-neutral-1"
+                  key={index}
+                >
+                  {index >= 1 && hasNumberItem && `${index}.`} {paragraph}
+                </Typography.Paragraph>
+              ))}
+          </div>
         </div>
         {message.author?.role === AuthorType.SYSTEM && (
           <div className="flex items-start justify-start">

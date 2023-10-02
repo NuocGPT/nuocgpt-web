@@ -83,7 +83,7 @@ function SignUp() {
             <Typography.Text className="pr-2">
               {t('authentication.alreadyHaveAccount')}
             </Typography.Text>
-            <Link className="primary underline" to="/slogin">
+            <Link className="primary underline" to="/login">
               {t('authentication.login')}
             </Link>
           </Col>

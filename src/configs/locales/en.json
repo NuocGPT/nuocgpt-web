@@ -19,9 +19,10 @@
     "title": "Welcome back",
     "login": "Login",
     "email": "Email",
-    "forgotPassword": "Forgot password",
+    "forgotPassword": "Forgot password?",
     "forgotPasswordDescription": "Enter your email address and we will send you instructions to reset your password.",
     "resetPassword": "Reset password",
+    "setNewPassword": "Set new password",
     "password": "Password",
     "confirmPassword": "Confirm password",
     "confirmPasswordNotMatch": "Confirm password does not match",
@@ -47,7 +48,9 @@
     "required": {
       "title": "This field is required!",
       "password": "Please enter your password!",
-      "email": "Please enter your email!"
+      "email": "Please enter your email!",
+      "verifyOTP": "Please enter your verify OTP code!",
+      "confirmPassword": "Please enter the confirm password!"
     }
   },
   "success": {
@@ -102,7 +105,8 @@
     "delete": "Delete",
     "generateResponse": "Generate response",
     "signUp": "Sign up",
-    "continue": "Continue"
+    "continue": "Continue",
+    "resetPassword": "Reset password"
   },
   "gender": {
     "title": "Gender",

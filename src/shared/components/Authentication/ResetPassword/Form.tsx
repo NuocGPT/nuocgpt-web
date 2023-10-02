@@ -18,7 +18,7 @@ function ResetPasswordForm({ onSubmit, loading }: ResetPasswordFormProps) {
   return (
     <>
       <Typography.Title className="mb-4 text-primary-color" level={3}>
-        🔐 {t('authentication.resetPassword')}
+        🔐 {t('authentication.setNewPassword')}
       </Typography.Title>
       <Form layout="vertical" onFinish={onSubmit} scrollToFirstError>
         <Row align="middle" justify="center">
@@ -28,6 +28,7 @@ function ResetPasswordForm({ onSubmit, loading }: ResetPasswordFormProps) {
               name="password"
               rules={[
                 {
+                  message: t('error.required.password'),
                   required: true,
                   whitespace: true,
                 },
@@ -48,6 +49,7 @@ function ResetPasswordForm({ onSubmit, loading }: ResetPasswordFormProps) {
               name="confirm_password"
               rules={[
                 {
+                  message: t('error.required.confirmPassword'),
                   required: true,
                   whitespace: true,
                 },
@@ -70,7 +72,7 @@ function ResetPasswordForm({ onSubmit, loading }: ResetPasswordFormProps) {
                 loading={loading}
                 type="primary"
               >
-                {t('authentication.resetPassword')}
+                {t('button.resetPassword')}
               </Button>
             </Form.Item>
           </Col>

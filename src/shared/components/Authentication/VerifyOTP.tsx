@@ -132,7 +132,10 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
       </Typography.Paragraph>
       <Form layout="vertical" onFinish={handleVerifyOTP} scrollToFirstError>
         <StyledOTPInput>
-          <Form.Item name="verify_code" rules={[{ required: true }]}>
+          <Form.Item
+            name="verify_code"
+            rules={[{ message: t('error.required.verifyOTP'), required: true }]}
+          >
             <OTPInput
               containerStyle={{
                 gap: '1.25rem',
