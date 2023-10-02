@@ -35,6 +35,11 @@ function List() {
   const navigate = useNavigate();
   const [queryParams, setQueryParams] = useState<QueryParams>({});
 
+  const hasNumberItem = viewAllText?.includes('1. **');
+  const paragraphs = hasNumberItem
+    ? viewAllText?.split(/\d+\.\s/)
+    : viewAllText?.split('\n');
+
   const { queryString } = useGetSearchParams(queryParams);
 
   const { data: fetchFeedbacksResponse, isLoading } = useQuery<
@@ -252,8 +257,15 @@ function List() {
           footer={false}
           onCancel={() => setViewAll(false)}
           open={viewAll}
+          width={800}
         >
-          <Typography.Text>{viewAllText}</Typography.Text>
+          {paragraphs
+            ?.filter(paragraph => paragraph.trim() !== '')
+            ?.map((paragraph, index) => (
+              <Typography.Paragraph key={index}>
+                {index >= 1 && hasNumberItem && `${index}.`} {paragraph}
+              </Typography.Paragraph>
+            ))}
         </StyledModal>
       </TableWrapper>
     </div>
