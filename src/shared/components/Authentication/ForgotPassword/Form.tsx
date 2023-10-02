@@ -27,6 +27,7 @@ function ForgotPasswordForm({ onSubmit, loading }: ForgotPasswordFormProps) {
               name="email"
               rules={[
                 {
+                  message: t('error.required.email'),
                   required: true,
                   type: 'email',
                 },

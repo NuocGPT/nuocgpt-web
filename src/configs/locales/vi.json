@@ -43,7 +43,12 @@
     "systemCode": "Mật mã hệ thống"
   },
   "error": {
-    "title": "Xin lỗi chúng tôi chưa thể trả lời câu hỏi này ngay bây giờ, vui lòng thử lại sau ít phút hoặc báo cáo sự cố cho nhóm phát triển, xin cảm ơn!"
+    "title": "Xin lỗi chúng tôi chưa thể trả lời câu hỏi này ngay bây giờ, vui lòng thử lại sau ít phút hoặc báo cáo sự cố cho nhóm phát triển, xin cảm ơn!",
+    "required": {
+      "title": "Đây là trường bắt buộc!",
+      "password": "Vui lòng nhập mật khẩu của bạn!",
+      "email": "Vui lòng nhập email của bạn!"
+    }
   },
   "success": {
     "title": "Thành công",

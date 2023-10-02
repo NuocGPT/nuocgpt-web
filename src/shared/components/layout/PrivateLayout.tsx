@@ -77,7 +77,7 @@ function PrivateLayout({
       keepPreviousData: true,
       onSuccess(data) {
         if (!id && !isInNewConversation && !isUserFeedback) {
-          data?.items?.length > 0 &&
+          if (data?.items?.length > 0) {
             navigate(
               `/c/${
                 data?.items?.sort(
@@ -87,6 +87,9 @@ function PrivateLayout({
                 )?.[0]?._id
               }`,
             );
+          } else {
+            navigate('/new-conversation');
+          }
         }
         // Create a Set to store unique item IDs
         const uniqueItemIds = new Set(conversationItems?.map(item => item._id));
@@ -206,9 +209,11 @@ function PrivateLayout({
                   {Object.entries(sortConversations).map(
                     ([dateCategory, conversationInCategory]) => (
                       <div key={dateCategory}>
-                        <Typography.Text className="font-semibold text-color-neutral-3">
-                          {dateCategory}
-                        </Typography.Text>
+                        <div className="sticky top-[-1px] z-[16]">
+                          <Typography.Text className="block bg-primary-color px-[10px] py-3 text-color-neutral-4">
+                            {dateCategory}
+                          </Typography.Text>
+                        </div>
                         <ConversationItem
                           conversationId={conversationId}
                           conversationItems={conversationItems}
@@ -315,9 +320,11 @@ function PrivateLayout({
                     {Object.entries(sortConversations).map(
                       ([dateCategory, conversationInCategory]) => (
                         <div key={dateCategory}>
-                          <Typography.Text className="font-semibold text-color-neutral-3">
-                            {dateCategory}
-                          </Typography.Text>
+                          <div className="sticky top-[-1px] z-[16]">
+                            <Typography.Text className="block bg-primary-color px-[10px] py-3 text-color-neutral-4">
+                              {dateCategory}
+                            </Typography.Text>
+                          </div>
                           <ConversationItem
                             conversationId={conversationId}
                             conversationItems={conversationItems}

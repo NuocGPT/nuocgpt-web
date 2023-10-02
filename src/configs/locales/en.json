@@ -43,7 +43,12 @@
     "systemCode": "System secret code"
   },
   "error": {
-    "title": "We apologize that we cannot answer this question right now. Please try again in a few minutes or report the issue to the development team. Thank you!"
+    "title": "We apologize that we cannot answer this question right now. Please try again in a few minutes or report the issue to the development team. Thank you!",
+    "required": {
+      "title": "This field is required!",
+      "password": "Please enter your password!",
+      "email": "Please enter your email!"
+    }
   },
   "success": {
     "title": "Success",

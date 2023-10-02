@@ -54,6 +54,7 @@ function LoginPage() {
               name="email"
               rules={[
                 {
+                  message: t('error.required.email'),
                   required: true,
                   type: 'email',
                 },
@@ -72,6 +73,7 @@ function LoginPage() {
               name="password"
               rules={[
                 {
+                  message: t('error.required.password'),
                   required: true,
                 },
               ]}

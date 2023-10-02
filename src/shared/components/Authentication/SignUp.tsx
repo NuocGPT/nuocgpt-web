@@ -46,6 +46,7 @@ function SignUp() {
               name="email"
               rules={[
                 {
+                  message: t('error.required.email'),
                   required: true,
                   type: 'email',
                 },
@@ -64,6 +65,7 @@ function SignUp() {
               name="password"
               rules={[
                 {
+                  message: t('error.required.title'),
                   required: true,
                   whitespace: true,
                 },

@@ -36,6 +36,9 @@ export type TranslationKeys =
   | 'authentication.setSystemCode'
   | 'authentication.systemCode'
   | 'error.title'
+  | 'error.required.title'
+  | 'error.required.password'
+  | 'error.required.email'
   | 'success.title'
   | 'success.signUp'
   | 'success.verify'
@@ -147,4 +150,8 @@ export type TranslationKeys =
   | 'feedback.false'
   | 'feedback.notHelpful'
   | 'navigation.english'
-  | 'navigation.vietnamese';
+  | 'navigation.vietnamese'
+  | 'date.today'
+  | 'date.yesterday'
+  | 'date.previousSevenDays'
+  | 'date.previousThirtyDays';
