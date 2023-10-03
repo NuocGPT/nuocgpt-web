@@ -7,6 +7,7 @@ import { Button, Form, Input, Select, Table, Tag, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ReactComponent as DislikeIcon } from '#/assets/svg/dislike-colour.svg';
 import { ReactComponent as LikeIcon } from '#/assets/svg/like-colour.svg';
+import type { TranslationKeys } from '#/generated/translationKeys';
 import { queryClient } from '#/services/client';
 import type {
   BaseGetAllResponse,
@@ -121,7 +122,7 @@ function List() {
       dataIndex: 'rating',
       key: 'rating',
       render: (_data: string, record: DeepPartial<Feedback>) => (
-        <StatusTag status={record.rating} />
+        <StatusTag status={record?.rating} />
       ),
       title: t('feedback.status'),
       width: 150,
@@ -132,12 +133,15 @@ function List() {
       render: (_data: string, record: DeepPartial<Feedback>) => (
         <div>
           <Typography.Text className="mb-2 block">
-            {record.text}
+            {record?.text}
           </Typography.Text>
-          {record.tags &&
+          {record?.tags &&
             record?.tags?.map(item => (
-              <Tag key={item}>
-                {TAG_MESSAGES.find(tag => tag.value === item)?.text}
+              <Tag className="my-1" key={item}>
+                {t(
+                  TAG_MESSAGES.find(tag => tag.value === item)
+                    ?.text as TranslationKeys,
+                )}
               </Tag>
             ))}
         </div>
@@ -166,7 +170,7 @@ function List() {
       <Typography.Text className="flex gap-2 py-4 text-2xl font-semibold text-primary-color">
         {t('feedback.title')}
       </Typography.Text>
-      <div className="mt-6 block items-center gap-5 lg:flex">
+      <div className="mt-2 block items-center gap-5 lg:flex">
         <div className="w-full lg:w-1/2">
           <Form form={form}>
             <div className="mt-6 flex items-center gap-5">
@@ -244,7 +248,7 @@ function List() {
           loading={isLoading}
           pagination={false}
           rowKey="id"
-          scroll={{ x: 'max-content', y: '67vh' }}
+          scroll={{ x: 'max-content', y: '50vh' }}
         />
         <PaginationPanel
           className="flex justify-end py-6 pr-6"
@@ -261,7 +265,7 @@ function List() {
           width={800}
         >
           {paragraphs
-            ?.filter(paragraph => paragraph.trim() !== '')
+            ?.filter(paragraph => paragraph?.trim() !== '')
             ?.map((paragraph, index) => (
               <Typography.Paragraph key={index}>
                 {index >= 1 && hasNumberItem && `${index}.`} {paragraph}

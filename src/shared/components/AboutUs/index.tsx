@@ -44,7 +44,12 @@ export function AboutUsModal({ visible, onClose }: AboutUsModalProps) {
           <Typography.Paragraph className="text-primary-color">
             {t('aboutUs.meaningOfOurBrand')}
           </Typography.Paragraph>
-          <Typography.Paragraph>{t('aboutUs.ourMission')}</Typography.Paragraph>
+          <Typography.Paragraph className="text-color-neutral-1">
+            {t('aboutUs.ourMission')}
+          </Typography.Paragraph>
+          <Typography.Paragraph className="text-color-neutral-1">
+            {t('aboutUs.sponsor')}
+          </Typography.Paragraph>
           <Row gutter={[16, 16]}>
             <Col lg={8} xs={12}>
               <Link

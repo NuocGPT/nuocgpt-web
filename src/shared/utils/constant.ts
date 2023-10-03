@@ -24,15 +24,15 @@ export const LIMIT_TRUNCATE_TEXT = 100;
 
 export const TAG_MESSAGES = [
   {
-    text: 'Điều này không đúng',
+    text: 'feedback.false',
     value: 'false',
   },
   {
-    text: 'Điều này có hại/không an toàn',
+    text: 'feedback.harmful',
     value: 'harmful',
   },
   {
-    text: 'Điều này không hữu ích',
+    text: 'feedback.notHelpful',
     value: 'not-helpful',
   },
 ];

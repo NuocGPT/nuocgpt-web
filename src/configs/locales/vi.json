@@ -13,7 +13,8 @@
   "aboutUs": {
     "title": "Về chúng tôi",
     "meaningOfOurBrand": "NướcGPT trả lời các câu hỏi về nước và khí hậu ở Việt Nam, đặc biệt tập trung vào vấn đề xâm nhập mặn. NướcGPT sẽ tận dụng Mô hình ngôn ngữ lớn để truy xuất thông tin và trả lời câu hỏi.",
-    "ourMission": "Được thành lập vào năm 2023, chúng tôi là một nhóm liên ngành đam mê nghiên cứu các giải pháp khí hậu cho Việt Nam. Cùng với nhau, chúng tôi có chuyên môn về AI, công nghệ vũ trụ, chăm sóc sức khỏe, tinh thần kinh doanh và các giải pháp khí hậu."
+    "ourMission": "Được thành lập vào năm 2023, chúng tôi là một nhóm liên ngành đam mê nghiên cứu các giải pháp khí hậu cho Việt Nam. Cùng với nhau, chúng tôi có chuyên môn về AI, công nghệ vũ trụ, chăm sóc sức khỏe, tinh thần kinh doanh và các giải pháp khí hậu.",
+    "sponsor": "Dự án này được hỗ trợ bởi Bill & Melinda Gates Foundation."
   },
   "authentication": {
     "title": "Chào mừng bạn quay trỏ lại",
@@ -81,7 +82,7 @@
     "cancel": "Huỷ bỏ",
     "save": "Lưu",
     "ok": "Ok",
-    "search": "Tìm kiểm",
+    "search": "Tìm kiếm",
     "submit": "Gửi",
     "filter": "Filter",
     "loadMore": "Load More...",
@@ -185,7 +186,7 @@
     "extraFeedback": "Phản hồi bổ sung",
     "addFeedback": "Cung cấp phản hồi bổ sung",
     "placeholder": {
-      "search": "Tìm kiểm",
+      "search": "Tìm kiếm",
       "status": "Tất cả trạng thái",
       "positive": "Bạn thích gì về câu trả lời?",
       "negative": "Vấn đề với câu trả lời là gì? Làm thế nào để câu trả lời có thể được cải thiện?"

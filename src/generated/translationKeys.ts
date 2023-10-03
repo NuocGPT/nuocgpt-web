@@ -10,6 +10,7 @@ export type TranslationKeys =
   | 'aboutUs.title'
   | 'aboutUs.meaningOfOurBrand'
   | 'aboutUs.ourMission'
+  | 'aboutUs.sponsor'
   | 'authentication.title'
   | 'authentication.login'
   | 'authentication.email'

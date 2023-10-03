@@ -314,7 +314,9 @@ function PrivateLayout({
                     </Button>
                   </div>
                   <ConversationWrapper
-                    className="flex max-h-[50vh] flex-col gap-2 overflow-auto"
+                    className={`${
+                      isAdmin ? 'max-h-[45vh]' : 'max-h-[50vh]'
+                    } flex flex-col gap-2 overflow-auto`}
                     ref={conversationRef}
                   >
                     {Object.entries(sortConversations).map(
