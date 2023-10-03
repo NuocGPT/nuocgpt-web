@@ -35,7 +35,8 @@ function List() {
   const navigate = useNavigate();
   const [queryParams, setQueryParams] = useState<QueryParams>({});
 
-  const hasNumberItem = viewAllText?.includes('1. **');
+  const hasNumberItem =
+    viewAllText?.includes('1. **') || viewAllText?.includes(': 1.');
   const paragraphs = hasNumberItem
     ? viewAllText?.split(/\d+\.\s/)
     : viewAllText?.split('\n');

@@ -16,6 +16,7 @@ export const DEFAULT_AVATAR =
 
 export const LINKS = {
   fulbright: 'https://fulbright.edu.vn/vi',
+  gates: 'https://www.gatesfoundation.org/',
   nuoc: 'https://www.nuoc.solutions',
 };
 

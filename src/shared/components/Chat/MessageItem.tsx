@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Typography } from 'antd';
-import Avocado from '#/assets/images/avocado.png';
+import AvocadoAvatar from '#/assets/images/avocado.png';
 import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import { ReactComponent as Dislike } from '#/assets/svg/dislike-outlined.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
@@ -27,7 +27,7 @@ function MessageItem({ message }: MessageProps) {
   );
   const [feedback, setFeedback] = useState<Feedback>();
   const avatar = getAvatar();
-  const defaultAvatar = avatar ?? Avocado;
+  const defaultAvatar = avatar ?? AvocadoAvatar;
 
   const handleCreatePositiveFeedback = () => {
     setFeedbackType(FeedbackTypes.LIKE);
@@ -42,7 +42,7 @@ function MessageItem({ message }: MessageProps) {
   };
 
   const content = message?.content?.parts?.[0];
-  const hasNumberItem = content?.includes('1. **');
+  const hasNumberItem = content?.includes('1. **') || content?.includes(': 1.');
 
   const paragraphs = hasNumberItem
     ? content?.split(/\d+\.\s/)

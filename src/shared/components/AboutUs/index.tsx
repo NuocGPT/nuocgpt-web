@@ -1,5 +1,6 @@
-import { Col, Grid, Image, Row, Typography } from 'antd';
+import { Col, Image, Row, Typography } from 'antd';
 import Link from 'antd/lib/typography/Link';
+import GatesLogo from '#/assets/images/gates-logo.png';
 import Logo from '#/assets/images/logo-white.png';
 import { ReactComponent as FulbrightLogo } from '#/assets/svg/fulbright-logo.svg';
 import { ReactComponent as NuocSolutionsLogo } from '#/assets/svg/nuoc-solutions-logo.svg';
@@ -14,7 +15,6 @@ interface AboutUsModalProps {
 
 export function AboutUsModal({ visible, onClose }: AboutUsModalProps) {
   const { t } = useTypeSafeTranslation();
-  const { xs } = Grid.useBreakpoint();
 
   return (
     <StyledModal
@@ -25,83 +25,60 @@ export function AboutUsModal({ visible, onClose }: AboutUsModalProps) {
       title={null}
       width={1280}
     >
-      {xs ? (
-        <div className="h-full rounded-2xl bg-primary-color shadow-2xl">
-          <StyledCol className="flex h-[340px]  items-center justify-center">
-            <Image height={110} preview={false} src={Logo} />
-          </StyledCol>
-          <div className="bg-secondary-color p-4">
-            <Typography.Title className="text-primary-color" level={4}>
-              {t('aboutUs.title')}
-            </Typography.Title>
-            <Typography.Paragraph className="text-primary-color">
-              {t('aboutUs.meaningOfOurBrand')}
-            </Typography.Paragraph>
-            <Typography.Paragraph>
-              {t('aboutUs.ourMission')}
-            </Typography.Paragraph>
-            <div className="flex w-full justify-between gap-4">
+      <Row className="h-[640px] rounded-2xl bg-primary-color shadow-2xl">
+        <StyledCol
+          className="flex h-[340px] items-center justify-center md:h-full"
+          md={13}
+          xs={24}
+        >
+          <Image height={110} preview={false} src={Logo} />
+        </StyledCol>
+        <Col
+          className="flex h-full flex-col items-start justify-center rounded-r-none bg-secondary-color px-4 py-8 md:rounded-r-2xl md:px-12"
+          md={11}
+          xs={24}
+        >
+          <Typography.Title className="text-primary-color" level={4}>
+            {t('aboutUs.title')}
+          </Typography.Title>
+          <Typography.Paragraph className="text-primary-color">
+            {t('aboutUs.meaningOfOurBrand')}
+          </Typography.Paragraph>
+          <Typography.Paragraph>{t('aboutUs.ourMission')}</Typography.Paragraph>
+          <Row gutter={[16, 16]}>
+            <Col lg={8} xs={12}>
               <Link
-                className="flex w-[47%] items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
+                className="flex h-[95px] items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
                 href={LINKS.nuoc}
                 rel="noreferrer"
                 target={'_blank'}
               >
                 <NuocSolutionsLogo />
               </Link>
+            </Col>
+            <Col lg={8} xs={12}>
               <Link
-                className="flex w-[47%] items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
+                className="flex h-[95px] items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
                 href={LINKS.fulbright}
                 rel="noreferrer"
                 target={'_blank'}
               >
                 <FulbrightLogo />
               </Link>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <Row className="h-[640px] rounded-2xl bg-primary-color shadow-2xl">
-          <StyledCol
-            className="flex h-full items-center justify-center"
-            span={13}
-          >
-            <Image height={110} preview={false} src={Logo} />
-          </StyledCol>
-          <Col
-            className="flex h-full flex-col items-start justify-center rounded-r-2xl bg-secondary-color px-12 py-8"
-            span={11}
-          >
-            <Typography.Title className="text-primary-color" level={4}>
-              {t('aboutUs.title')}
-            </Typography.Title>
-            <Typography.Paragraph className="text-primary-color">
-              {t('aboutUs.meaningOfOurBrand')}
-            </Typography.Paragraph>
-            <Typography.Paragraph>
-              {t('aboutUs.ourMission')}
-            </Typography.Paragraph>
-            <div className="flex w-full justify-between gap-4">
+            </Col>
+            <Col lg={8} xs={12}>
               <Link
-                className="flex w-1/2 items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
-                href={LINKS.nuoc}
+                className="flex h-[95px] items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
+                href={LINKS.gates}
                 rel="noreferrer"
                 target={'_blank'}
               >
-                <NuocSolutionsLogo />
+                <Image preview={false} src={GatesLogo} />
               </Link>
-              <Link
-                className="flex w-1/2 items-center justify-center rounded-lg bg-[#F1F6FF] p-4"
-                href={LINKS.fulbright}
-                rel="noreferrer"
-                target={'_blank'}
-              >
-                <FulbrightLogo />
-              </Link>
-            </div>
-          </Col>
-        </Row>
-      )}
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     </StyledModal>
   );
 }
