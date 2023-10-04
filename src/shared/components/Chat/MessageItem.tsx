@@ -65,7 +65,7 @@ function MessageItem({ message }: MessageProps) {
         message.author?.role === AuthorType.SYSTEM ? 'bg-color-neutral-5' : ''
       }`}
     >
-      <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-[50px] py-4 xl:px-0">
+      <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 xl:px-0">
         <div className="flex items-start gap-4">
           <Avatar
             className="flex-shrink-0"

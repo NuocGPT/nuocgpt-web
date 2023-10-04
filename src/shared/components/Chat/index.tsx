@@ -121,7 +121,10 @@ function Chat({ conversationId }: ChatProps) {
 
   return conversationMessages ? (
     <>
-      <div className="mt-8 max-h-[75vh] overflow-auto pb-28" id="messages">
+      <div
+        className="mt-8 max-h-[75vh] min-h-[75vh] overflow-auto pb-28"
+        id="messages"
+      >
         {conversationMessages?.length > 0 ? (
           conversationMessages?.map(message => (
             <div className="flex" key={message._id}>
@@ -139,7 +142,7 @@ function Chat({ conversationId }: ChatProps) {
             <div className="flex">
               <MessageItem message={user} />
             </div>
-            <div className="w-full bg-color-neutral-5 px-[50px] xl:px-0">
+            <div className="w-full bg-color-neutral-5 px-4">
               <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
                 <div className="flex items-start gap-4">
                   <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
