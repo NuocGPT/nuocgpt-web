@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import type { Conversation } from '#/services/conversations/interfaces';
 import i18n from '../i18n';
 import { MONTH_NAMES } from './constant';
@@ -9,31 +10,29 @@ export const categorizedConversations = (
     [date: string]: Conversation[];
   } = {};
 
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  const isWithinDays = (date: Date, days: number): boolean => {
-    const diffInMilliseconds = today.getTime() - date.getTime();
-    const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
-    return diffInDays <= days;
-  };
+  const today = dayjs();
 
   conversations?.forEach(conversation => {
-    const date = new Date(conversation?.created_at);
+    const date = dayjs(conversation?.updated_at);
+    const daysDifference = today.diff(date, 'day');
 
     let category = '';
 
-    if (isWithinDays(date, 0)) {
+    if (daysDifference === 0) {
       category = i18n.t('date.today');
-    } else if (isWithinDays(date, 1)) {
+    } else if (daysDifference === 1) {
       category = i18n.t('date.yesterday');
-    } else if (isWithinDays(date, 7)) {
+    } else if (daysDifference > 1 && daysDifference < 7) {
+      category = i18n.t('date.previousTwoDays');
+    } else if (
+      daysDifference <= 7 ||
+      (daysDifference > 7 && daysDifference <= 30)
+    ) {
       category = i18n.t('date.previousSevenDays');
-    } else if (isWithinDays(date, 30)) {
+    } else if (daysDifference === 30) {
       category = i18n.t('date.previousThirtyDays');
     } else {
-      const monthName = MONTH_NAMES[date.getMonth()];
-
+      const monthName = i18n.t(MONTH_NAMES[date.month()]);
       category = monthName;
     }
 
@@ -52,5 +51,5 @@ export const categorizedConversations = (
 export const sortByDate = (data?: Conversation[]) =>
   data?.sort(
     (prev, next) =>
-      Number(new Date(next.created_at)) - Number(new Date(prev.created_at)),
+      Number(new Date(next.updated_at)) - Number(new Date(prev.updated_at)),
   ) ?? [];

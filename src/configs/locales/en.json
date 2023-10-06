@@ -202,7 +202,22 @@
   "date": {
     "today": "Today",
     "yesterday": "Yesterday",
+    "previousTwoDays": "Previous 2 days",
     "previousSevenDays": "Previous 7 days",
     "previousThirtyDays": "Previous 30 days"
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
   }
 }

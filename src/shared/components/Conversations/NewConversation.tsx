@@ -140,10 +140,12 @@ function NewConversation() {
     }
   };
 
-  const onSendMessage = () =>
+  const onSendMessage = () => {
     Number(messages?.length) > 0
       ? addMessageMutation()
       : addConversationMutation();
+    setDisableChat(true);
+  };
 
   useEffect(() => {
     if (completedTyping) {
@@ -219,7 +221,6 @@ function NewConversation() {
               onKeyPress={e => {
                 if (e.key === 'Enter') {
                   if (message && message.trim() !== '') {
-                    setDisableChat(true);
                     e.preventDefault();
                     scrollToConversationBottom();
                     onSendMessage();
