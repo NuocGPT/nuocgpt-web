@@ -20,7 +20,7 @@
     "title": "Chào mừng bạn quay trỏ lại",
     "login": "Đăng nhập",
     "email": "Email",
-    "forgotPassword": "Quên mật khẩu?",
+    "forgotPassword": "Quên mật khẩu",
     "forgotPasswordDescription": "Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn hướng dẫn để thiết lập lại mật khẩu của bạn.",
     "resetPassword": "Đổi mật khẩu",
     "setNewPassword": "Thiết lập mật khẩu mới",
@@ -146,7 +146,13 @@
     "fileSizeLimit": "File must smaller than 2MB!",
     "incorrectPassword": "Mật khẩu không đúng! Xin vui lòng thử lại.",
     "validateSystemCode": "Mã hệ thống phải có ít nhất 8 ký tự và chứa ít nhất một số, một chữ cái và một ký tự đặc biệt",
-    "incorrectSystemCode": "Mã hệ thống không đúng! Xin vui lòng thử lại."
+    "incorrectSystemCode": "Mã hệ thống không đúng! Xin vui lòng thử lại.",
+    "password": {
+      "hint": "Mật khẩu của bạn phải chứa:",
+      "atLeastLength": "Ít nhất 8 ký tự",
+      "lowercaseAndUppercase": "Bao gồm chữ cái in hoa và in thường",
+      "specialCharacter": "Ít nhất 1 ký tự đặc biệt"
+    }
   },
   "input": {
     "image": "Select a .jpeg or .png file that is less than 3 MB.",

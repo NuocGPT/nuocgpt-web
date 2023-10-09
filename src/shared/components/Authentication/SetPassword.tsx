@@ -4,7 +4,6 @@ import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { DEFAULT_PASSWORD } from '#/shared/utils/constant';
 import { setPassword } from '#/shared/utils/token';
-import { getPasswordRules } from '#/shared/utils/validations';
 
 interface SystemCode {
   code: string;
@@ -40,11 +39,10 @@ function SetPassword() {
                     required: true,
                     whitespace: true,
                   },
-                  ...getPasswordRules(),
                 ]}
               >
                 <Input.Password
-                  className="rounded-lg"
+                  className="rounded-lg border-color-neutral-3"
                   placeholder={t('placeholder.systemCode')}
                   prefix={<LockSVG />}
                 />
