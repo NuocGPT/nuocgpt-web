@@ -29,7 +29,7 @@ import { StyledModal, TableWrapper } from './styles';
 
 function List() {
   const { t } = useTypeSafeTranslation();
-  const { pageSize, currentPage, setCurrentPage } = useTable();
+  const { pageSize, currentPage, setCurrentPage, setPageSize } = useTable();
   const [form] = Form.useForm();
   const [viewAll, setViewAll] = useState(false);
   const [viewAllText, setViewAllText] = useState<string | undefined>('');
@@ -158,12 +158,17 @@ function List() {
     });
   };
 
+  const onShowSizeChange = (current: number, pageSize: number) => {
+    setCurrentPage(current);
+    setPageSize(pageSize);
+  };
+
   useEffect(() => {
     prefetchFeedbacks();
     navigate({
       search: queryString,
     });
-  }, [queryString, currentPage]); // eslint-disable-line
+  }, [queryString, currentPage, pageSize]); // eslint-disable-line
 
   return (
     <div className="shadow-shadow-default mr-2 px-6">
@@ -237,9 +242,11 @@ function List() {
         <PaginationPanel
           className="py-6"
           current={currentPage || 1}
+          onShowSizeChange={onShowSizeChange}
           pageSize={pageSize ?? 10}
           setCurrentPage={setCurrentPage}
           showQuickJumper
+          showSizeChanger
           total={fetchFeedbacksResponse?.total ?? 1}
         />
         <Table
@@ -248,14 +255,16 @@ function List() {
           loading={isLoading}
           pagination={false}
           rowKey="id"
-          scroll={{ x: 'max-content', y: '50vh' }}
+          scroll={{ x: 1100, y: '50vh' }}
         />
         <PaginationPanel
           className="flex justify-end py-6 pr-6"
           current={currentPage || 1}
+          onShowSizeChange={onShowSizeChange}
           pageSize={pageSize ?? 10}
           setCurrentPage={setCurrentPage}
           showQuickJumper
+          showSizeChanger
           total={fetchFeedbacksResponse?.total ?? 1}
         />
         <StyledModal

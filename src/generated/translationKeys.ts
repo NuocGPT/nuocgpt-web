@@ -7,6 +7,8 @@ export type TranslationKeys =
   | 'common.loadingData'
   | 'common.description'
   | 'common.fetching'
+  | 'common.results'
+  | 'common.page'
   | 'aboutUs.title'
   | 'aboutUs.meaningOfOurBrand'
   | 'aboutUs.ourMission'

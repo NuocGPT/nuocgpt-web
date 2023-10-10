@@ -33,9 +33,6 @@ const StyledPagination = styled(Pagination)`
       border-radius: 0.5rem;
     }
     margin-left: 0;
-    @media only screen and (min-width: 768px) {
-      margin-left: 16px;
-    }
   }
   .ant-pagination-item-active a {
     background-color: var(--primary-color);

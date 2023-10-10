@@ -28,3 +28,5 @@ export interface QueryParams {
   search?: string;
   rating?: string;
 }
+
+export type Maybe<T> = T | null;

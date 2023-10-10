@@ -41,6 +41,7 @@ function PaginationPanel({
         <StyledPagination
           current={current}
           locale={{
+            items_per_page: t('common.page'),
             ['jump_to']: t('button.goTo'),
             page: '',
           }}
@@ -50,7 +51,7 @@ function PaginationPanel({
           showQuickJumper={showQuickJumper}
           showSizeChanger={!!showSizeChanger}
           showTotal={(total, pageSize) =>
-            `${pageSize[0]}-${pageSize[1]}/${total} results`
+            `${pageSize[0]}-${pageSize[1]}/${total} ${t('common.results')}`
           }
           total={total}
         />
