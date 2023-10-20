@@ -163,7 +163,7 @@ function VerifyOTP({ email, isForgotPassword = false }: VerifyOTPProps) {
             }
             type="primary"
           >
-            {t('button.proceed')}
+            {t('button.continue')}
           </Button>
         </Form.Item>
         <div className="flex items-center justify-center gap-2">

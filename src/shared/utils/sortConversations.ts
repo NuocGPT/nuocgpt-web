@@ -24,12 +24,9 @@ export const categorizedConversations = (
       category = i18n.t('date.yesterday');
     } else if (daysDifference > 1 && daysDifference < 7) {
       category = i18n.t('date.previousTwoDays');
-    } else if (
-      daysDifference <= 7 ||
-      (daysDifference > 7 && daysDifference <= 30)
-    ) {
+    } else if (daysDifference >= 7 && daysDifference <= 30) {
       category = i18n.t('date.previousSevenDays');
-    } else if (daysDifference === 30) {
+    } else if (daysDifference >= 30 && daysDifference <= 60) {
       category = i18n.t('date.previousThirtyDays');
     } else {
       const monthName = i18n.t(MONTH_NAMES[date.month()]);

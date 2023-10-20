@@ -8,7 +8,9 @@
     "etc": "...",
     "loadingData": "Đang tải dữ liệu...",
     "description": "Xem trước nghiên cứu miễn phí. Mục tiêu của chúng tôi là làm cho các hệ thống AI trở nên tự nhiên và an toàn hơn khi tương tác. Phản hồi của bạn giúp chúng tôi hoàn thiện hơn.",
-    "fetching": "Đang tải..."
+    "fetching": "Đang tải...",
+    "results": "kết quả",
+    "page": "trang"
   },
   "aboutUs": {
     "title": "Về chúng tôi",
@@ -20,7 +22,7 @@
     "title": "Chào mừng bạn quay trỏ lại",
     "login": "Đăng nhập",
     "email": "Email",
-    "forgotPassword": "Quên mật khẩu?",
+    "forgotPassword": "Quên mật khẩu",
     "forgotPasswordDescription": "Nhập địa chỉ email của bạn và chúng tôi sẽ gửi cho bạn hướng dẫn để thiết lập lại mật khẩu của bạn.",
     "resetPassword": "Đổi mật khẩu",
     "setNewPassword": "Thiết lập mật khẩu mới",
@@ -84,18 +86,18 @@
     "ok": "Ok",
     "search": "Tìm kiếm",
     "submit": "Gửi",
-    "filter": "Filter",
+    "filter": "Lọc",
     "loadMore": "Load More...",
     "change": "Change",
     "confirm": "Xác nhận",
-    "previous": "Previous",
-    "next": "Next",
+    "previous": "Trước đó",
+    "next": "Tiếp theo",
     "back": "Trở về",
-    "goTo": "Go to",
+    "goTo": "Đến",
     "backHome": "Back Home",
     "readMore": "...more",
     "readLess": " less",
-    "hide": "Hide",
+    "hide": "Ẩn",
     "proceed": "Tiếp theo",
     "enterOTP": "Nhập mã OTP",
     "login": "Đăng nhập",
@@ -146,7 +148,13 @@
     "fileSizeLimit": "File must smaller than 2MB!",
     "incorrectPassword": "Mật khẩu không đúng! Xin vui lòng thử lại.",
     "validateSystemCode": "Mã hệ thống phải có ít nhất 8 ký tự và chứa ít nhất một số, một chữ cái và một ký tự đặc biệt",
-    "incorrectSystemCode": "Mã hệ thống không đúng! Xin vui lòng thử lại."
+    "incorrectSystemCode": "Mã hệ thống không đúng! Xin vui lòng thử lại.",
+    "password": {
+      "hint": "Mật khẩu của bạn phải chứa:",
+      "atLeastLength": "Ít nhất 8 ký tự",
+      "lowercaseAndUppercase": "Bao gồm chữ cái in hoa và in thường",
+      "specialCharacter": "Ít nhất 1 ký tự đặc biệt"
+    }
   },
   "input": {
     "image": "Select a .jpeg or .png file that is less than 3 MB.",

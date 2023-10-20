@@ -34,7 +34,7 @@ function ForgotPasswordForm({ onSubmit, loading }: ForgotPasswordFormProps) {
               ]}
             >
               <Input
-                className="rounded-lg pr-[1.875rem]"
+                className="rounded-lg border-color-neutral-3 pr-[1.875rem]"
                 placeholder={t('placeholder.email')}
                 prefix={<SmsSVG />}
               />

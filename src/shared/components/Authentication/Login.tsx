@@ -61,7 +61,7 @@ function LoginPage() {
               ]}
             >
               <Input
-                className="rounded-lg pr-[1.875rem]"
+                className="rounded-lg border-color-neutral-3 pr-[1.875rem]"
                 placeholder={t('placeholder.email')}
                 prefix={<SmsSVG />}
               />
@@ -79,7 +79,7 @@ function LoginPage() {
               ]}
             >
               <Input.Password
-                className="rounded-lg"
+                className="rounded-lg border-color-neutral-3"
                 placeholder={t('placeholder.password')}
                 prefix={<LockSVG />}
               />
@@ -87,7 +87,7 @@ function LoginPage() {
           </Col>
           <Col span={24}>
             <Link className="primary" to="/forgot-password">
-              {t('authentication.forgotPassword')}
+              {t('authentication.forgotPassword')}?
             </Link>
           </Col>
           <Col className="mt-8" span={24}>
@@ -99,7 +99,7 @@ function LoginPage() {
                 loading={signInLoading}
                 type="primary"
               >
-                {t('button.proceed')}
+                {t('button.continue')}
               </Button>
             </Form.Item>
           </Col>

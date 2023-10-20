@@ -8,7 +8,9 @@
     "etc": "...",
     "loadingData": "Loading data...",
     "description": "Free research preview. Our goal is to make AI systems more natural and safe to interact with. Your feedback helps us improve.",
-    "fetching": "Fetching..."
+    "fetching": "Fetching...",
+    "results": "results",
+    "page": "page"
   },
   "aboutUs": {
     "title": "About us",
@@ -20,7 +22,7 @@
     "title": "Welcome back",
     "login": "Login",
     "email": "Email",
-    "forgotPassword": "Forgot password?",
+    "forgotPassword": "Forgot password",
     "forgotPasswordDescription": "Enter your email address and we will send you instructions to reset your password.",
     "resetPassword": "Reset password",
     "setNewPassword": "Set new password",
@@ -146,7 +148,13 @@
     "fileSizeLimit": "File must smaller than 2MB!",
     "incorrectPassword": "Incorrect password! Please try again.",
     "validateSystemCode": "System code must be at least 8 characters and contain at least one number, one letter and one special character",
-    "incorrectSystemCode": "Incorrect the system code! Please try again."
+    "incorrectSystemCode": "Incorrect the system code! Please try again.",
+    "password": {
+      "hint": "Password must contain:",
+      "atLeastLength": "At least 8 characters",
+      "lowercaseAndUppercase": "Includes uppercase and lowercase letters",
+      "specialCharacter": "At least 1 special character"
+    }
   },
   "input": {
     "image": "Select a .jpeg or .png file that is less than 3 MB.",
