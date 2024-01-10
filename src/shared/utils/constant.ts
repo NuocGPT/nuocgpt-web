@@ -37,6 +37,8 @@ export const TAG_MESSAGES = [
   },
 ];
 
+export const STREAM_MESSAGES_API = `${import.meta.env.VITE_BASE_URL}/messages`;
+
 // Get the month name for the message's date
 export const MONTH_NAMES = [
   'months.january',

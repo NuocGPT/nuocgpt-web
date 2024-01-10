@@ -20,6 +20,7 @@ export const MUTATION = {
   signIn: ['SIGN_IN'],
   signUp: ['SIGN_UP'],
   updateConversation: ['UPDATE_CONVERSATION'],
+  updateConversationAnswer: ['UPDATE_CONVERSATION_ANSWER'],
   updateFeedback: ['UPDATE_FEEDBACK'],
   verifyOTP: ['VERIFY_OTP'],
   verifyOTPForgotPassword: ['VERIFY_OTP_FORGOT_PASSWORD'],
