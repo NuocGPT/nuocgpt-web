@@ -1,5 +1,6 @@
 import * as fetcher from '../utils/fetcher';
 import type {
+  AddConversationAnswersDto,
   AddConversationDto,
   AddConversationResponse,
   AddMessageDto,
@@ -44,6 +45,23 @@ async function updateConversation(id: string, title: string) {
   return data;
 }
 
+async function updateConversationAnswer({
+  id,
+  answer,
+}: {
+  id: string;
+  answer: string;
+}) {
+  const data = await fetcher.post<AddConversationAnswersDto, string>(
+    `${import.meta.env.VITE_BASE_URL}/conversations/${id}/answers`,
+    {
+      answer,
+      id,
+    },
+  );
+  return data;
+}
+
 async function deleteConversation(id: string) {
   const data = await fetcher.remove<string>(
     `${import.meta.env.VITE_BASE_URL}/conversations/${id}`,
@@ -82,4 +100,5 @@ export {
   deleteConversation,
   addMessage,
   fetchSummarizeQuestion,
+  updateConversationAnswer,
 };
