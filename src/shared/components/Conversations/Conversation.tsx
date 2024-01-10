@@ -1,18 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Avatar, Button, Image, Input, Typography } from 'antd';
+import { Button, Image, Input, Typography } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import LoadingGif from '#/assets/images/loading.gif';
 import LogoGrey from '#/assets/images/logo-grey.png';
-import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
 import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
 import {
   addConversation,
   fetchSummarizeQuestion,
-  updateConversationAnswer,
 } from '#/services/conversations';
 import type { Message } from '#/services/conversations/interfaces';
 import {
@@ -20,7 +18,6 @@ import {
   ConversationType,
 } from '#/services/conversations/interfaces';
 import MessageItem from '#/shared/components/Chat/MessageItem';
-import { useHandleStreamMessages } from '#/shared/hooks/useHandleStreamMessages';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { scrollToConversationBottom } from '../Chat';
 
@@ -29,7 +26,6 @@ function Conversation() {
   const [message, setMessage] = useState('');
   const conversationId = useRef('');
   const [disableChat, setDisableChat] = useState(false);
-  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -38,21 +34,9 @@ function Conversation() {
       // window.history.replaceState({}, '', `/c/${conversationId.current}`);
 
       navigate(`/c/${conversationId.current}`);
+      localStorage.setItem('messageFromConversation', message);
     });
   };
-
-  const {
-    answer,
-    completedTyping,
-    handleStream,
-    setCompletedTyping,
-    setIsTyping,
-  } = useHandleStreamMessages({
-    message,
-    onFinish() {
-      setDisableChat(false);
-    },
-  });
 
   const user: Message = {
     _id: String(Math.random() * 1000),
@@ -82,86 +66,27 @@ function Conversation() {
           setMessage('');
           setDisableChat(false);
         },
-        onSettled: handleStream,
         onSuccess(data) {
           conversationId.current = data?._id;
           fetchSummarizeQuestion({
             conversationId: data?._id,
+          }).then(() => {
+            handleFinishRenderResponse();
           });
         },
       },
     );
 
-  const { mutate: updateConversationAnswerMutation } = useMutation(
-    MUTATION.updateConversationAnswer,
-    () =>
-      updateConversationAnswer({
-        answer,
-        id: conversationId?.current,
-      }),
-    {
-      onError() {
-        setMessage('');
-        setDisableChat(false);
-      },
-      onSuccess() {
-        scrollToConversationBottom();
-        handleFinishRenderResponse();
-        setCompletedTyping(false);
-      },
-    },
-  );
-
-  const renderResponse = (response: string) => {
-    if (response) {
-      return (
-        <>
-          <div className="flex">
-            <MessageItem message={user} />
-          </div>
-          <div className="w-full bg-color-neutral-5">
-            <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
-              <div className="flex items-start gap-4">
-                <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
-                <Typography.Paragraph className="text-color-neutral-1">
-                  {response}
-                </Typography.Paragraph>
-              </div>
-            </div>
-          </div>
-        </>
-      );
-    }
-    return (
-      <div className="mt-[16rem] flex flex-col items-center justify-center">
-        <Image height={114} preview={false} src={LogoGrey} />
-      </div>
-    );
-  };
-
   const onSendMessage = () => {
     setLoading(true);
     setDisableChat(true);
-    setIsTyping(true);
     addConversationMutation();
   };
-
-  useEffect(() => {
-    if (completedTyping) {
-      setDisableChat(false);
-      updateConversationAnswerMutation();
-    }
-    if (answer) {
-      setLoading(false);
-    }
-  }, [completedTyping, location, answer]); // eslint-disable-line
 
   return (
     <>
       <div className="mt-8 max-h-[80vh] overflow-auto pb-28" id="messages">
-        <div>{renderResponse(answer)}</div>
-
-        {loading && (
+        {loading ? (
           <>
             <div className="flex">
               <MessageItem message={user} />
@@ -171,6 +96,10 @@ function Conversation() {
               {t('common.loadingData')}
             </div>
           </>
+        ) : (
+          <div className="mt-[16rem] flex flex-col items-center justify-center">
+            <Image height={114} preview={false} src={LogoGrey} />
+          </div>
         )}
 
         {addConversationError && (

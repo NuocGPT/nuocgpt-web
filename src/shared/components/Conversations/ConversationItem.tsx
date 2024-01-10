@@ -102,6 +102,7 @@ function ConversationItem({
           setConversationItems(prevItems =>
             prevItems?.filter(item => item._id !== id),
           );
+          navigate('new-conversation');
         });
       },
       title: t('conversation.deleteTitle'),

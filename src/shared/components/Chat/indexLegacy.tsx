@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { Avatar, Button, Image, Input, Typography } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
 import LoadingGif from '#/assets/images/loading.gif';
+import LogoGrey from '#/assets/images/logo-grey.png';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
 import NotFoundPage from '#/pages/404';
@@ -18,7 +19,6 @@ import {
   ConversationType,
 } from '#/services/conversations/interfaces';
 import { useHandleStreamConversations } from '#/shared/hooks/useHandleStreamConversations';
-import { useHandleStreamMessages } from '#/shared/hooks/useHandleStreamMessages';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import MessageItem from './MessageItem';
 
@@ -38,20 +38,16 @@ interface ChatProps {
 
 function Chat({ conversationId }: ChatProps) {
   const { t } = useTypeSafeTranslation();
+  const [message, setMessage] = useState('');
   const [disableChat, setDisableChat] = useState(false);
   const [loading, setLoading] = useState(false);
-  const messageFromConversation = localStorage.getItem(
-    'messageFromConversation',
-  );
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [message, setMessage] = useState(messageFromConversation ?? '');
 
   const {
     answer: messageAnswer,
     completedTyping: messageCompletedTyping,
     handleStream: messageHandleStream,
     setCompletedTyping: messageSetCompletedTyping,
-    setAnswer: messageSetAnswer,
+    setAnswer,
   } = useHandleStreamConversations({
     id: conversationId,
     message,
@@ -62,26 +58,12 @@ function Chat({ conversationId }: ChatProps) {
     },
   });
 
-  const {
-    answer,
-    completedTyping,
-    handleStream,
-    setCompletedTyping,
-    setAnswer,
-  } = useHandleStreamMessages({
-    message: messageFromConversation ?? '',
-    onFinish() {
-      setDisableChat(false);
-    },
-  });
-
-  const { refetch } = useQuery(
+  const { data: fetchMessagesResponse, refetch } = useQuery(
     QUERY.getMessages,
     () => fetchMessages({ conversationId }),
     {
-      enabled: !!conversationId || !!messageFromConversation,
-      onSuccess(data) {
-        setMessages(data?.items as unknown as Message[]);
+      enabled: !!conversationId,
+      onSuccess() {
         setTimeout(() => {
           scrollToConversationBottom();
         }, 100);
@@ -105,42 +87,6 @@ function Chat({ conversationId }: ChatProps) {
     revision_id: null,
   };
 
-  const system = {
-    _id: String(Math.random() * 1000),
-    author: {
-      id: '',
-      role: AuthorType.SYSTEM,
-    },
-    content: {
-      content_type: ConversationType.TEXT,
-      parts: [messageAnswer],
-    },
-    conversation_id: String(conversationId),
-    created_at: new Date().toISOString(),
-    revision_id: null,
-  };
-
-  const { mutate: updateConversationAnswerMutation } = useMutation(
-    MUTATION.updateConversationAnswer,
-    () =>
-      updateConversationAnswer({
-        answer,
-        id: conversationId,
-      }),
-    {
-      onError() {
-        setMessage('');
-        setDisableChat(false);
-      },
-      onSuccess() {
-        localStorage.removeItem('messageFromConversation');
-        setAnswer('');
-        setMessage('');
-        setCompletedTyping(false);
-      },
-    },
-  );
-
   const {
     mutate: updateConversationAnswerMessageMutation,
     isError: addMessageError,
@@ -157,20 +103,14 @@ function Chat({ conversationId }: ChatProps) {
         setDisableChat(false);
       },
       onSuccess() {
+        scrollToConversationBottom();
         messageSetCompletedTyping(false);
         setMessage('');
-        messageSetAnswer('');
+        setAnswer('');
         setLoading(false);
-        setMessages([...messages, system]);
       },
     },
   );
-
-  useEffect(() => {
-    if (messageFromConversation) {
-      handleStream();
-    }
-  }, [messageFromConversation]); // eslint-disable-line
 
   useEffect(() => {
     if (messageAnswer) {
@@ -182,22 +122,16 @@ function Chat({ conversationId }: ChatProps) {
     if (messageCompletedTyping) {
       updateConversationAnswerMessageMutation();
     }
-  }, [messageCompletedTyping, updateConversationAnswerMessageMutation]);
-
-  useEffect(() => {
-    if (completedTyping) {
-      updateConversationAnswerMutation();
-    }
-  }, [completedTyping, updateConversationAnswerMutation]);
-
-  useEffect(() => {
-    if (!messageFromConversation) {
-      refetch();
-    }
-  }, [conversationId, messageFromConversation]); // eslint-disable-line
+    refetch();
+  }, [
+    refetch,
+    messageCompletedTyping,
+    conversationId,
+    updateConversationAnswerMessageMutation,
+  ]);
 
   const conversationMessages: Message[] =
-    messages?.sort(
+    fetchMessagesResponse?.items?.sort(
       (prev, next) =>
         Number(new Date(prev.created_at)) - Number(new Date(next.created_at)),
     ) ?? [];
@@ -217,29 +151,19 @@ function Chat({ conversationId }: ChatProps) {
         className="mt-8 max-h-[75vh] min-h-[75vh] overflow-auto pb-28"
         id="messages"
       >
-        {conversationMessages?.length > 0 &&
+        {conversationMessages?.length > 0 ? (
           conversationMessages?.map(message => (
             <div className="flex" key={message._id}>
               <MessageItem message={message} />
             </div>
-          ))}
-
-        {Number(messageFromConversation?.length) > 0 && answer?.length > 0 && (
-          <>
-            <div className="w-full bg-color-neutral-5 px-4">
-              <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
-                <div className="flex items-start gap-4">
-                  <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
-                  <Typography.Paragraph className="text-color-neutral-1">
-                    {answer}
-                  </Typography.Paragraph>
-                </div>
-              </div>
-            </div>
-          </>
+          ))
+        ) : (
+          <div className="mt-[16rem] flex flex-col items-center justify-center">
+            <Image height={114} preview={false} src={LogoGrey} />
+          </div>
         )}
 
-        {messageAnswer?.length > 0 && (
+        {messageAnswer && (
           <>
             <div className="flex">
               <MessageItem message={user} />
@@ -257,7 +181,7 @@ function Chat({ conversationId }: ChatProps) {
           </>
         )}
 
-        {(loading || messages?.length === 0) && (
+        {loading && (
           <>
             <div className="flex">
               <MessageItem message={user} />
@@ -279,7 +203,7 @@ function Chat({ conversationId }: ChatProps) {
         <div className="">
           <Input
             className="rounded-lg p-4 shadow-lg"
-            disabled={disableChat || !!messageFromConversation}
+            disabled={disableChat}
             onChange={e => {
               setMessage(e.target.value);
             }}
@@ -301,7 +225,7 @@ function Chat({ conversationId }: ChatProps) {
                 onClick={() => handleAddMessage()}
               />
             }
-            value={disableChat || messageFromConversation ? '' : message}
+            value={disableChat ? '' : message}
           />
           <Typography.Paragraph className="mt-2 text-center text-xs text-color-neutral-3">
             {t('common.description')}
