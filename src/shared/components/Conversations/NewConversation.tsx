@@ -1,3 +1,5 @@
+/* eslint-disable unused-imports/no-unused-vars-ts */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useRef, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { Avatar, Button, Image, Input, Typography } from 'antd';
@@ -24,6 +26,7 @@ import MessageItem from '#/shared/components/Chat/MessageItem';
 import { useRenderResponse } from '#/shared/hooks/useRenderResponse';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { formatDateUTC } from '#/shared/utils/date';
+import { getToken } from '#/shared/utils/token';
 import { scrollToConversationBottom } from '../Chat';
 
 function NewConversation() {
@@ -34,6 +37,54 @@ function NewConversation() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [content, setContent] = useState<Message[]>([]);
   const location = useLocation();
+
+  const [onStream, setOnStream] = useState(false);
+  const [answer, setAnswer] = useState('');
+
+  const handleStream = async () => {
+    const token = getToken();
+    const response = await fetch('http://localhost:8080/v1/messages', {
+      body: JSON.stringify({
+        message,
+      }),
+      headers: {
+        Accept: 'text/event-stream',
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    });
+
+    const stream = response.body;
+    const reader = stream?.getReader();
+    let chunkAnswer = '';
+
+    const readChunk = () => {
+      reader
+        ?.read()
+        .then(({ value, done }) => {
+          if (done) {
+            console.log('Stream finished');
+            return;
+          }
+          const chunkString = new TextDecoder().decode(value);
+          chunkAnswer += chunkString;
+          setAnswer(chunkAnswer);
+          readChunk();
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    };
+
+    readChunk();
+  };
+
+  useEffect(() => {
+    if (onStream) {
+      handleStream();
+    }
+  }, [onStream]);
 
   const handleFinishRenderResponse = () => {
     setMessage('');
@@ -141,10 +192,14 @@ function NewConversation() {
   };
 
   const onSendMessage = () => {
-    Number(messages?.length) > 0
-      ? addMessageMutation()
-      : addConversationMutation();
-    setDisableChat(true);
+    setOnStream(true);
+
+    /*
+     * Number(messages?.length) > 0
+     *   ? addMessageMutation()
+     *   : addConversationMutation();
+     * setDisableChat(true);
+     */
   };
 
   useEffect(() => {
@@ -171,6 +226,7 @@ function NewConversation() {
   return (
     <>
       <div className="mt-8 max-h-[80vh] overflow-auto pb-28" id="messages">
+        <div className="px-24">{answer}</div>
         {Number(messages?.length) > 0 || displayResponse ? (
           conversationMessages?.map(message => (
             <div

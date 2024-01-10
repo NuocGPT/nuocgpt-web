@@ -9,6 +9,11 @@ export interface UpdateConversationDto {
   title: string | null;
 }
 
+export interface AddConversationAnswersDto {
+  id: string;
+  answer: string;
+}
+
 export interface AddConversationResponse {
   _id: string;
   conversation_id: string;

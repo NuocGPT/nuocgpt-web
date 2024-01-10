@@ -4,19 +4,21 @@ import { Avatar, Button, Image, Input, Typography } from 'antd';
 import { Footer } from 'antd/lib/layout/layout';
 import LoadingGif from '#/assets/images/loading.gif';
 import LogoGrey from '#/assets/images/logo-grey.png';
-import { ReactComponent as CursorIcon } from '#/assets/svg/cursor.svg';
 import GPTAvatar from '#/assets/svg/gpt-avatar.svg';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
 import NotFoundPage from '#/pages/404';
 import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
-import { addMessage, fetchMessages } from '#/services/conversations';
+import {
+  fetchMessages,
+  updateConversationAnswer,
+} from '#/services/conversations';
 import type { Message } from '#/services/conversations/interfaces';
 import {
   AuthorType,
   ConversationType,
 } from '#/services/conversations/interfaces';
-import { useRenderResponse } from '#/shared/hooks/useRenderResponse';
+import { useHandleStreamConversations } from '#/shared/hooks/useHandleStreamConversations';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import MessageItem from './MessageItem';
 
@@ -38,15 +40,23 @@ function Chat({ conversationId }: ChatProps) {
   const { t } = useTypeSafeTranslation();
   const [message, setMessage] = useState('');
   const [disableChat, setDisableChat] = useState(false);
-  const { completedTyping, displayResponse, handleRenderResponse } =
-    useRenderResponse({
-      onFinish: () => {
-        setMessage('');
-        queryClient.invalidateQueries(QUERY.getMessages);
-        scrollToConversationBottom();
-        setDisableChat(false);
-      },
-    });
+  const [loading, setLoading] = useState(false);
+
+  const {
+    answer: messageAnswer,
+    completedTyping: messageCompletedTyping,
+    handleStream: messageHandleStream,
+    setCompletedTyping: messageSetCompletedTyping,
+    setAnswer,
+  } = useHandleStreamConversations({
+    id: conversationId,
+    message,
+    onFinish() {
+      queryClient.invalidateQueries(QUERY.getMessages);
+      scrollToConversationBottom();
+      setDisableChat(false);
+    },
+  });
 
   const { data: fetchMessagesResponse, refetch } = useQuery(
     QUERY.getMessages,
@@ -78,33 +88,47 @@ function Chat({ conversationId }: ChatProps) {
   };
 
   const {
-    mutate: addMessageMutation,
-    isLoading: addMessageLoading,
+    mutate: updateConversationAnswerMessageMutation,
     isError: addMessageError,
-    reset,
   } = useMutation(
-    MUTATION.addMessage,
+    MUTATION.updateConversationAnswer,
     () =>
-      addMessage(String(conversationId), {
-        message,
+      updateConversationAnswer({
+        answer: messageAnswer,
+        id: conversationId,
       }),
     {
       onError() {
         setMessage('');
-        scrollToConversationBottom();
         setDisableChat(false);
       },
-      onSuccess(data) {
-        handleRenderResponse(data.content.parts[0]);
+      onSuccess() {
         scrollToConversationBottom();
+        messageSetCompletedTyping(false);
+        setMessage('');
+        setAnswer('');
+        setLoading(false);
       },
     },
   );
 
   useEffect(() => {
+    if (messageAnswer) {
+      setLoading(false);
+    }
+  }, [messageAnswer]);
+
+  useEffect(() => {
+    if (messageCompletedTyping) {
+      updateConversationAnswerMessageMutation();
+    }
     refetch();
-    reset();
-  }, [conversationId, refetch, reset]);
+  }, [
+    refetch,
+    messageCompletedTyping,
+    conversationId,
+    updateConversationAnswerMessageMutation,
+  ]);
 
   const conversationMessages: Message[] =
     fetchMessagesResponse?.items?.sort(
@@ -116,7 +140,8 @@ function Chat({ conversationId }: ChatProps) {
     if (conversationId) {
       scrollToConversationBottom();
       setDisableChat(true);
-      addMessageMutation();
+      messageHandleStream();
+      setLoading(true);
     }
   };
 
@@ -138,7 +163,7 @@ function Chat({ conversationId }: ChatProps) {
           </div>
         )}
 
-        {displayResponse && (
+        {messageAnswer && (
           <>
             <div className="flex">
               <MessageItem message={user} />
@@ -148,8 +173,7 @@ function Chat({ conversationId }: ChatProps) {
                 <div className="flex items-start gap-4">
                   <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
                   <Typography.Paragraph className="text-color-neutral-1">
-                    {displayResponse}
-                    {!completedTyping && <CursorIcon />}
+                    {messageAnswer}
                   </Typography.Paragraph>
                 </div>
               </div>
@@ -157,7 +181,7 @@ function Chat({ conversationId }: ChatProps) {
           </>
         )}
 
-        {addMessageLoading && (
+        {loading && (
           <>
             <div className="flex">
               <MessageItem message={user} />
