@@ -6,12 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import LoadingGif from '#/assets/images/loading.gif';
 import LogoGrey from '#/assets/images/logo-grey.png';
 import { ReactComponent as SendIcon } from '#/assets/svg/send.svg';
-import { queryClient } from '#/services/client';
-import { MUTATION, QUERY } from '#/services/constants';
-import {
-  addConversation,
-  fetchSummarizeQuestion,
-} from '#/services/conversations';
+import { MUTATION } from '#/services/constants';
+import { addConversation } from '#/services/conversations';
 import type { Message } from '#/services/conversations/interfaces';
 import {
   AuthorType,
@@ -30,12 +26,8 @@ function Conversation() {
   const navigate = useNavigate();
 
   const handleFinishRenderResponse = () => {
-    queryClient.invalidateQueries(QUERY.getConversations).then(() => {
-      // window.history.replaceState({}, '', `/c/${conversationId.current}`);
-
-      navigate(`/c/${conversationId.current}`);
-      localStorage.setItem('messageFromConversation', message);
-    });
+    navigate(`/c/${conversationId.current}`);
+    localStorage.setItem('messageFromConversation', message);
   };
 
   const user: Message = {
@@ -68,11 +60,7 @@ function Conversation() {
         },
         onSuccess(data) {
           conversationId.current = data?._id;
-          fetchSummarizeQuestion({
-            conversationId: data?._id,
-          }).then(() => {
-            handleFinishRenderResponse();
-          });
+          handleFinishRenderResponse();
         },
       },
     );

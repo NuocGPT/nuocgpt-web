@@ -10,6 +10,7 @@ import { queryClient } from '#/services/client';
 import { MUTATION, QUERY } from '#/services/constants';
 import {
   fetchMessages,
+  fetchSummarizeQuestion,
   updateConversationAnswer,
 } from '#/services/conversations';
 import type { Message } from '#/services/conversations/interfaces';
@@ -56,7 +57,7 @@ function Chat({ conversationId }: ChatProps) {
     id: conversationId,
     message,
     onFinish() {
-      queryClient.invalidateQueries(QUERY.getMessages);
+      // queryClient.invalidateQueries(QUERY.getMessages);
       scrollToConversationBottom();
       setDisableChat(false);
     },
@@ -72,6 +73,9 @@ function Chat({ conversationId }: ChatProps) {
     message: messageFromConversation ?? '',
     onFinish() {
       setDisableChat(false);
+      fetchSummarizeQuestion({
+        conversationId,
+      }).then(() => queryClient.invalidateQueries(QUERY.getConversations));
     },
   });
 
@@ -79,7 +83,7 @@ function Chat({ conversationId }: ChatProps) {
     QUERY.getMessages,
     () => fetchMessages({ conversationId }),
     {
-      enabled: !!conversationId || !!messageFromConversation,
+      enabled: !!conversationId && !messageFromConversation,
       onSuccess(data) {
         setMessages(data?.items as unknown as Message[]);
         setTimeout(() => {
@@ -113,7 +117,7 @@ function Chat({ conversationId }: ChatProps) {
     },
     content: {
       content_type: ConversationType.TEXT,
-      parts: [messageAnswer],
+      parts: [answer?.length > 0 ? answer : messageAnswer],
     },
     conversation_id: String(conversationId),
     created_at: new Date().toISOString(),
@@ -134,6 +138,8 @@ function Chat({ conversationId }: ChatProps) {
       },
       onSuccess() {
         localStorage.removeItem('messageFromConversation');
+        const mess = messages?.concat(user);
+        setMessages([...mess, system]);
         setAnswer('');
         setMessage('');
         setCompletedTyping(false);
@@ -157,26 +163,28 @@ function Chat({ conversationId }: ChatProps) {
         setDisableChat(false);
       },
       onSuccess() {
+        const mess = messages?.concat(user);
+        setMessages([...mess, system]);
         messageSetCompletedTyping(false);
         setMessage('');
         messageSetAnswer('');
         setLoading(false);
-        setMessages([...messages, system]);
       },
     },
   );
 
   useEffect(() => {
     if (messageFromConversation) {
+      setLoading(true);
       handleStream();
     }
   }, [messageFromConversation]); // eslint-disable-line
 
   useEffect(() => {
-    if (messageAnswer) {
+    if (messageAnswer || answer) {
       setLoading(false);
     }
-  }, [messageAnswer]);
+  }, [messageAnswer, answer]);
 
   useEffect(() => {
     if (messageCompletedTyping) {
@@ -224,22 +232,7 @@ function Chat({ conversationId }: ChatProps) {
             </div>
           ))}
 
-        {Number(messageFromConversation?.length) > 0 && answer?.length > 0 && (
-          <>
-            <div className="w-full bg-color-neutral-5 px-4">
-              <div className="mx-auto flex max-w-[960px] justify-between gap-4 px-4 py-4 sm:px-0">
-                <div className="flex items-start gap-4">
-                  <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
-                  <Typography.Paragraph className="text-color-neutral-1">
-                    {answer}
-                  </Typography.Paragraph>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        {messageAnswer?.length > 0 && (
+        {(answer?.length > 0 || messageAnswer?.length > 0) && (
           <>
             <div className="flex">
               <MessageItem message={user} />
@@ -249,7 +242,7 @@ function Chat({ conversationId }: ChatProps) {
                 <div className="flex items-start gap-4">
                   <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
                   <Typography.Paragraph className="text-color-neutral-1">
-                    {messageAnswer}
+                    {answer?.length ? answer : messageAnswer}
                   </Typography.Paragraph>
                 </div>
               </div>
@@ -257,7 +250,7 @@ function Chat({ conversationId }: ChatProps) {
           </>
         )}
 
-        {(loading || messages?.length === 0) && (
+        {loading && (
           <>
             <div className="flex">
               <MessageItem message={user} />
