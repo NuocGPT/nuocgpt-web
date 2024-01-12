@@ -242,7 +242,7 @@ function Chat({ conversationId }: ChatProps) {
                 <div className="flex items-start gap-4">
                   <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
                   <div className="block">
-                    <Typography.Paragraph className="block whitespace-pre text-color-neutral-1">
+                    <Typography.Paragraph className="block whitespace-pre-line text-color-neutral-1">
                       {answer?.length ? answer : messageAnswer}
                     </Typography.Paragraph>
                   </div>
