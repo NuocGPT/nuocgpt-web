@@ -44,11 +44,6 @@ function MessageItem({ message }: MessageProps) {
   };
 
   const content = message?.content?.parts?.[0];
-  const hasNumberItem = content?.includes('1. **') || content?.includes(': 1.');
-
-  const paragraphs = hasNumberItem
-    ? content?.split(/\d+\.\s/)
-    : content?.split('\n');
 
   return !message ? (
     <div className="w-full bg-color-neutral-5">
@@ -77,16 +72,9 @@ function MessageItem({ message }: MessageProps) {
             }
           />
           <div className="block">
-            {paragraphs
-              ?.filter(paragraph => paragraph.trim() !== '')
-              ?.map((paragraph, index) => (
-                <Typography.Paragraph
-                  className="block text-color-neutral-1"
-                  key={index}
-                >
-                  {index >= 1 && hasNumberItem && `${index}.`} {paragraph}
-                </Typography.Paragraph>
-              ))}
+            <Typography.Paragraph className="block whitespace-pre-line text-color-neutral-1">
+              {content}
+            </Typography.Paragraph>
           </div>
         </div>
         {message.author?.role === AuthorType.SYSTEM && (
