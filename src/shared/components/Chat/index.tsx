@@ -22,7 +22,6 @@ import { useHandleStreamConversations } from '#/shared/hooks/useHandleStreamConv
 import { useHandleStreamMessages } from '#/shared/hooks/useHandleStreamMessages';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import MessageItem from './MessageItem';
-import { formatResponse } from './utils';
 
 export const scrollToConversationBottom = () => {
   const conversation = document.getElementById('messages');
@@ -220,13 +219,6 @@ function Chat({ conversationId }: ChatProps) {
     }
   };
 
-  const { paragraphs: answerParagraphs, hasNumberItem: answerNumberItems } =
-    formatResponse(answer);
-  const {
-    paragraphs: messageAnswerParagraphs,
-    hasNumberItem: messageAnswerNumberItems,
-  } = formatResponse(messageAnswer);
-
   return conversationMessages ? (
     <>
       <div
@@ -250,31 +242,9 @@ function Chat({ conversationId }: ChatProps) {
                 <div className="flex items-start gap-4">
                   <Avatar className="flex-shrink-0" size={32} src={GPTAvatar} />
                   <div className="block">
-                    {answer?.length
-                      ? answerParagraphs
-                          ?.filter(paragraph => paragraph.trim() !== '')
-                          ?.map((paragraph, index) => (
-                            <Typography.Paragraph
-                              className="block text-color-neutral-1"
-                              key={index}
-                            >
-                              {index >= 1 && answerNumberItems && `${index}.`}{' '}
-                              {paragraph}
-                            </Typography.Paragraph>
-                          ))
-                      : messageAnswerParagraphs
-                          ?.filter(paragraph => paragraph.trim() !== '')
-                          ?.map((paragraph, index) => (
-                            <Typography.Paragraph
-                              className="block text-color-neutral-1"
-                              key={index}
-                            >
-                              {index >= 1 &&
-                                messageAnswerNumberItems &&
-                                `${index}.`}{' '}
-                              {paragraph}
-                            </Typography.Paragraph>
-                          ))}
+                    <Typography.Paragraph className="block whitespace-pre text-color-neutral-1">
+                      {answer?.length ? answer : messageAnswer}
+                    </Typography.Paragraph>
                   </div>
                 </div>
               </div>
