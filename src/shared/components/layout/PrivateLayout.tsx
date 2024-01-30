@@ -260,7 +260,7 @@ function PrivateLayout({
                   <div className="block w-full text-secondary-color">
                     <UserActions
                       defaultAvatar={defaultAvatar}
-                      email={user?.email}
+                      email={user?.email ?? user?.phone_number}
                       logout={logout}
                     />
                   </div>
@@ -372,7 +372,7 @@ function PrivateLayout({
                     <div className="block w-full text-secondary-color">
                       <UserActions
                         defaultAvatar={defaultAvatar}
-                        email={user?.email}
+                        email={user?.email ?? user?.phone_number}
                         logout={logout}
                       />
                     </div>

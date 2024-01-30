@@ -41,6 +41,7 @@
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
+    "react-flag-kit": "^1.1.1",
     "react-i18next": "^11.12.0",
     "react-otp-input": "^3.0.4",
     "react-router-dom": "6.3.0",

@@ -54,7 +54,8 @@
       "email": "Please enter your email!",
       "verifyOTP": "Please enter your verify OTP code!",
       "confirmPassword": "Please enter the confirm password!"
-    }
+    },
+    "phoneNumber": "Phone number is invalid!"
   },
   "success": {
     "title": "Success",
@@ -109,7 +110,8 @@
     "generateResponse": "Generate response",
     "signUp": "Sign up",
     "continue": "Continue",
-    "resetPassword": "Reset password"
+    "resetPassword": "Reset password",
+    "loginBySms": "Login by phone number"
   },
   "gender": {
     "title": "Gender",
@@ -154,7 +156,8 @@
       "atLeastLength": "At least 8 characters",
       "lowercaseAndUppercase": "Includes uppercase and lowercase letters",
       "specialCharacter": "At least 1 special character"
-    }
+    },
+    "feedback": "Please choose the reason for the feedback!"
   },
   "input": {
     "image": "Select a .jpeg or .png file that is less than 3 MB.",
