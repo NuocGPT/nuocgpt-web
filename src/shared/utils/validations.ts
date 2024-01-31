@@ -4,6 +4,8 @@ import i18n from '../i18n';
 export const validateRegex = {
   password:
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%()*#?&^<>])[A-Za-z\d@$!%()*#?&^<> ]{8,}$/,
+  phoneNumber:
+    /(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})/g,
   username: /^[\w.%+_//:a-zA-Z0-9-]{0,}$/,
 };
 

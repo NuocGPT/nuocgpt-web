@@ -3,6 +3,19 @@ export interface SignInDto {
   password: string;
 }
 
+export interface SignInBySmsDto {
+  phone_number: string;
+}
+
+export interface VerifySmsOTPDto {
+  phone_number: string;
+  verify_code: string;
+}
+
+export interface ResendVerifySmsOTPDto {
+  phone_number: string;
+}
+
 export interface SignInResponse {
   access_token: string;
   roles: string[];

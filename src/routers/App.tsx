@@ -4,6 +4,7 @@ import ForgotPassword from '#/pages/forgot-password';
 import ResetPassword from '#/pages/reset-password';
 import SignUp from '#/pages/sign-up';
 import VerifyOTPPage from '#/pages/verify-otp';
+import VerifySmsOTPPage from '#/pages/verify-sms-otp';
 import SetPassword from '#/shared/components/Authentication/SetPassword';
 import GuardRoute from './GuardRoute';
 import PrivateRoute from './PrivateRoute';
@@ -51,6 +52,14 @@ const App = () => {
         </GuardRoute>
       ),
       path: 'verify-otp',
+    },
+    {
+      element: (
+        <GuardRoute>
+          <VerifySmsOTPPage />
+        </GuardRoute>
+      ),
+      path: 'verify-sms-otp',
     },
     {
       element: (

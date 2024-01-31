@@ -169,6 +169,7 @@ function Chat({ conversationId }: ChatProps) {
         setMessage('');
         messageSetAnswer('');
         setLoading(false);
+        queryClient.invalidateQueries(QUERY.getMessages);
       },
     },
   );

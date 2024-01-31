@@ -103,7 +103,10 @@ function ModalFeedback({
           />
         </Form.Item>
         {!isPositive && (
-          <Form.Item name="tags" rules={[{ required: true }]}>
+          <Form.Item
+            name="tags"
+            rules={[{ message: t('validateMessage.feedback'), required: true }]}
+          >
             <Checkbox.Group className="flex flex-col gap-2">
               <Checkbox value={FeedbackTag.harmful}>
                 {t('feedback.harmful')}
