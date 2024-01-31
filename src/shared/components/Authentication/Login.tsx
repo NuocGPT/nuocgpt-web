@@ -18,6 +18,7 @@ import {
 } from '#/services/utils/resultCodeCheck';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { setToken } from '#/shared/utils/token';
+import { validateRegex as validateCustom } from '#/shared/utils/validations';
 import { PhoneNumberInput } from '../common/PhoneNumberInput';
 
 function LoginPage() {
@@ -65,6 +66,9 @@ function LoginPage() {
         phone_number: `+84${removeLeadingZeros(values.phone_number.trim())}`,
       },
       {
+        onError() {
+          showError(t('error.phoneNumber'));
+        },
         onSuccess(data) {
           if (data) {
             navigate(
@@ -92,11 +96,9 @@ function LoginPage() {
                 rules={[
                   {
                     message: t('error.phoneNumber'),
-                    pattern: validateRegex.phoneNumber,
-                  },
-                  {
-                    message: t('error.phoneNumber'),
-                    pattern: validateRegex.noSpaceAround,
+                    pattern:
+                      validateCustom.phoneNumber || validateRegex.noSpaceAround,
+                    whitespace: true,
                   },
                 ]}
               />
