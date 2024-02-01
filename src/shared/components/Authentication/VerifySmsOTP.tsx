@@ -91,7 +91,7 @@ function VerifySmsOTP({ phoneNumber }: Props) {
         {t('authentication.inputOTP')}
       </Typography.Title>
       <Typography.Paragraph className="text-center text-base text-color-neutral-2">
-        {t('authentication.inputOTPDescription')}
+        {t('authentication.inputSmsOTPDescription')}
       </Typography.Paragraph>
       <Form layout="vertical" onFinish={handleVerifyOTP} scrollToFirstError>
         <StyledOTPInput>

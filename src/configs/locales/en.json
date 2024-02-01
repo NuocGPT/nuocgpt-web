@@ -37,6 +37,7 @@
     "errorTitle": "Your login session expired. Please login again.",
     "inputOTP": "Enter OTP code",
     "inputOTPDescription": "Please enter the 6-digit verification code sent to your email. Code is valid for 10 minutes.",
+    "inputSmsOTPDescription": "Please enter the 6-digit verification code sent to your phone number. Code is valid for 10 minutes.",
     "notReceiveOTP": "Didn’t receive OTP?",
     "resendOTP": "Resend",
     "resendAfterSeconds": "Resend after {{seconds}} seconds",

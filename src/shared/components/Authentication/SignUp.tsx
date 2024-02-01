@@ -168,7 +168,8 @@ function SignUp() {
                 disabled={
                   !conditions.lowercase ||
                   !conditions.specialCharacter ||
-                  !conditions.uppercase
+                  !conditions.uppercase ||
+                  !conditions.length
                 }
                 htmlType="submit"
                 loading={signUpLoading}
