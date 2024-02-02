@@ -27,6 +27,7 @@ function LoginPage() {
   const navigate = useNavigate();
 
   const [isLoginBySms, setIsLoginBySms] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const { mutate: signInMutation, isLoading: signInLoading } = useMutation(
     MUTATION.signIn,
@@ -98,9 +99,11 @@ function LoginPage() {
                     message: t('error.phoneNumber'),
                     pattern:
                       validateCustom.phoneNumber || validateRegex.noSpaceAround,
+                    required: true,
                     whitespace: true,
                   },
                 ]}
+                setPhoneNumber={setPhoneNumber}
               />
             </Col>
             <Col className="mt-8" span={24}>
@@ -108,6 +111,7 @@ function LoginPage() {
                 <Button
                   block
                   className="rounded-lg p-2 font-semibold text-secondary-color"
+                  disabled={!phoneNumber.length}
                   htmlType="submit"
                   loading={signInBySmsLoading}
                   type="primary"

@@ -37,6 +37,7 @@
     "errorTitle": "Your login session expired. Please login again.",
     "inputOTP": "Nhập mã OTP",
     "inputOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến email của bạn. Mã có giá trị trong 10 phút.",
+    "inputSmsOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến số điện thoại của bạn. Mã có giá trị trong 10 phút.",
     "notReceiveOTP": "Không nhận được OTP?",
     "resendOTP": "Gửi lại",
     "resendAfterSeconds": "Gửi lại sau {{seconds}} giây",

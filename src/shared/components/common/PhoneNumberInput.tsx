@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import type { FormItemProps } from 'antd';
 import { Form, Input, Select, Space } from 'antd';
@@ -24,12 +25,14 @@ interface Props extends FormItemProps {
   size?: 'large' | 'middle' | 'small';
   placeholder?: string;
   defaultPhoneCode?: string;
+  setPhoneNumber?: Dispatch<SetStateAction<string>>;
 }
 
 export function PhoneNumberInput({
   size = 'middle',
   placeholder,
   defaultPhoneCode,
+  setPhoneNumber,
   ...props
 }: Props) {
   return (
@@ -83,6 +86,7 @@ export function PhoneNumberInput({
                   className="rounded-r-xl border-color-neutral-3 py-2"
                   onChange={e => {
                     const inputValue = e.target.value;
+                    setPhoneNumber?.(inputValue);
 
                     setFieldsValue({
                       [props.name as string]: `${prefixPhoneNumber}${inputValue}`,

@@ -31,6 +31,7 @@ export type TranslationKeys =
   | 'authentication.errorTitle'
   | 'authentication.inputOTP'
   | 'authentication.inputOTPDescription'
+  | 'authentication.inputSmsOTPDescription'
   | 'authentication.notReceiveOTP'
   | 'authentication.resendOTP'
   | 'authentication.resendAfterSeconds'
