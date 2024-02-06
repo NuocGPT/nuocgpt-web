@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { showError, validateRegex } from '@enouvo/react-uikit';
 import { useMutation } from '@tanstack/react-query';
-import { Button, Col, Form, Input, Row, Typography } from 'antd';
+import { Button, Checkbox, Col, Form, Input, Row, Typography } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReactComponent as LockSVG } from '#/assets/svg/lock.svg';
 import { ReactComponent as SmsSVG } from '#/assets/svg/sms.svg';
@@ -28,6 +28,7 @@ function LoginPage() {
 
   const [isLoginBySms, setIsLoginBySms] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [checked, setChecked] = useState(false);
 
   const { mutate: signInMutation, isLoading: signInLoading } = useMutation(
     MUTATION.signIn,
@@ -106,12 +107,20 @@ function LoginPage() {
                 setPhoneNumber={setPhoneNumber}
               />
             </Col>
+            <Col span={24}>
+              <div className="flex items-center gap-1">
+                <Checkbox onChange={() => setChecked(!checked)} />
+                <Typography.Text className="text-base font-medium">
+                  {t('authentication.agreement')}
+                </Typography.Text>
+              </div>
+            </Col>
             <Col className="mt-8" span={24}>
               <Form.Item>
                 <Button
                   block
                   className="rounded-lg p-2 font-semibold text-secondary-color"
-                  disabled={!phoneNumber.length}
+                  disabled={(!phoneNumber.length && !checked) || !checked}
                   htmlType="submit"
                   loading={signInBySmsLoading}
                   type="primary"
