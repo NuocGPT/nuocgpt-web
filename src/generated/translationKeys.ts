@@ -40,6 +40,7 @@ export type TranslationKeys =
   | 'authentication.passwordUpdated'
   | 'authentication.setSystemCode'
   | 'authentication.systemCode'
+  | 'authentication.agreement'
   | 'error.title'
   | 'error.required.title'
   | 'error.required.password'

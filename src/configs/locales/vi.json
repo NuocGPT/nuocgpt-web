@@ -37,7 +37,7 @@
     "errorTitle": "Your login session expired. Please login again.",
     "inputOTP": "Nhập mã OTP",
     "inputOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến email của bạn. Mã có giá trị trong 10 phút.",
-    "inputSmsOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến số điện thoại của bạn. Mã có giá trị trong 10 phút.",
+    "inputSmsOTPDescription": "Vui lòng nhập mã xác minh gồm 6 chữ số đã được gửi đến số điện thoại của bạn. Mã OTP sẽ hợp lệ trong vòng 5 phút.",
     "notReceiveOTP": "Không nhận được OTP?",
     "resendOTP": "Gửi lại",
     "resendAfterSeconds": "Gửi lại sau {{seconds}} giây",
@@ -45,7 +45,8 @@
     "checkMailDescription": "Vui lòng kiểm tra địa chỉ email {{email}} để được hướng dẫn đặt lại mật khẩu",
     "passwordUpdated": "Mật khẩu đã được cập nhật thành công!",
     "setSystemCode": "Vui lòng nhập mã hệ thống",
-    "systemCode": "Mật mã hệ thống"
+    "systemCode": "Mật mã hệ thống",
+    "agreement": "Tôi đồng ý nhận SMS/OTP"
   },
   "error": {
     "title": "Xin lỗi chúng tôi chưa thể trả lời câu hỏi này ngay bây giờ, vui lòng thử lại sau ít phút hoặc báo cáo sự cố cho nhóm phát triển, xin cảm ơn!",

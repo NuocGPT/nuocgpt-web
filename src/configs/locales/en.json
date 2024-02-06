@@ -37,7 +37,7 @@
     "errorTitle": "Your login session expired. Please login again.",
     "inputOTP": "Enter OTP code",
     "inputOTPDescription": "Please enter the 6-digit verification code sent to your email. Code is valid for 10 minutes.",
-    "inputSmsOTPDescription": "Please enter the 6-digit verification code sent to your phone number. Code is valid for 10 minutes.",
+    "inputSmsOTPDescription": "Please enter the 6-digit verification code sent to your phone number. The OTP code will be valid within 5 minutes.",
     "notReceiveOTP": "Didn’t receive OTP?",
     "resendOTP": "Resend",
     "resendAfterSeconds": "Resend after {{seconds}} seconds",
@@ -45,7 +45,8 @@
     "checkMailDescription": "Please check your email {{email}} to receive instructions on how to reset your password.",
     "passwordUpdated": "Password updated successfully!",
     "setSystemCode": "Please enter the system secret code",
-    "systemCode": "System secret code"
+    "systemCode": "System secret code",
+    "agreement": "I agree to receive SMS/OTP"
   },
   "error": {
     "title": "We apologize that we cannot answer this question right now. Please try again in a few minutes or report the issue to the development team. Thank you!",
