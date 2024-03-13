@@ -31,6 +31,7 @@ export interface Feedback {
   user: {
     id: string;
     email: string;
+    phone_number: string;
   };
   rating: Rating;
   tags: FeedbackTag[];

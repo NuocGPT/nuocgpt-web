@@ -86,7 +86,7 @@ function List() {
       dataIndex: 'users',
       key: 'users',
       render: (_data: string, record: DeepPartial<Feedback>) =>
-        record?.user?.email,
+        record?.user?.email || record?.user?.phone_number,
       title: t('feedback.users'),
       width: 230,
     },
