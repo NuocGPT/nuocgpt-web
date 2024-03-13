@@ -13,7 +13,7 @@ import type {
 } from '#/services/auth/interfaces';
 import { MUTATION } from '#/services/constants';
 import { handleShowErrorMessage } from '#/services/utils/resultCodeCheck';
-import { useCountdownTimer } from '#/shared/hooks/useCountdownTimer';
+import { useTimer } from '#/shared/hooks/useTimer';
 import useTypeSafeTranslation from '#/shared/hooks/useTypeSafeTranslation';
 import { setToken } from '#/shared/utils/token';
 import { showSuccess } from '#/shared/utils/tools';
@@ -43,7 +43,7 @@ function VerifySmsOTP({ phoneNumber }: Props) {
   const navigate = useNavigate();
 
   const [verifyCode, setVerifyCode] = useState<string>('');
-  const { counter, resetCounter } = useCountdownTimer();
+  const { timer, resendOtp } = useTimer();
 
   const { mutate: verifySmsOTPMutation, isLoading: verifySmsOTPLoading } =
     useMutation(MUTATION.verifySmsOTP, verifySmsOTP, {
@@ -63,7 +63,7 @@ function VerifySmsOTP({ phoneNumber }: Props) {
         showError(handleShowErrorMessage(error.message));
       },
       onSuccess() {
-        resetCounter();
+        resendOtp();
         showSuccess(t('success.title'), t('success.resendOTP'));
       },
     });
@@ -129,13 +129,13 @@ function VerifySmsOTP({ phoneNumber }: Props) {
           {t('authentication.notReceiveOTP')}
           <Button
             className="p-0 text-sm"
-            disabled={counter >= 0}
+            disabled={timer > 0}
             onClick={handleResendOTP}
             type="link"
           >
-            {counter !== -1
+            {timer !== 0
               ? t('authentication.resendAfterSeconds', {
-                  seconds: String(counter),
+                  seconds: String(timer),
                 })
               : t('authentication.resendOTP')}
           </Button>
