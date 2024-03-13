@@ -33,6 +33,8 @@ function ModalFeedback({
   const { t } = useTypeSafeTranslation();
   const [form] = Form.useForm();
 
+  const text = Form.useWatch('text', form);
+
   const handleClose = () => {
     form.resetFields();
     onClose();
@@ -74,6 +76,7 @@ function ModalFeedback({
       cancelButtonProps={{ hidden: true }}
       destroyOnClose
       okButtonProps={{
+        disabled: !text,
         form: 'feedback',
         htmlType: 'submit',
         loading: addFeedbackLoading,
